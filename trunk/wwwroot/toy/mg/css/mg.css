@@ -8,6 +8,25 @@ body {
 	line-height: 20px;
 	background: #eee;
 }
+body a {
+	text-decoration: none; 
+	color: #85AB34;
+}
+body a:hover {
+	text-decoration: underline;
+	color: #C5D848;
+}
+body a:active {
+	text-decoration: none;
+	color: #FCF49F;
+}
+body a:visited {
+	text-decoration: none;
+	/* color: #666; */
+}
+.center {
+	text-align: center;
+}
 .mg {
 	font-size: 12px;
 	border: solid 2px #666;
