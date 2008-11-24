@@ -105,8 +105,8 @@ p {
 	border: solid 1px #999;
 	padding: 9px;
 	background: #f5f5f5;
-	float: right;
-	width: 320px;
+	width: 380px;
+	margin-top: 50px;
 }
 #project_info p {
 	padding-left: 1em;
