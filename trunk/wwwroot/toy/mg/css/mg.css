@@ -90,6 +90,9 @@ p {
 	float: right;
 	width: 300px;
 }
+#project_info p {
+	padding-left: 1em;
+}
 #wrapper {
 	margin: 0;
 	padding: 10px 20px 40px 20px;
