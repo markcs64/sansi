@@ -4,7 +4,13 @@ import os, time
 #path = os.path.abspath(os.path.join(os.getcwd(), __file__))
 
 def getPath(fn):
-    return os.path.abspath(os.path.join(os.getcwd(), fn))
+    cwd = os.getcwd()
+    fpath = ""
+    try:
+        cwd.index("stat") >= 0
+    except:
+        fpath = os.path.join("toy", "mg", "stat")
+    return os.path.abspath(os.path.join(os.getcwd(), fpath, fn))
 
 def isLock():
     f = open(getPath("isLock.ini"), "r")
