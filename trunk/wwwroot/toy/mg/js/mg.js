@@ -1,3 +1,17 @@
+/*
+Sansi Maze
+- A maze game based on JavaScript.
+
+Copyright (c) 2008 oldJ, Sansi.Org
+Author: oldj.wu@gmail.com
+License: LGPL
+
+LastUpdate: 2008-8-16
+
+You can get the last version by SVN:
+svn checkout http://sansi.googlecode.com/svn/trunk/ sansi-read-only
+*/
+
 function MG(ob, w, h) {
 	this.ob = document.getElementById(ob);
 	this.w = w || 20;
