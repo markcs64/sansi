@@ -1,11 +1,13 @@
 #coding=utf-8
 
-import time
-#path = "D:\\wu\\sansi\\wwwroot\\toy\\mg\\stat\\"
-path = "E:\\studio\\sansi\\wwwroot\\toy\\mg\\stat\\"
+import os, time
+#path = os.path.abspath(os.path.join(os.getcwd(), __file__))
+
+def getPath(fn):
+    return os.path.abspath(os.path.join(os.getcwd(), fn))
 
 def isLock():
-    f = open(path + "isLock.ini", "r")
+    f = open(getPath("isLock.ini"), "r")
     c = f.read()
     r = False
     if c == "1":
@@ -16,13 +18,13 @@ def isLock():
 def lock(v):
     while (isLock() and v == 1):
         time.sleep(1)
-    f = open(path + "isLock.ini", "w+")
+    f = open(getPath("isLock.ini"), "w+")
     f.write(str(v))
     f.close()
 
 def count():
     lock(1)
-    f = open(path + "data.ini", "r")
+    f = open(getPath("data.ini"), "r")
     d = f.read()
     f.close()
     if d != "":
@@ -30,7 +32,7 @@ def count():
     else:
         d = 1
     lock(0)
-    f = open(path + "data.ini", "w+")
+    f = open(getPath("data.ini"), "w+")
     f.write(str(d))
     f.close()
     return d
