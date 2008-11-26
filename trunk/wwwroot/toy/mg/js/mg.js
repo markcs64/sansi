@@ -252,14 +252,14 @@ MG_Me.prototype = {
 		});
 		setTimeout(function () {
 			if (_this.mg.isMoved) return;
-			_this.inform("提示：您可以使用键盘上的上、下、左、右方向键控制我的移动。");
+			_this.inform(SANSI_TOY_MSG.keyboardHint);
 		}, 3000);
 
 		this.itvl = setInterval(function () {
 			if (!_this.mg.isMoved) return;
 			var now = new Date();
 			if (now - _this.lastMove > 10000) {
-				_this.inform("Hello?");
+				_this.inform(SANSI_TOY_MSG.hello);
 				_this.setEmotion("surprised");
 			}
 		}, 3000);
@@ -311,15 +311,15 @@ MG_Me.prototype = {
 				_this.isMoving = false;
 				var v = _this.mg.grids[p];
 				if (p == _this.mg.grids.length - 1) {
-					_this.inform("YEAH~!<br /> 到终点啦~！");
+					_this.inform(SANSI_TOY_MSG.win);
 					_this.finished = true;
 					_this.setEmotion("happy");
 					clearInterval(_this.itvl);
 				} else if (p != 0 && (v == 1 || v == 2 || v == 4 || v == 8)) {
-					_this.inform("哎呀，好像走进死胡同了！");
+					_this.inform(SANSI_TOY_MSG.blindAlley);
 					_this.setEmotion("unhappy");
 				} else if (p == 0) {
-					_this.inform("咦，我怎么又回到起点了？");
+					_this.inform(SANSI_TOY_MSG.backToTheStart);
 					_this.setEmotion("surprised");
 				}
 			});
