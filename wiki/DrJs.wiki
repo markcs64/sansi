@@ -7,3 +7,6 @@ DrJs适用于那些需要在网页上绘制一些简单的函数图形（如正�
 DrJs适用于IE 6+以及Firefox。
 
 http://www.sansi.org/images/drjs.jpg
+
+
+DrJs主页及演示：http://www.sansi.org/drjs
