@@ -2,14 +2,14 @@
 drjs.js
 - A JavaScript graphics library based on DOM and CSS.
 
-Version: 0.2.1
+Version: 0.2.2
 Copyright (c) 2008 oldJ, Sansi.Org
 License: LGPL
 
 LastUpdate: 2008-8-16
 
 You can get the last version by SVN:
-svn checkout http://drjs.googlecode.com/svn/trunk/ drjs-read-only
+svn checkout http://sansi.googlecode.com/svn/trunk/ drjs-read-only
 */
 
 (function () {
