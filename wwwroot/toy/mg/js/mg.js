@@ -12,61 +12,73 @@ You can get the last version by SVN:
 svn checkout http://sansi.googlecode.com/svn/trunk/ sansi-read-only
 */
 
+// 迷宫类
 function MG(ob, w, h) {
 	this.ob = document.getElementById(ob);
 	this.w = w || 20;
 	this.h = h || 20;
-	this.gridSize = 20;
-	this.gridStr = "";
-	this.grids = [];
-	this.gridOb = [];
-	this.isMoved = false;
-	this.markHistory = false;
-	this.markHistory2 = false;
+	this.gridSize = 20;		// 迷宫格子宽度，暂时没有用
+	this.gridStr = "";		// 迷宫的字符串形式，暂时没有用
+	this.grids = [];		// 迷宫每个格子的状态，数值为[0, 15]
+	this.gridOb = [];		// 迷宫各格子对应的DOM元素
+	this.isMoved = false;		// 用户是否按下过方向键
+	this.markHistory = false;	// 是否将走过的格子用红色标出
+	this.markHistory2 = false;	// 是否标出最短路径，暂时没有用
 }
 
 MG.prototype = {
 	set: function (sets) {
+		// 设置迷宫的宽度与高度
 		if (sets.width) this.w = sets.width;
 		if (sets.height) this.h = sets.height;
 		return this;
 	},
 	create: function () {
+		// 秘生成迷宫
 		this.init();
 		return this._walk(Math.floor(Math.random() * this.grids.length));
 	},
 	_walk: function (startPos) {
+		// 从startPos开始，遍历地图
 		this._walkHistory = [];
 		this._walkHistory2 = [];
 		var curPos = startPos;
 		while (this._getNext0() != -1) {
+			// 当还有格子未到达过
 			curPos = this._step(curPos);
 			if (typeof(curPos) != "number") break;
 		}
 		return this;
 	},
 	_getTargetSteps: function (curPos) {
+		// 得到当前格子上、下、左、右四个相邻格子中未到达过且可在下一次遍历到达的格子，
+		// 可到达写入相应格子的位置，不可到达写入-1
+		// 结果以数组形式返回。
 		var p = 0,
 			a = [];
 
+		// 判断当前格子上方的格子是否可在下一次遍历到达
 		p = curPos - this.w;
 		if (p > 0 && this.grids[p] == 0 && !this._isRepeating(p))
 			a.push(p);
 		else
 			a.push(-1);
 
+		// 判断当前格子右方的格子是否可在下一次遍历到达
 		p = curPos + 1;
 		if (p % this.w != 0 && this.grids[p] == 0 && !this._isRepeating(p))
 			a.push(p);
 		else
 			a.push(-1);
 
+		// 判断当前格子下方的格子是否可在下一次遍历到达
 		p = curPos + this.w;
 		if (p < this.grids.length && this.grids[p] == 0 && !this._isRepeating(p))
 			a.push(p);
 		else
 			a.push(-1);
 
+		// 判断当前格子左方的格子是否可在下一次遍历到达
 		p = curPos - 1;
 		if (curPos % this.w != 0 && this.grids[p] == 0 && !this._isRepeating(p))
 			a.push(p);
@@ -76,14 +88,18 @@ MG.prototype = {
 		return a;
 	},
 	_noStep: function () {
+		// 判断当前格子是否有可到达的邻格
 		for (var i = 0; i < this._targetSteps.length; i ++)
 			if (this._targetSteps[i] != -1)
 				return false;
 		return true;
 	},
 	_step: function (curPos) {
+		// 从当前格子随机行走一步
 		this._targetSteps = this._getTargetSteps(curPos);
 		if (this._noStep()) {
+			// 如果当前格子的所有邻居都无法到达，
+			// 返回历史记录中的上一级
 			var tmp = this._walkHistory.pop();
 			if (typeof(tmp) != "number") return false;
 			this._walkHistory2.push(tmp);
@@ -96,30 +112,46 @@ MG.prototype = {
 		while (this._targetSteps[r] == -1) {
 			r = Math.floor(Math.random() * 4);
 		}
+		// 从当前格子可到达的领居中随机选取一个
 		nextPos = this._targetSteps[r];
 
 		var isCross = false;
+		// 判断当前格子是否与已走过的路线交叉
 		if (this.grids[nextPos] != 0)
 			isCross = true;
 
 		if (r == 0) {
+			// 如果是向上走
+			// 当前格子的顶边标记为可通过（标记为1）
+			// 下一格子的底边标记为可通过（标记为1）
 			this.grids[curPos] ^= 1;
 			this.grids[nextPos] ^= 4;
 		} else if (r == 1) {
+			// 如果是向右走
+			// 当前格子的右边标记为可通过（标记为1）
+			// 下一格子的左边标记为可通过（标记为1）
 			this.grids[curPos] ^= 2;
 			this.grids[nextPos] ^= 8;
 		} else if (r == 2) {
+			// 如果是向下走
+			// 当前格子的底边标记为可通过（标记为1）
+			// 下一格子的顶边标记为可通过（标记为1）
 			this.grids[curPos] ^= 4;
 			this.grids[nextPos] ^= 1;
 		} else if (r == 3) {
+			// 如果是向左走
+			// 当前格子的左边标记为可通过（标记为1）
+			// 下一格子的右边标记为可通过（标记为1）
 			this.grids[curPos] ^= 8;
 			this.grids[nextPos] ^= 2;
 		}
+		// 将当前位置记入历史记录
 		this._walkHistory.push(curPos);
 
 		return isCross ? false : nextPos;
 	},
 	_isRepeating: function (p) {
+		// 判断当前格子是否已走过
 		for (var i = 0; i < this._walkHistory.length; i ++) {
 			if (this._walkHistory[i] == p) return true;
 		}
@@ -129,6 +161,7 @@ MG.prototype = {
 		return false;
 	},
 	_getNext0: function () {
+		// 得到地图上下一个未到达的格子
 		for (var i = 0, l = this.grids.length; i <= l; i ++) {
 			if (this.grids[i] == 0)
 				return i;
@@ -136,6 +169,7 @@ MG.prototype = {
 		return -1;
 	},
 	init: function () {
+		// 初始化迷宫地图
 		this.grids = [];
 		this.gridOb = [];
 		this.gridStr = "";
@@ -148,11 +182,13 @@ MG.prototype = {
 		return this;
 	},
 	clear: function () {
+		// 清除迷宫上的DOM元素
 		while (this.ob.childNodes[0])
 			this.ob.removeChild(this.ob.childNodes[0]);
 		return this;
 	},
 	show: function () {
+		// 将迷宫从数据转化为DOM元素并显示在页面上
 		this.clear();
 		var tmpOb, v;
 		this.ob.style.width = this.gridSize * this.w + 2 + "px";
@@ -182,6 +218,8 @@ MG.prototype = {
 };
 
 MG.border = function (ob, v) {
+	// MG对象的方法，
+	// 根据格子的值显示格子四条边是否可通过
 	if (v == 0) {
 		ob.style.backgroundColor = "#666";
 		return;
@@ -196,6 +234,7 @@ MG.border = function (ob, v) {
 		ob.style.borderLeft = "solid 1px #f5f5f5";
 };
 
+// 走迷宫的小人的类
 function MG_Me(mg) {
 	this.mg = mg || null;
 	this.pos = 0;
