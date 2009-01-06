@@ -1,4 +1,11 @@
-#阿里系网站	
+#url list
+#格式为：URL\tINT
+#	其中：URL为要截图的页面地址
+#	INT为每次运行时截图的概率（需为0～100之间的整数）
+#	如INT为50表示每次运行时这个URL有50%的概率被截图
+#行首可以用“#”进行注释
+
+#阿里系网站
 http://china.alibaba.com	100
 http://www.alibaba.com	100
 http://www.taobao.com	100
