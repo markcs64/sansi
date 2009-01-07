@@ -14,12 +14,13 @@ http://www.alisoft.com	50
 http://www.koubei.com	50
 http://cn.yahoo.com	100
 
-#其它门户
+#门户类
 http://www.163.com	100
 http://www.sina.com.cn	100
 http://www.sohu.com	100
 http://www.qq.com	100
 http://www.jrj.com.cn	50
+http://www.yahoo.com	50
 
 http://www.google.com	100
 http://www.baidu.com	100
@@ -35,7 +36,6 @@ http://top.baidu.com	100
 
 http://www.gov.cn	50
 
-http://www.yahoo.com	100
 http://www.csdn.net	50
 http://news.sina.com.cn	100
 http://www.blueidea.com	50
@@ -56,7 +56,10 @@ http://www.19lou.com	10
 http://city.qzone.qq.com	20
 http://www.hao123.com	20
 http://www.splife.com	5
+
+#娱乐类
 http://www.4399.com	10
+http://www.qidian.com	10
 
 #教育类网站
 http://www.ustc.edu.cn	5
