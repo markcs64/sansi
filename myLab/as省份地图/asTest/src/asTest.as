@@ -2,6 +2,7 @@ package {
 	import flash.display.BlendMode;
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.events.TextEvent;
 	import flash.external.ExternalInterface;
@@ -11,6 +12,7 @@ package {
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFieldType;
+	import flash.text.TextFormat;
 	import flash.utils.clearTimeout;
 	import flash.utils.setTimeout;
 
@@ -64,10 +66,24 @@ package {
 			filter.strength = 2;
 			cit.filters = [filter];
 			
-			/*var tf:TextFormat = new TextFormat();
-			tf.leading = 2;
-			
-			cit.defaultTextFormat = tf;*/
+			var tf:TextFormat = new TextFormat();
+			tf.kerning = true;
+			tf.leading = 5;
+			tf.leftMargin = 6;
+			tf.rightMargin = 6;
+			tf.size = 14;
+			//cit.setTextFormat(tf);
+			cit.defaultTextFormat = tf;
+		}
+		
+		private function cityHover(e:Event):void {
+			var tf:TextField = TextField(e.target);
+			var i:int = tf.getCharIndexAtPoint(tf.mouseX, tf.mouseY);
+			trace(i);
+			if (i == -1) return;
+			var f:TextFormat = new TextFormat();
+			f.color = 0xff0000;
+			tf.setTextFormat(f, i, i + 1);
 		}
 		
 		private function citySelected(e:TextEvent):void {
@@ -88,9 +104,9 @@ package {
 			var x:int, y:int;
 			var p:String = ob.toString().match(/\[object (\w+)\]/i)[1].toString().toLowerCase();
 			var pName:String = cnmap.prov[p];
-			var htmlText:String = "<textformat leftmargin='6' rightmargin='6'>" +
+			var htmlText:String = "" +
 				"<p><font size='5'>&nbsp;</font></p>" +
-				"<p><font color='#333333'><font size='14'><b>" + pName + "</b></font>";
+				"<p><font color='#333333'><font size='16'><b>" + pName + "</b></font>";
 
 			var sCitys:String = cnmap.provCity[pName];
 			var citys:Array = sCitys.split("|");
@@ -108,7 +124,7 @@ package {
 					htmlText += "<a href='event:" + citys[i].replace(/<.+?>/g, "").replace(/[\s'"]/g, "") +
 						"'>" + citySpace(citys[i], maxLen) + "</a>";
 				}
-				htmlText += "</font></p><font size='5'>&nbsp;</font></textformat>";
+				htmlText += "</font></p><font size='5'>&nbsp;</font>";
 				cit.htmlText = htmlText;
 				x = ob.x + ob.width / 2;
 				y = ob.y + ob.height / 2;
@@ -125,6 +141,7 @@ package {
 				sprCit.y = y;
 				sprCit.visible = true;
 			//}
+			//cit.addEventListener(Event.ENTER_FRAME, cityHover);
 		}
 		
 		private function hideCities():void {
@@ -136,6 +153,7 @@ package {
 				var pn:String = curProv.toString().match(/\[object (\w+)\]/i)[1].toLowerCase();
 				fadeTo(curProv, cnmap.hot[pn]);
 			}
+			//cit.dispatchEvent();
 		}
 		
 		private function hoverCities(e:MouseEvent):void {
