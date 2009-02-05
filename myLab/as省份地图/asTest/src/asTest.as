@@ -55,6 +55,7 @@ package {
 			cit.addEventListener(TextEvent.LINK, citySelected);
 			cit.addEventListener(MouseEvent.MOUSE_OVER, hoverCities);
 			cit.addEventListener(MouseEvent.MOUSE_OUT, unhoverCities);
+			
 			//cit.thickness = 3;
 			sprCit.visible = false;
 			sprCit.blendMode = BlendMode.LAYER;
@@ -74,6 +75,8 @@ package {
 			tf.size = 14;
 			//cit.setTextFormat(tf);
 			cit.defaultTextFormat = tf;
+			
+			cit.addEventListener(Event.ENTER_FRAME, cityHover);
 		}
 		
 		private function cityHover(e:Event):void {
