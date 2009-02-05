@@ -76,7 +76,7 @@ package {
 			//cit.setTextFormat(tf);
 			cit.defaultTextFormat = tf;
 			
-			cit.addEventListener(Event.ENTER_FRAME, cityHover);
+			//cit.addEventListener(Event.ENTER_FRAME, cityHover);
 		}
 		
 		private function cityHover(e:Event):void {
