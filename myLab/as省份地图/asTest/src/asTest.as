@@ -69,16 +69,20 @@ package {
 			filter.strength = 2;
 			cit.filters = [filter];
 			
+			//setCitiesTextFormat();
+			
+			//cit.addEventListener(Event.ENTER_FRAME, cityHover);
+		}
+		
+		private function setCitiesTextFormat():void {
 			var tf:TextFormat = new TextFormat();
 			tf.kerning = true;
 			tf.leading = 5;
 			tf.leftMargin = 6;
 			tf.rightMargin = 6;
 			tf.size = 14;
-			//cit.setTextFormat(tf);
 			cit.defaultTextFormat = tf;
-			
-			//cit.addEventListener(Event.ENTER_FRAME, cityHover);
+			//cit.setTextFormat(tf);
 		}
 		
 		private function cityHover(e:Event):void {
@@ -106,6 +110,7 @@ package {
 		
 		private function showCities(e:MouseEvent, ob:DisplayObject):void {
 			clearTimeout(tmOut_cit);
+			setCitiesTextFormat();
 			var x:int, y:int;
 			var p:String = ob.toString().match(/\[object (\w+)\]/i)[1].toString().toLowerCase();
 			var pName:String = cnmap.prov[p];
