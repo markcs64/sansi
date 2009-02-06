@@ -5,6 +5,7 @@ package {
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.events.TextEvent;
+	import flash.events.TimerEvent;
 	import flash.external.ExternalInterface;
 	import flash.filters.GlowFilter;
 	import flash.net.URLRequest;
@@ -13,6 +14,7 @@ package {
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFieldType;
 	import flash.text.TextFormat;
+	import flash.utils.Timer;
 	import flash.utils.clearTimeout;
 	import flash.utils.setTimeout;
 
@@ -143,6 +145,8 @@ package {
 				sprCit.x = x;
 				sprCit.y = y;
 				sprCit.visible = true;
+				sprCit.alpha = 0;
+				fadeInOut(sprCit);
 			//}
 			//cit.addEventListener(Event.ENTER_FRAME, cityHover);
 		}
@@ -150,7 +154,9 @@ package {
 		private function hideCities():void {
 			clearTimeout(tmOut);
 			if (isCitiesHovering == false) {
-				sprCit.visible = false;
+				sprCit.alpha = 1;
+				fadeInOut(sprCit);
+				//sprCit.visible = false;
 			
 				curProv.filters = [];
 				var pn:String = curProv.toString().match(/\[object (\w+)\]/i)[1].toLowerCase();
@@ -202,6 +208,23 @@ package {
 			if (p > 1) p = 1;
 			//trace(ob);
 			ob.alpha = p;
+		}
+		
+		private function fadeInOut(ob:DisplayObject):void {
+			var tmr:Timer = new Timer(10);
+			var a:Number = ob.alpha;
+			var p:Number = a <= 0 ? 0.05 : -0.05;
+			var t:Number = a <= 0 ? 1 : 0;
+			var _f:Function = function (e:TimerEvent):void {
+				ob.alpha += p;
+				if (ob.alpha >= 1 || ob.alpha <= 0) {
+					tmr.stop();
+					if (ob.alpha <= 0)
+						ob.visible = false;
+				}
+			};
+			tmr.addEventListener(TimerEvent.TIMER, _f);
+			tmr.start();
 		}
 		
 		private function getParams():void {
