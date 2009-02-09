@@ -2,6 +2,9 @@
 <mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="600" height="480" initialize="init();">
 	<mx:Script>
 		<![CDATA[
+			import flash.net.*;
+			import flash.events.*;
+			
 			private function init():void {
 				var ma:mainAct = new mainAct();
 				
@@ -9,20 +12,30 @@
 			}
 			
 			private function showPage(e:MouseEvent):void {
-				htmlPage.location = iptUrl.text;
+				//htmlPage.location = iptUrl.text;
+				var loader:URLLoader = new URLLoader();
+				loader.addEventListener(Event.COMPLETE, pageLoad);
+				loader.load(new URLRequest(iptUrl.text));
 			}
 			
-			private function pageLoad():void {
-				trace(htmlPage.htmlText);
+			private function pageLoad(e:Event):void {
+				trace("page load");
+				var loader:URLLoader = URLLoader(e.target);
+				trace(loader.data);
+				//trace(htmlPage.htmlText);
+				htmlPage.htmlText = loader.data;
+				trace(txtHTMLRes);
+				txtHTMLRes.text = loader.data;
 			}
 		]]>
 	</mx:Script>
 	<mx:Canvas x="10" y="10" width="578" height="458" id="wrapper">
-		<mx:TabNavigator x="0" y="40" width="450" height="396" id="mainTabs">
+		<mx:TabNavigator x="0" y="40" width="450" height="396" id="mainTabs" creationPolicy="all">
 			<mx:Canvas label="page" width="100%" height="100%" id="mtabPage">
-				<mx:HTML x="0" y="0" width="448" height="363" id="htmlPage" htmlText="test" complete="pageLoad();"/>
+				<mx:HTML x="0" y="0" width="438" height="353" id="htmlPage" htmlText="test"/>
 			</mx:Canvas>
 			<mx:Canvas label="resource" width="100%" height="100%" id="mtabRes">
+				<mx:TextArea x="0" y="0" width="438" height="353" id="txtHTMLRes"/>
 			</mx:Canvas>
 			<mx:Canvas label="mtabTxt" width="100%" height="100%">
 			</mx:Canvas>
