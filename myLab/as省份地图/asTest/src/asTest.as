@@ -1,4 +1,5 @@
 package {
+	import flash.display.Bitmap;
 	import flash.display.BlendMode;
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
@@ -33,6 +34,11 @@ package {
 		private var isCitiesHovering:Boolean = false;
 		private var mapParams:Object;
 		private var curProv:DisplayObject;
+		
+		private var demo:animDemo;
+		private var demoShow:Boolean = true;
+		[Embed(source="../img/cursor.png")]
+		private var cursor:Class;
 
 		public function asTest()
 		{
@@ -43,6 +49,18 @@ package {
 			stage.addChild(sprCit);
 			
 			citiesMenu();
+			anim();
+		}
+		
+		private function anim():void {
+			var pointer:Bitmap = new Bitmap();
+			var asset:Bitmap = new cursor() as Bitmap;
+			pointer.bitmapData = asset.bitmapData;
+			
+			//stage.addChild(pointer);
+			
+			demo = new animDemo(this, pointer);
+			setTimeout(demo.show, 1000);
 		}
 		
 		private function citiesMenu():void {
@@ -108,19 +126,19 @@ package {
 			return s;
 		}
 		
-		private function showCities(e:MouseEvent, ob:DisplayObject):void {
+		private function showCities(ob:DisplayObject):void {
 			clearTimeout(tmOut_cit);
 			setCitiesTextFormat();
 			var x:int, y:int;
 			var p:String = ob.toString().match(/\[object (\w+)\]/i)[1].toString().toLowerCase();
-			var pName:String = cnmap.prov[p];
+			var pName:String = this.cnmap.prov[p];
 			var htmlText:String = "" +
 				"<p><font size='5'>&nbsp;</font></p>" +
 				"<p><font color='#333333'><font size='16'><b>" + pName + "</b></font>";
 
-			var sCitys:String = cnmap.provCity[pName];
+			var sCitys:String = this.cnmap.provCity[pName];
 			var citys:Array = sCitys.split("|");
-			var maxLen:int = cnmap.citiesMaxLen[pName];
+			var maxLen:int = this.cnmap.citiesMaxLen[pName];
 			//trace(pName + "::" + maxLen);
 
 			//if (sprCit.visible == false) {
@@ -181,6 +199,8 @@ package {
 		
 		private function hover(e:MouseEvent):void {
 			//clearTimeout(tmOut_cit);
+			demo.couldShow = false;
+			demo.hide();
 			clearTimeout(tmOut);
 			if (curProv) {
 				curProv.filters = [];
@@ -190,15 +210,20 @@ package {
 			
 			var ob:DisplayObject = DisplayObject(e.target);
 			curProv = ob;
+			
+			hover2(ob);
+		}
+		
+		public function hover2(ob:DisplayObject):void {
 			var filter:GlowFilter = new GlowFilter();
 			filter.color = 0x333333;
 			filter.strength = 2;
 			ob.filters = [filter];
 			//fadeTo(ob, 10);
-			sprProv.setChildIndex(ob, sprProv.numChildren - 1);
+			ob.parent.setChildIndex(ob, ob.parent.numChildren - 1);
 			
 			tmOut_cit = setTimeout(function ():void {
-				showCities(e, ob);
+				showCities(ob);
 			}, 500);
 		}
 		
@@ -380,6 +405,9 @@ package {
 				prov[p].addEventListener(MouseEvent.MOUSE_OVER, hover);
 				prov[p].addEventListener(MouseEvent.MOUSE_OUT, unhover);
 			}
+			
+			//var ppp:Point = new Point(300, 300);
+			//trace(sprProv.getObjectsUnderPoint(ppp));
 		}
 	}
 }
