@@ -202,19 +202,19 @@ package {
 			demo.couldShow = false;
 			demo.hide();
 			clearTimeout(tmOut);
-			if (curProv) {
-				curProv.filters = [];
+			if (this.curProv) {
+				this.curProv.filters = [];
 				//var pn:String = curProv.toString().match(/\[object (\w+)\]/i)[1].toLowerCase();
 				//fadeTo(curProv, cnmap.hot[pn]);
 			}
 			
 			var ob:DisplayObject = DisplayObject(e.target);
-			curProv = ob;
 			
 			hover2(ob);
 		}
 		
 		public function hover2(ob:DisplayObject):void {
+			this.curProv = ob;
 			var filter:GlowFilter = new GlowFilter();
 			filter.color = 0x333333;
 			filter.strength = 2;
@@ -408,6 +408,8 @@ package {
 			
 			//var ppp:Point = new Point(300, 300);
 			//trace(sprProv.getObjectsUnderPoint(ppp));
+			
+			sprProv.setChildIndex(prov.zj, 0);
 		}
 	}
 }

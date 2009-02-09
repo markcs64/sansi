@@ -87,7 +87,7 @@ package {
 			//var obs:Array = this.stage.getObjectsUnderPoint(p);
 			//var prov:DisplayObject = obs[0];
 			var sp:Sprite = this.stage.getChildAt(1) as Sprite;
-			var prov:DisplayObject = sp.getChildAt(22);
+			var prov:DisplayObject = sp.getChildAt(0);
 			//trace(obs, prov, sp.getChildAt(3));
 			//for (var i:int = 0; i < sp.numChildren; i ++) {
 			//	trace(i, sp.getChildAt(i));
