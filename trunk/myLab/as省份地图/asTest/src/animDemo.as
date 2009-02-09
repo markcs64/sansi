@@ -4,7 +4,6 @@ package {
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.display.Stage;
-	import flash.geom.Point;
 	import flash.utils.clearTimeout;
 	import flash.utils.setTimeout;
 	
@@ -12,37 +11,62 @@ package {
 		public var couldShow:Boolean = true;
 		public var cursor:Sprite = new Sprite();
 		public var step:int = 5;	//每次移动的距离
+		public var tmShow:int;
 		private var stage:Stage;
 		private var su:Object;
+		private var cursorMoving:Boolean = false;
+		private var showList:Array = [];//["zj", "gd", "bj"];
+		//private var showIdx:int = 0;
 		
 		public function animDemo(su:Object, cursor:Bitmap) {
 			this.cursor.addChild(cursor);
 			this.cursor.visible = false;
+			this.cursor.x = 300;
+			this.cursor.y = 50;
 			
 			su.stage.addChild(this.cursor);
 			this.stage = su.stage;
 			this.su = su;
+			
+			for (var k:String in this.su.prov) {
+				this.showList.push(k);
+			}
 		}
 		
 		public function show():void {
 			if (!this.couldShow) return;
+			/*if (this.cursorMoving) {
+				setTimeout(this.show, 50);
+				return;
+			}*/
 			
 			this.cursor.visible = true;
 			//this.cursor.
 			
-			this.moveTo(480, 320);
+			//this.moveTo(480, 320, 0);
+			var r:int = Math.floor(Math.random() * this.showList.length);
+			this.moveTo(this.su.prov[this.showList[r]]);
+			
+			//this.showIdx ++;
+			//if (this.showIdx >= this.showList.length) this.showIdx = 0;
+			
+			setTimeout(this.show, 6000);
 		}
 		
 		public function hide():void {
 			this.cursor.visible = false;
 		}
 		
-		private function moveTo(x:int, y:int):void {
+		private function moveTo(prov:DisplayObject):void {
+			//将鼠标移到某个省
+			var x:Number = prov.x + prov.width / 2;
+			var y:Number = prov.y + prov.height / 2;
+			
 			//将鼠标移到位置 x, y
-			var x0:int = this.cursor.x;
-			var y0:int = this.cursor.y;
-			var xm:int = x - x0;
-			var ym:int = y - y0;
+			var x0:Number = this.cursor.x;
+			var y0:Number = this.cursor.y;
+			var xm:Number = x - x0;
+			var ym:Number = y - y0;
 			
 			var d:Number = Math.sqrt(xm * xm + ym * ym);	//距离
 			var steps:Number = d / this.step;
@@ -55,17 +79,23 @@ package {
 			var _this:Object = this;
 			
 			var move:Function = function (x:int, y:int, xs:Number, ys:Number):void {
-				if (Math.abs(ob.x - x) < 1 && Math.abs(ob.y - y) < 1) {
+				//trace(xs, ys);
+				var absX:Number = Math.abs(ob.x - x);
+				var absY:Number = Math.abs(ob.y - y);
+				_this.cursorMoving = true;
+				
+				if (absX < 1 && absY < 1) {
 					clearTimeout(tmOut);
-					_this.hover();
+					_this.hover(prov);
+					_this.cursorMoving = false;
 					return;
 				}
 				//trace(ob.x, ob.y);
-				
-				if (Math.abs(ob.x - x) < Math.abs(xs))
-					xs = 1;
-				if (Math.abs(ob.y - y) < Math.abs(ys))
-					ys = 1;
+
+				if (absX < Math.abs(xs))
+					xs = x - ob.x;
+				if (absY < Math.abs(ys))
+					ys = y - ob.y;
 				
 				ob.x += xs;
 				ob.y += ys;
@@ -82,12 +112,12 @@ package {
 			f();
 		}
 		
-		private function hover():void {
+		private function hover(prov:DisplayObject):void {
 			//var p:Point = new Point(this.cursor.x, this.cursor.y);
 			//var obs:Array = this.stage.getObjectsUnderPoint(p);
 			//var prov:DisplayObject = obs[0];
-			var sp:Sprite = this.stage.getChildAt(1) as Sprite;
-			var prov:DisplayObject = sp.getChildAt(0);
+			//var sp:Sprite = this.stage.getChildAt(1) as Sprite;
+			//var prov:DisplayObject = sp.getChildAt(idx);
 			//trace(obs, prov, sp.getChildAt(3));
 			//for (var i:int = 0; i < sp.numChildren; i ++) {
 			//	trace(i, sp.getChildAt(i));

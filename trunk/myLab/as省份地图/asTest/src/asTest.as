@@ -36,7 +36,6 @@ package {
 		private var curProv:DisplayObject;
 		
 		private var demo:animDemo;
-		private var demoShow:Boolean = true;
 		[Embed(source="../img/cursor.png")]
 		private var cursor:Class;
 
@@ -202,18 +201,20 @@ package {
 			demo.couldShow = false;
 			demo.hide();
 			clearTimeout(tmOut);
-			if (this.curProv) {
-				this.curProv.filters = [];
-				//var pn:String = curProv.toString().match(/\[object (\w+)\]/i)[1].toLowerCase();
-				//fadeTo(curProv, cnmap.hot[pn]);
-			}
-			
 			var ob:DisplayObject = DisplayObject(e.target);
 			
 			hover2(ob);
 		}
 		
 		public function hover2(ob:DisplayObject):void {
+			clearTimeout(demo.tmShow);
+			
+			if (this.curProv) {
+				this.curProv.filters = [];
+				//var pn:String = curProv.toString().match(/\[object (\w+)\]/i)[1].toLowerCase();
+				//fadeTo(curProv, cnmap.hot[pn]);
+			}
+			
 			this.curProv = ob;
 			var filter:GlowFilter = new GlowFilter();
 			filter.color = 0x333333;
@@ -231,6 +232,11 @@ package {
 			clearTimeout(tmOut_cit);
 			var ob:DisplayObject = DisplayObject(e.target);
 			tmOut = setTimeout(hideCities, 800);
+			
+			demo.tmShow = setTimeout(function ():void {
+				demo.couldShow = true;
+				demo.show();
+			}, 4000);
 		}
 		
 		private function fadeTo(ob:DisplayObject, v:int):void {
@@ -408,8 +414,6 @@ package {
 			
 			//var ppp:Point = new Point(300, 300);
 			//trace(sprProv.getObjectsUnderPoint(ppp));
-			
-			sprProv.setChildIndex(prov.zj, 0);
 		}
 	}
 }
