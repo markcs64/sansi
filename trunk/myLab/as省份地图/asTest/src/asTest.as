@@ -20,6 +20,7 @@ package {
 	import flash.utils.setTimeout;
 
 	[SWF(frameRate="30", backgroundColor="0xffffff", width="600", height="480")]
+	//显示宽度只有390×227，需再调整...
 	
 	public class asTest extends Sprite
 	{
