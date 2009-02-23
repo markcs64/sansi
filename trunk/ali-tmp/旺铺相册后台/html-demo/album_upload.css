@@ -1,0 +1,57 @@
+/* 相册上传相关样式 */
+
+.upload-step {
+	line-height: 36px;
+	font-weight: bold;
+	font-size: 14px;
+	padding-left: 35px;
+	background: url(http://img.china.alibaba.com/images/cn/market/danai/090210/icon_90210.gif) no-repeat scroll 10px -203px;
+	border-bottom: dotted 1px #B6C6DD;
+}
+#uploadArea ul.ul-inline,
+#uploadArea ul.ul-inline li,
+.upload-step ul,
+.upload-step ul li {
+	height: 36px;
+	line-height: 36px;
+	padding-right: 10px;
+}
+.upload-step span.s {
+	font-size: 12px;
+	font-weight: normal;
+}
+#upload-step2 {
+	background: url(http://img.china.alibaba.com/images/cn/market/danai/090210/icon_90210.gif) no-repeat scroll 10px -293px;
+}
+#main_right_body .upload-step2-enabled {
+	background: url(http://img.china.alibaba.com/images/cn/market/danai/090210/icon_90210.gif) no-repeat scroll 10px -263px;
+}
+
+#albumArea {
+	margin: 10px 0 30px 0;
+	height: 412px;
+	overflow: auto;
+	position: relative;
+}
+
+#uploadArea {
+	padding: 10px 0;
+	font-size: 14px;
+}
+#uploadBox {
+	margin: 10px 0;
+	height: 200px;
+	background: #f7f7f7;
+}
+#uploadAct {
+	font-size: 12px;
+	color: #999;
+	height: 100px;
+	width: 510px;
+}
+#upload-step2-toInfo {
+	display: none;
+}
+#upload-step2-albumName {
+	color: #F24500;
+}
