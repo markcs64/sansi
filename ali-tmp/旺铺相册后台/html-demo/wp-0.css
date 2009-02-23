@@ -1,0 +1,244 @@
+/* 
+ * ÍúÆÌ¹«ÓÃCSS
+ * 2009-2-18
+ * */
+
+div.bo_902btn,
+div.bo_902btn b.btnL,
+div.bo_902btn b.btnR {
+	height: 36px;
+	line-height: 33px;
+	font-size: 14px;
+	font-weight: bold;
+	overflow: hidden;
+	background: url(http://img.china.alibaba.com/images/cn/market/danai/090210/btn902.png) repeat-x 0 -200px;
+	cursor: pointer;
+}
+div.bo_902btn_disabled {
+	background-position: 0 -52px;
+	cursor: normal;
+}
+div.bo_902btn_hover {
+	background-position: 0 -200px;
+}
+div.bo_902btn a {
+	color: #DC7200 !important;
+}
+div.bo_902btn_disabled a {
+	color: #999 !important;
+}
+div.bo_902btn_hover a {
+	color: #DC7200 !important;
+}
+div.bo_902btn a:hover {
+	text-decoration: none;
+}
+div.bo_902btn b.btnL {
+	float: left;
+	display: block;
+	width: 20px;
+	background-position: 0 -152px;
+}
+div.bo_902btn_hover b.btnL {
+	background-position: 0 -152px;
+}
+div.bo_902btn_disabled b.btnL {
+	background-position: 0 -1px;
+}
+div.bo_902btn b.btnR {
+	float: right;
+	display: block;
+	width: 15px;
+	background-position: 100% -252px;
+}
+div.bo_902btn_hover b.btnR {
+	background-position: 100% -252px;
+}
+div.bo_902btn_disabled b.btnR {
+	background-position: 100% -102px;
+}
+
+.msgbox_oj_overlay {
+	position: absolute;
+	z-index: 9999;
+	top: 0;
+	left: 0;
+	background: #fff;
+}
+.msgbox_oj {
+	position: absolute;
+	z-index: 10000;
+	top: 100px;
+	left: 200px;
+	width: 422px;
+	display: none;
+	/*_filter: glow(color="#999999", strength=10);*/
+}
+.msgbox_oj .msgbox_oj_inner {
+	padding: 22px 22px 40px 22px;
+	background: url(http://img.china.alibaba.com/images/cn/market/danai/090210/msgBox_shadow2.png) no-repeat 0 0;
+	_background: url(http://img.china.alibaba.com/images/cn/market/danai/090210/msgBox_shadow2.gif) no-repeat 0 1px;
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://img.china.alibaba.com/images/cn/market/danai/090210/msgBox_shadow2.png',sizingMethod='crop');
+	_background: none;
+	width: 378px;
+}
+.msgbox_oj .msgbox_oj_bottom {
+	height: 36px;
+	background: url(http://img.china.alibaba.com/images/cn/market/danai/090210/msgBox_shadow2.png) no-repeat 0 100%;
+	_background: url(http://img.china.alibaba.com/images/cn/market/danai/090210/msgBox_shadow2.gif) no-repeat 0 1px;
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://img.china.alibaba.com/images/cn/market/danai/090210/msgBox_shadow_btmForIE6.png',sizingMethod='crop');
+	_background: none;
+	width: 422px;
+}
+.msgbox_oj .msgbox_oj_innerWrapper {
+	position: relative;
+}
+.msgbox_oj .msgbox_oj_box {
+	background: #fff url(http://img.china.alibaba.com/images/cn/market/danai/090210/msgBox_title.gif) repeat-x;
+}
+.msgbox_oj .close {
+	float: right;
+	width: 23px;
+	height: 23px;
+	margin: 3px 3px 0 0;
+	cursor: pointer;
+	background: url(img090216/msg_box_close.png) no-repeat;
+}
+.msgbox_oj h2 {
+	font-size: 14px;
+	margin: 0;
+	padding: 0 0 0 30px;
+	height: 30px;
+	line-height: 30px;
+	background: url(http://img.china.alibaba.com/images/cn/market/danai/090210/icon_90210.gif) no-repeat 5px -323px;
+	color: #fff;
+}
+.msgbox_oj .msgbox_oj_body {
+	padding: 20px 20px 10px 20px;
+	font-size: 14px;
+	font-weight: bold;
+	text-align: center;
+}
+.msgbox_oj .msgbox_oj_foot {
+	text-align: center;
+	height: 36px;
+	overflow: hidden;
+	position: absolute;
+	bottom: 36px;
+}
+.msgbox_oj .msgbox_oj_foot .bo_902btn {
+	float: left;
+}
+
+.ul-inline {
+	clear: both;
+}
+.ul-inline li {
+	float: left;
+}
+
+#mainTRHelp {
+	font-size: 12px;
+	float: right;
+	padding-left: 18px;
+	color: #112482;
+	background: #EFF2F9 url(http://img.china.alibaba.com/images/cn/market/danai/090210/icon_90210.gif) no-repeat 0 2px;
+}
+#main_right_body {
+	padding: 12px;
+	line-height: 18px;
+}
+#main_right_info {
+	border: solid 1px #A0B6E8;
+}
+#main_right_info div {
+	border: solid 2px #D4DCED;
+	border-right: 0;
+	border-bottom: 0;
+	padding: 4px 8px;
+	background: #EFF2F9;
+}
+#main_right p, #main_right h2 {
+	margin: 0;
+	padding: 0;
+}
+#main_right h2 {
+	font-size: 14px;
+	padding-left: 18px;
+	background: url(http://img.china.alibaba.com/images/cn/market/danai/090210/icon_90210.gif) no-repeat 0 -30px;
+}
+#main_right_info p {
+	padding: 4px 0 2px 18px;
+}
+
+.hidden {
+	display: none;
+}
+
+.msgbox_oj #formAlbumAct {
+	display: block;
+	font-weight: normal;
+	text-align: left;
+	line-height: 25px;
+}
+
+.wp-gotopage {
+	float: right !important;
+	line-height: 20px !important;
+	font-size: 14px;
+	font-weight: normal;
+	color: #3266CC;
+}
+.wp-gotopage div {
+	float: left;
+	cursor: pointer;
+}
+.wp-gotopage div.disabled {
+	color: #000;
+	cursor: auto;
+}
+.wp-gotopage .wp-gotopage-some {
+	font-size: 12px;
+	padding: 0 5px;
+	cursor: auto;
+	position: relative;
+}
+.wp-gotopage .wp-gotopage-cur {
+	border: solid 1px #fff;
+	padding: 0 15px 0 3px;
+	background: url(img090216/arrow_down_2.gif) no-repeat 95% 50%;
+}
+.wp-gotopage div.hover .wp-gotopage-cur {
+	border: solid 1px #3266cc;
+}
+.wp-gotopage div.hover ul.wp-gotopage-pages {
+	display: block;
+}
+.wp-gotopage ul.wp-gotopage-pages {
+	border: solid 1px #3266cc;
+	background: #fff;
+	height: auto !important;
+	position: absolute;
+	left: 5px;
+	top: 21px;
+	z-index: 10;
+	padding: 0;
+	width: 2em;
+	overflow: hidden;
+	display: none;
+}
+.wp-gotopage ul.wp-gotopage-pages li {
+	float: none;
+	height: auto;
+	margin: 0;
+	padding: 0 5px;
+	display: block;
+	height: 20px;
+	line-height: 20px;
+	cursor: pointer;
+}
+.wp-gotopage ul.wp-gotopage-pages li.hover,
+.wp-gotopage ul.wp-gotopage-pages li.selected {
+	background: #3266cc;
+	color: #fff;
+}

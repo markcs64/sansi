@@ -1,0 +1,32 @@
+// 照片JSON格式
+
+var g_photos = [
+	{
+		id: "abcde_123",		//照片ID
+		title: "照片标题",		//照片标题
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg",		//照片地址
+		datetime: new Date(2008, 10, 27),	//照片最后修改时间
+		desc: "照片描述"		//照片描述
+	},
+	{
+		id: "abcde_123",
+		title: "照片标题",
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg",
+		datetime: new Date(2008, 10, 27),
+		desc: "照片描述"
+	},
+	{
+		id: "abcde_123",
+		title: "照片标题",
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg",
+		datetime: new Date(2008, 10, 27),
+		desc: "照片描述"
+	},
+	{
+		id: "abcde_123",
+		title: "照片标题",
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg",
+		datetime: new Date(2008, 10, 27),
+		desc: "照片描述"
+	}
+];

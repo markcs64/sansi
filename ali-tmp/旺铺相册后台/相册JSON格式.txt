@@ -1,0 +1,28 @@
+// JSON格式
+
+var g_albums = [
+	{
+		id: "abcdefg_123",	//相册ID
+		title: "相册名",
+		count: 53,			//相册中包含多少张照片
+		datetime: new Date(2008, 10, 27),		//相册最后修改日期（年，月-1，日）
+		lock: 1,			//是否需要密码访问（0：否；1：是）
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"					//相册封面图片（可选）
+	},
+	{
+		id: "abcdefg_124",
+		title: "相册2",
+		count: 13,
+		datetime: new Date(2008, 11, 5),
+		lock: 1,
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		count: 40,
+		datetime: new Date(2009, 1, 3),
+		lock: 1,
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	}
+];

@@ -1,0 +1,87 @@
+/* œ‡≤·∫ÛÃ® */
+
+.album {
+	float: left;
+}
+.album .wrapper {
+	position: relative;
+	width: 140px;
+	height: 200px;
+	border: solid 1px #fff;
+	text-align: center;
+	padding: 2px;
+}
+.album .normal {
+}
+.album .hover {
+	background: #FAFBFD;
+	border: solid 1px #E0E8F8;
+}
+.album .selected {
+	background: transparent url(img090216/album_selected_bg.png) no-repeat -1px -1px;
+	_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img090216/album_selected_bg.png',sizingMethod='crop');
+	_background: none;
+	border: 0;
+	padding: 3px;
+	color: #fff;
+}
+.album .selected .lock {
+	color: #FFE5B1;
+}
+.album .selected span.title,
+.album .selected span.count,
+.album .selected span.datetime {
+	color: #fff;
+}
+.album .hook {
+	width: 64px;
+	height: 64px;
+	background: transparent url(img090216/1000864.gif) no-repeat;
+	position: absolute;
+	top: 98px;
+	left: 75px;
+	display: none;
+}
+.album .selected .hook {
+	display: block;
+}
+.album .cover {
+	background: transparent url(img090216/album.png) no-repeat 50% 0;
+	_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img090216/album.png',sizingMethod='crop');
+	_background: none;
+	width: 140px;
+	height: 153px;
+	overflow: hidden;
+}
+.album .cover-img {
+	width: 108px;
+	height: 125px;
+	overflow: hidden;
+	margin: 12px auto 0 auto;
+}
+.album .cover .no-photo {
+	background: url(img090216/no_photo.gif) no-repeat 50% 50%;
+}
+.album .cover .no-photo img {
+	display: none;
+}
+.album .info {
+	color: #999;
+	font-family: Arial;
+}
+.album .title {
+	font-weight: bold;
+	color: #000;
+	padding-right: 0.5em;
+}
+.album .count,
+.album .datetime {
+	font-size: 10px;
+}
+.album .lock {
+	padding-left: 25px;
+	background: transparent url(img090216/lock.png) no-repeat 8px 50%;
+	/*_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img090216/lock.png',sizingMethod='crop');
+	_background: none;*/
+	color: #cc0000;
+}
