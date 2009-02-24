@@ -237,7 +237,9 @@ div.bo_902btn_disabled b.btnR {
 	line-height: 20px;
 	cursor: pointer;
 }
-.wp-gotopage ul.wp-gotopage-pages li.hover,
+.wp-gotopage ul.wp-gotopage-pages li.hover {
+	background: #EFF2F9;
+}
 .wp-gotopage ul.wp-gotopage-pages li.selected {
 	background: #3266cc;
 	color: #fff;

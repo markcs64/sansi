@@ -10,6 +10,7 @@ function WP_GotoPage(ob, curPage, pageCount, callback) {
 	this.tm = 0;
 
 	WP_GotoPage.items.push(this);
+	WP_GotoPage.pageCount = this.pageCount;
 	this.init();
 }
 
@@ -118,6 +119,7 @@ WP_GotoPage.prototype = {
 
 WP_GotoPage.items = [];
 WP_GotoPage.curPage = 1;
+WP_GotoPage.pageCount = 1;
 WP_GotoPage.update = function () {
 	for (var i = 0; WP_GotoPage.items[i]; i ++) {
 		WP_GotoPage.items[i].curPage = WP_GotoPage.curPage;

@@ -1,0 +1,15 @@
+/* album_mng.css */
+
+#photoListHead {
+	height: 36px;
+	line-height: 36px;
+	clear: both;
+	border-bottom: 1px dotted #B6C6DD;
+	font-size: 14px;
+	font-weight: bold;
+	background: url(img090216/2002912.gif) no-repeat 5px 50%;
+	padding-left: 25px;
+}
+#photoListHead ul li {
+	padding-right: 10px;
+}

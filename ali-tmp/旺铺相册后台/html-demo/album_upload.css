@@ -16,6 +16,14 @@
 	line-height: 36px;
 	padding-right: 10px;
 }
+div#upload-step3 {
+	position: relative;
+}
+div#upload-step3 li.wp-gotopage {
+	position: absolute;
+	top: 10px;
+	right: 0px;
+}
 .upload-step span.s {
 	font-size: 12px;
 	font-weight: normal;
@@ -25,6 +33,18 @@
 }
 #main_right_body .upload-step2-enabled {
 	background: url(http://img.china.alibaba.com/images/cn/market/danai/090210/icon_90210.gif) no-repeat scroll 10px -263px;
+}
+#main_right_body .bigOK {
+	margin-bottom: 20px;
+}
+#main_right_body .bigOK div {
+	padding-left: 80px;
+	background: #EFF2F9 url(img090216/1000848.gif) no-repeat 15px 50%;
+}
+#main_right_info h3 {
+	padding: 0;
+	margin: 0 0 5px 0;
+	font-size: 14px;
 }
 
 #albumArea {
@@ -54,4 +74,100 @@
 }
 #upload-step2-albumName {
 	color: #F24500;
+}
+
+#photo-list {
+	position: relative;
+	overflow: hidden;
+}
+#photo-list ul {
+}
+#photo-list li {
+	clear: both;
+	height: 176px;
+	+height: 172px;
+	margin: 0;
+	padding: 10px 0;
+	overflow: hidden;
+}
+#photo-list .left {
+	width: 210px;
+	overflow: hidden;
+	text-align: center;
+}
+#photo-list .photo {
+	height: 165px;
+	margin: 0 auto;
+}
+#photo-list .photo img {
+	height: 150px;
+}
+#photo-list .right {
+	width: 540px;
+	overflow: hidden;
+}
+#photo-list .right p {
+	margin: 5px 0 10px 0;
+	padding: 0;
+}
+#photo-list .right input {
+	width: 240px;
+}
+#photo-list .right textarea {
+	width: 460px;
+	height: 8em;
+	font-size: 12px;
+}
+#photo-list .right span.abs {
+	position: absolute;
+}
+#photo-list .right p.tright {
+	text-align: right;
+	background: url(img090216/copyDown.gif) no-repeat right 50%;
+	padding-right: 15px;
+	margin-right: 20px;
+}
+#photo-actions {
+	border-top: 1px dotted #B6C6DD;
+	clear: both;
+	margin: 20px 0;
+	padding: 10px 10px 20px 340px;
+}
+
+.photo table .photo-img {
+	max-width: 180px;
+	+max-width: none;
+	overflow: hidden;
+}
+.photo table {
+	background: url(img090216/s1.png) no-repeat 100% 100%;
+}
+.photo table .tb-bd-1,
+.photo table .tb-bd-2,
+.photo table .tb-bd-3,
+.photo table .tb-bd-7,
+.photo table .tb-bd-8,
+.photo table .tb-bd-9 {
+	height: 6px;
+}
+.photo table .tb-bd-1,
+.photo table .tb-bd-4,
+.photo table .tb-bd-7,
+.photo table .tb-bd-3,
+.photo table .tb-bd-6,
+.photo table .tb-bd-9 {
+	width: 6px;
+}
+.photo table .tb-bd-2 {
+	background: url(img090216/s3.png) no-repeat;
+}
+.photo table .tb-bd-5 {
+}
+.photo table .tb-bd-6 {
+	background: url(img090216/s2.png) no-repeat;
+}
+.photo table .tb-bd-1,
+.photo table .tb-bd-8,
+.photo table .tb-bd-9 {
+	background: #fff;
 }
