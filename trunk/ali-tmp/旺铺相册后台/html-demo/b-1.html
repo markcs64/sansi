@@ -18,109 +18,131 @@
 <link id="ecsColorStyle" rel="stylesheet" rev="stylesheet" href="http://style.china.alibaba.com/css/store/ecs/eCustomerService0.css" type="text/css" />
 <link rel="stylesheet" rev="stylesheet" href="wp-0.css" type="text/css" media="screen" />
 <link rel="stylesheet" rev="stylesheet" href="cls_album.css" type="text/css" media="screen" />
-<link rel="stylesheet" rev="stylesheet" href="album_upload.css" type="text/css" media="screen" />
+<link rel="stylesheet" rev="stylesheet" href="album_mng.css" type="text/css" media="screen" />
 
 <script type="text/javascript">
-
-// 照片数组
-var g_photos = [
+/* 如果没有相册 */
+/*
+var g_albums = [
 	{
-		id: "abcde_123",		//照片ID
-		title: "照片标题",		//照片标题
-		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg",		//照片地址
-		datetime: new Date(2008, 10, 27),	//照片最后修改时间
-		desc: "照片描述"		//照片描述
+		id: "asfaefe",
+		title: "我的相册",
+		datetime: new Date(2008, 10, 27)
+	}
+];
+*/
+/* 如果有相册 */
+var g_albums = [
+	{
+		id: "abcdefg_123",	//相册ID
+		title: "相册名",
+		count: 53,			//相册中包含多少张照片
+		datetime: new Date(2008, 10, 27),		//相册最后修改日期（年，月-1，日）
+		lock: 1,			//是否需要密码访问（0：否；1：是）
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"					//相册封面图片（可选）
 	},
 	{
-		id: "abcde_124",
-		title: "照片标题",
-		src: "http://img.china.alibaba.com/club/upload/user/3/2/c/a/32ca4058aea227a4c8b37ef5e7a177f5.jpg",
-		datetime: new Date(2008, 10, 27),
-		desc: "照片描述"
+		id: "abcdefg_124",
+		title: "相册2",
+		count: 13,
+		datetime: new Date(2008, 11, 5),
+		lock: 0,
+		cover: "http://i02.c.aliimg.com/img/offer/32/06/00/34/8/320600348"
 	},
 	{
-		id: "abcde_125",
-		title: "照片标题",
-		src: "http://img.china.alibaba.com/news/upload/king/daogou/081203/176_240t1_1230542778676.jpg",
-		datetime: new Date(2008, 10, 27),
-		desc: "照片描述"
+		id: "abcdefg_125",
+		title: "相册名长度最多显示七个字符",
+		count: 40,
+		datetime: new Date(2009, 1, 3),
+		lock: 0,
+		cover: "http://i02.c.aliimg.com/img/offer/32/82/88/98/2/328288982"
 	},
 	{
-		id: "abcde_126",
-		title: "照片标题",
-		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg",
-		datetime: new Date(2008, 10, 27),
-		desc: "照片描述"
+		id: "abcdefg_125",
+		title: "相册3",
+		count: 40,
+		datetime: new Date(2009, 1, 3),
+		lock: 0,
+		cover: "http://i00.c.aliimg.com/img/offer/33/28/81/45/4/332881454"
 	},
 	{
-		id: "abcde_127",
-		title: "照片标题",
-		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg",
-		datetime: new Date(2008, 10, 27),
-		desc: "照片描述"
+		id: "abcdefg_125",
+		title: "相册3",
+		count: 40,
+		datetime: new Date(2009, 1, 3),
+		lock: 1,
+		cover: "http://i02.c.aliimg.com/news/upload/9/news/2008/9/26/350x350_11c9d4bd119.jpg"
 	},
 	{
-		id: "abcde_128",
-		title: "照片标题",
-		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg",
-		datetime: new Date(2008, 10, 27),
-		desc: "照片描述"
+		id: "abcdefg_125",
+		title: "相册3",
+		count: 40,
+		datetime: new Date(2009, 1, 3),
+		lock: 1,
+		cover: "http://i05.c.aliimg.com/news/upload/9/news/2008/9/26/350x350_11c9d4bd132.jpg"
 	},
 	{
-		id: "abcde_129",
-		title: "照片标题",
-		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg",
-		datetime: new Date(2008, 10, 27),
-		desc: "照片描述"
+		id: "abcdefg_125",
+		title: "相册3",
+		count: 40,
+		datetime: new Date(2009, 1, 3),
+		lock: 1,
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
-		id: "abcde_130",
-		title: "照片标题",
-		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg",
-		datetime: new Date(2008, 10, 27),
-		desc: "照片描述"
+		id: "abcdefg_125",
+		title: "相册3",
+		count: 40,
+		datetime: new Date(2009, 1, 3),
+		lock: 1,
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
-		id: "abcde_131",
-		title: "照片标题",
-		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg",
-		datetime: new Date(2008, 10, 27),
-		desc: "照片描述"
+		id: "abcdefg_125",
+		title: "相册3",
+		count: 40,
+		datetime: new Date(2009, 1, 3),
+		lock: 1,
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
-		id: "abcde_132",
-		title: "照片标题",
-		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg",
-		datetime: new Date(2008, 10, 27),
-		desc: "照片描述"
+		id: "abcdefg_125",
+		title: "相册3",
+		count: 40,
+		datetime: new Date(2009, 1, 3),
+		lock: 1,
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
-		id: "abcde_133",
-		title: "照片标题",
-		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg",
-		datetime: new Date(2008, 10, 27),
-		desc: "照片描述"
+		id: "abcdefg_125",
+		title: "相册3",
+		count: 40,
+		datetime: new Date(2009, 1, 3),
+		lock: 1,
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
-		id: "abcde_134",
-		title: "照片标题",
-		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg",
-		datetime: new Date(2008, 10, 27),
-		desc: "照片描述"
+		id: "abcdefg_125",
+		title: "空相册",
+		count: 0,
+		datetime: new Date(2009, 1, 3),
+		lock: 1
 	},
 	{
-		id: "abcde_135",
-		title: "照片标题",
-		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg",
-		datetime: new Date(2008, 10, 27),
-		desc: "照片描述"
+		id: "abcdefg_125",
+		title: "相册3",
+		count: 40,
+		datetime: new Date(2009, 1, 3),
+		lock: 1,
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
-		id: "abcde_136",
-		title: "照片标题",
-		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg",
-		datetime: new Date(2008, 10, 27),
-		desc: "照片描述"
+		id: "abcdefg_125",
+		title: "相册3",
+		count: 40,
+		datetime: new Date(2009, 1, 3),
+		lock: 1,
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	}
 ];
 </script>
@@ -211,7 +233,7 @@ function treeInit() { //菜单控件初始化
   menu=new AlicnMenu("menu");
   menu.bindData(roots.menu);
   menu.draw(parent1);
-  menu.setActivedItem("12.1");
+  menu.setActivedItem("12.2");
 }
 
 var roots2 = {menu2:[	
@@ -261,34 +283,21 @@ function treeInit2() { //菜单控件初始化
 
 	    <table width="100%"  border="0" cellspacing="0" cellpadding="1">
           <tr>
-            <td bgcolor="#eff2f9" class="tx_title">&nbsp;&nbsp;上传图片</td>
+            <td bgcolor="#eff2f9" class="tx_title">&nbsp;&nbsp;管理相册</td>
 			<td bgcolor="#eff2f9" class="tx_title" width="250"><span id="mainTRHelp"><a href="#">发布相册指导</a> <span style="font-weight:normal;">|</span> <a href="#">查看范例</a></span></td>
           </tr>
         </table>
 
 		<div id="main_right_body">
-			<div id="main_right_info" class="bigOK"><div>
-					<h3>您已成功上传 <span class="red">15</span> 张图片，请为这些图片添加标题与内容</h3>
-					1. 点击保存后，您所添加的图片说明会被保存下来；<br />
-					2. 您可以使用向下复制功能，对具有相同特性的图片进行描述。
-			</div></div>
-
-			<div id="upload-step3" class="upload-step">
+			<div id="photoListHead">
 				<ul class="ul-inline">
-					<li>步骤三 添加标题与内容</li>
+					<li>共有 <span class="num">19</span> 本相册，您可以 </li>
+					<li><div id="btn_createNewAlbum" class="bo_902btn"><a href="#">新建相册</a></div></li>
 					<li class="wp-gotopage"></li>
 				</ul>
 			</div>
 
-			<form id="frmSave" action="#" method="post">
-			<div id="photo-list"></div>
-			</form>
-
-			<div id="photo-actions">
-				<ul class="ul-inline">
-					<li><div class="bo_902btn" onclick="chkSubmitFrm();"><a href="#">保存设定</a></div></li>
-					<li class="wp-gotopage"></li>
-				</ul>
+			<div id="albumArea">
 			</div>
 
 		</div>
@@ -297,13 +306,23 @@ function treeInit2() { //菜单控件初始化
 <!--right part end-->
 </div>
 
-<script type="text/javascript">
+<div id="formAlbumAct" class="hidden">
+	<form action="#" method="post">
+		<span>相册名称：</span><input type="text" id="frm_albumTitle" name="frm_albumTitle" value="" /><br />
+		<span>访问权限：</span><input type="radio" id="frm_albumLocked0" name="frm_albumLocked" value="0" checked="checked" /><label for="frm_albumLocked0">公开</label> <input type="radio" id="frm_albumLocked" name="frm_albumLocked" value="1" /><label for="frm_albumLocked">密码访问</label><br />
+		<div id="frm_pswdDiv" class="hidden">
+			<span>　　密码：</span><input type="password" id="frm_albumPswd" name="frm_albumPswd" /><br />
+			<span>确认密码：</span><input type="password" id="frm_albumPswd2" name="frm_albumPswd2" />
+		</div>
+	</form>
+</div>
 
+<script type="text/javascript">
 	function showPages() {
 		var c = $D.getElementsByClassName("wp-gotopage"),
 			i;
 		for (i = 0; c[i]; i ++) {
-			new WP_GotoPage(c[i], 1, Math.ceil(g_photos.length / 10), function () {
+			new WP_GotoPage(c[i], 1, Math.ceil(g_albums.length / 10), function () {
 				$D.setStyle("photo-list", "height", (WP_GotoPage.curPage != WP_GotoPage.pageCount ? 1960 : 196 * (g_photos.length % 10)) + "px");
 				$("photo-list").scrollTop = (WP_GotoPage.curPage - 1) * 1960;
 				getTreeHeight();	//重新计算页面高度
@@ -311,17 +330,43 @@ function treeInit2() { //菜单控件初始化
 		}
 	}
 
-	function chkSubmitFrm() {
-		alert("提交表单");
-		$("frmSave").submit();
-	}
-
 	$E.onDOMReady(function () {
 		showPages();
-		WP_Album._upload_fun.photoList();
+		WP_Album.init(g_albums);
+		WP_Album.show("albumArea");
 
 		//设置高度,高度是更具screen_placeholder的内容而定的，所以要放在screen_placeholder后面
 		getTreeHeight();
+
+		$E.on(BTN902.btns["btn_createNewAlbum"].ob, "click", function () {
+			WP_Album.msgBox("创建相册", {
+				action: "create"
+				},
+				$("formAlbumAct")
+			);
+			frm_albumTitleIsNull();
+			if ($("frm_albumLocked").checked) {
+				$D.removeClass("frm_pswdDiv", "hidden");
+			}
+		});
+
+		$E.on("frm_albumLocked0", "click", function () {
+			$D.addClass("frm_pswdDiv", "hidden");
+		});
+
+		$E.on("frm_albumLocked", "click", function () {
+			$D.removeClass("frm_pswdDiv", "hidden");
+		});
+
+		var frm_albumTitleIsNull = function () {
+			if ($("frm_albumTitle").value.length) {
+				WP_Album._msgbox.btns[0].disable(0);
+			} else {
+				WP_Album._msgbox.btns[0].disable(1);
+			}
+		};
+		$E.on("frm_albumTitle", "keyup", frm_albumTitleIsNull);
+		$E.on("frm_albumTitle", "change", frm_albumTitleIsNull);
 	});
 </script>
 <!--footer-->
