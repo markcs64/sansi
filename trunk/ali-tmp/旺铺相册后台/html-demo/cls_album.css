@@ -118,3 +118,7 @@
 	_background: none;*/
 	color: #cc0000;
 }
+
+input#frm_albumTitle {
+	width: 240px;
+}

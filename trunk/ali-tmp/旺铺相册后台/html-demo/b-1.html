@@ -482,8 +482,7 @@ function treeInit2() { //菜单控件初始化
 				</ul>
 			</div>
 
-			<div id="albumArea">
-			</div>
+			<div id="albumArea"></div>
 
 			<div id="albumListFoot">
 				<ul class="ul-inline">
@@ -497,16 +496,18 @@ function treeInit2() { //菜单控件初始化
 <!--right part end-->
 </div>
 
+<!--
 <div id="formAlbumAct" class="hidden">
 	<form action="#" method="post">
 		<span>相册名称：</span><input type="text" id="frm_albumTitle" name="frm_albumTitle" value="" /><br />
-		<span>访问权限：</span><input type="radio" id="frm_albumLocked0" name="frm_albumLocked" value="0" checked="checked" /><label for="frm_albumLocked0">公开</label> <input type="radio" id="frm_albumLocked" name="frm_albumLocked" value="1" /><label for="frm_albumLocked">密码访问</label><br />
+		<span>访问权限：</span><input type="radio" id="frm_albumLocked0" name="frm_locked" value="0" checked="checked" /><label for="frm_albumLocked0">公开</label> <input type="radio" id="frm_albumLocked" name="frm_locked" value="1" /><label for="frm_albumLocked">密码访问</label><br />
 		<div id="frm_pswdDiv" class="hidden">
 			<span>　　密码：</span><input type="password" id="frm_albumPswd" name="frm_albumPswd" /><br />
 			<span>确认密码：</span><input type="password" id="frm_albumPswd2" name="frm_albumPswd2" />
 		</div>
 	</form>
 </div>
+-->
 
 <script type="text/javascript">
 	g_pageSize = 20;
@@ -541,31 +542,10 @@ function treeInit2() { //菜单控件初始化
 			WP_Album.msgBox("创建相册", {
 				action: "create"
 				},
-				$("formAlbumAct")
+				WP_Album.frmStr
 			);
-			frm_albumTitleIsNull();
-			if ($("frm_albumLocked").checked) {
-				$D.removeClass("frm_pswdDiv", "hidden");
-			}
+			WP_Album.frmInit();
 		});
-
-		$E.on("frm_albumLocked0", "click", function () {
-			$D.addClass("frm_pswdDiv", "hidden");
-		});
-
-		$E.on("frm_albumLocked", "click", function () {
-			$D.removeClass("frm_pswdDiv", "hidden");
-		});
-
-		var frm_albumTitleIsNull = function () {
-			if ($("frm_albumTitle").value.length) {
-				WP_Album._msgbox.btns[0].disable(0);
-			} else {
-				WP_Album._msgbox.btns[0].disable(1);
-			}
-		};
-		$E.on("frm_albumTitle", "keyup", frm_albumTitleIsNull);
-		$E.on("frm_albumTitle", "change", frm_albumTitleIsNull);
 	});
 </script>
 <!--footer-->

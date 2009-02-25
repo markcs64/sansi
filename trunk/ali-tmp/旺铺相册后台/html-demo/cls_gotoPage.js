@@ -87,6 +87,7 @@ WP_GotoPage.prototype = {
 		WP_GotoPage.update();
 	},
 	gotoPrePage: function () {
+		if ($D.hasClass(this.obs.lnkPrePage, "disabled")) return;
 		this.gotoPage(--this.curPage);
 	},
 	pageSelect: function (li) {
@@ -94,6 +95,7 @@ WP_GotoPage.prototype = {
 		this.gotoPage(p);
 	},
 	gotoNextPage: function () {
+		if ($D.hasClass(this.obs.lnkNextPage, "disabled")) return;
 		this.gotoPage(++this.curPage);
 	},
 	hidePages: function () {
