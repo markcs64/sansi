@@ -138,11 +138,30 @@ WP_Album.prototype = {
 		this._ob_state.className = "wrapper " + flag;
 	},
 	modifyDialog: function (e) {
-		alert("编辑");
+		if (this.type > 1) {
+			alert("此类相册不能被编辑！");
+		} else {
+			WP_Album.msgBox("修改相册属性", {
+				action: "modify"
+				},
+				WP_Album.frmStr
+			);
+			$("frm_albumId").value = this.id;
+			$("frm_albumTitle").value = this.title;
+			if (this.lock) {
+				$("frm_albumLocked").checked = true;
+			}
+			WP_Album.frmInit();
+		}
+
 		$E.stopPropagation(e);
 	},
 	delDialog: function (e) {
-		alert("删除");
+		if (this.type) {
+			alert("此类相册不能被删除！");
+		} else if (confirm("您确定要删除 " + this.title + " 相册吗？\n删除后，相册内 " + this.count + " 张相片将不可恢复！")) {
+			alert("删除...");
+		}
 		$E.stopPropagation(e);
 	},
 	open: function () {
@@ -164,13 +183,16 @@ WP_Album.msgBox = function (title, params, html) {
 					pswd2 = $("frm_albumPswd2").value;
 
 				if ($("frm_albumLocked").checked) {
-					if (pswd != pswd2) {
+					if (pswd == "") {
+						alert("密码不可以为空！");
+						return "__blocked__";
+					} else if (pswd != pswd2) {
 						alert("两次输入的密码不一致！");
 						return "__blocked__";
 					}
 				}
 
-				alert(1);
+				alert("提交表单...");
 			}
 		},
 		{
@@ -230,6 +252,44 @@ WP_Album.select = function (album) {
 
 	for (var i = 0; WP_Album.onselect[i]; i ++)
 		WP_Album.onselect[i]();
+};
+
+WP_Album.frmStr = "<div id=\"formAlbumAct\">"
+		+ "<form id=\"frmAlbumAct\" action=\"#\" method=\"post\">"
+		+ "<input type=\"hidden\" id=\"frm_albumId\" name=\"frm_albumId\" value=\"\" />"
+		+ "<span>相册名称：</span><input type=\"text\" id=\"frm_albumTitle\" name=\"frm_albumTitle\" value=\"\" /><br />"
+		+ "<span>访问权限：</span><input type=\"radio\" id=\"frm_albumLocked0\" name=\"frm_locked\" value=\"0\" checked=\"checked\" /><label for=\"frm_albumLocked0\">公开</label> <input type=\"radio\" id=\"frm_albumLocked\" name=\"frm_locked\" value=\"1\" /><label for=\"frm_albumLocked\">密码访问</label><br />"
+		+ "<div id=\"frm_pswdDiv\" class=\"hidden\">"
+		+ "<span>　　密码：</span><input type=\"password\" id=\"frm_albumPswd\" name=\"frm_albumPswd\" /><br />"
+		+ "<span>确认密码：</span><input type=\"password\" id=\"frm_albumPswd2\" name=\"frm_albumPswd2\" />"
+		+ "</div>"
+		+ "</form></div>";
+
+WP_Album.frmInit = function () {
+	var frm_albumTitleIsNull = function () {
+		if ($("frm_albumTitle").value.length) {
+			WP_Album._msgbox.btns[0].disable(0);
+		} else {
+			WP_Album._msgbox.btns[0].disable(1);
+		}
+	}
+
+	frm_albumTitleIsNull();
+
+	if ($("frm_albumLocked").checked) {
+		$D.removeClass("frm_pswdDiv", "hidden");
+	}
+
+	$E.on("frm_albumLocked0", "click", function () {
+		$D.addClass("frm_pswdDiv", "hidden");
+	});
+
+	$E.on("frm_albumLocked", "click", function () {
+		$D.removeClass("frm_pswdDiv", "hidden");
+	});
+
+	$E.on("frm_albumTitle", "keyup", frm_albumTitleIsNull);
+	$E.on("frm_albumTitle", "change", frm_albumTitleIsNull);
 };
 
 $E.onDOMReady(function () {
