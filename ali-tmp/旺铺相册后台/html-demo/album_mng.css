@@ -1,6 +1,6 @@
 /* album_mng.css */
 
-#photoListHead {
+#albumListHead {
 	height: 36px;
 	line-height: 36px;
 	clear: both;
@@ -10,6 +10,12 @@
 	background: url(img090216/2002912.gif) no-repeat 5px 50%;
 	padding-left: 25px;
 }
-#photoListHead ul li {
+#albumListHead ul li {
 	padding-right: 10px;
+}
+#albumArea {
+	overflow: hidden;
+}
+#albumListFoot {
+	padding: 20px 10px;
 }
