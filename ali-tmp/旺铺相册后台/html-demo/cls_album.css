@@ -38,6 +38,7 @@
 	height: 64px;
 	background: transparent url(img090216/1000864.gif) no-repeat;
 	position: absolute;
+	z-index: 100;
 	top: 98px;
 	left: 75px;
 	display: none;
@@ -46,12 +47,32 @@
 	display: block;
 }
 .album .cover {
+	position: relative;
 	background: transparent url(img090216/album.png) no-repeat 50% 0;
 	_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img090216/album.png',sizingMethod='crop');
 	_background: none;
 	width: 140px;
 	height: 153px;
 	overflow: hidden;
+}
+.album .cover .operation {
+	position: absolute;
+	background: #fff;
+	bottom: 10px;
+	left: 15px;
+	width: 106px;
+	padding: 3px 0 0 5px;
+	height: 0;
+	overflow: hidden;
+}
+.album .cover .operation a {
+	color: #00f;
+	padding: 0 5px 0 15px;
+	background: url(img090216/6001512.gif) no-repeat 0 50%;
+	cursor: pointer;
+}
+.album .cover .operation a.ope-del {
+	background-image: url(img090216/1000912.gif);
 }
 .album .cover-img {
 	width: 108px;
@@ -73,6 +94,18 @@
 	font-weight: bold;
 	color: #000;
 	padding-right: 0.5em;
+}
+.album .type-1,
+.album .type-2,
+.album .type-3 {
+	background: url(img090216/6006512.gif) no-repeat 0 0;
+	padding-left: 20px;
+}
+.album .type-2 {
+	background-image: url(img090216/6006612.gif);
+}
+.album .type-3 {
+	background-image: url(img090216/6006712.gif);
 }
 .album .count,
 .album .datetime {

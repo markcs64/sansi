@@ -303,6 +303,31 @@ var g_albums = [
 		datetime: new Date(2009, 1, 3),
 		lock: 1,
 		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		type: 1,
+		title: "我的相册",
+		count: 40,
+		datetime: new Date(2009, 1, 3),
+		lock: 1,
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		type: 2,
+		title: "下架图片",
+		count: 40,
+		datetime: new Date(2009, 1, 3),
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		type: 3,
+		title: "审核未通过",
+		count: 40,
+		datetime: new Date(2009, 1, 3),
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	}
 ];
 </script>
@@ -500,7 +525,7 @@ function treeInit2() { //菜单控件初始化
 
 	$E.onDOMReady(function () {
 		showPages();
-		WP_Album.init(g_albums);
+		WP_Album.init(g_albums, {click: "open"});
 		WP_Album.show("albumArea");
 
 		if (WP_GotoPage.pageCount > 1) {

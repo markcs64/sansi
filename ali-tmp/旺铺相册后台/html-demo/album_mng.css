@@ -9,13 +9,23 @@
 	font-weight: bold;
 	background: url(img090216/2002912.gif) no-repeat 5px 50%;
 	padding-left: 25px;
+	position: relative;
 }
 #albumListHead ul li {
 	padding-right: 10px;
 }
 #albumArea {
+	position: relative;
 	overflow: hidden;
 }
 #albumListFoot {
 	padding: 20px 10px;
+}
+.album {
+	cursor: pointer;
+}
+#albumListHead li.wp-gotopage {
+	position: absolute;
+	right: 0;
+	top: 10px;
 }

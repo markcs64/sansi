@@ -14,6 +14,10 @@ function WP_Album (ob, i) {
 	this.id = ob.id || "";
 	this.ob = null;
 	this.title = ob.title || "";
+	this.type = ob.type || 0;		// type: 0 - 普通相册
+									//       1 - 我的相册
+									//       2 - 下架图片
+									//       3 - 审核未通过
 	this.count = parseInt(ob.count) || 0;
 	this.lock = ob.lock || 0;
 	this.datetime = ob.datetime || new Date();
@@ -38,8 +42,18 @@ WP_Album.prototype = {
 		tmp.appendChild(this._ob_cover_img);
 		if (this.cover == "") $D.addClass(tmp, "no-photo");
 		this._ob_cover.appendChild(tmp);
+		this._ob_operation = mkEl("div", {className: "operation"});
+		this._ob_cover.appendChild(this._ob_operation);
+		tmp = mkEl("a", {className: "ope-edit"});
+		tmp.appendChild(document.createTextNode("编辑"));
+		this._ob_operation.appendChild(tmp);
+		$E.on(tmp, "click", this.modifyDialog, this, true);
+		tmp = mkEl("a", {className: "ope-del"});
+		tmp.appendChild(document.createTextNode("删除"));
+		this._ob_operation.appendChild(tmp);
+		$E.on(tmp, "click", this.delDialog, this, true);
 		tmp = mkEl("div", {className: "info"});
-		this._ob_title = mkEl("span", {className: "title"});
+		this._ob_title = mkEl("span", {className: "title type-" + this.type});
 		var _title = this.title;
 		if (_title.length > 7) _title = _title.substring(0, 7) + "..";
 		this._ob_title.appendChild(document.createTextNode(_title));
@@ -61,7 +75,7 @@ WP_Album.prototype = {
 
 		$E.on(this.ob, "mouseover", this._bind(this.hover));
 		$E.on(this.ob, "mouseout", this._bind(this.unhover));
-		$E.on(this.ob, "click", this._bind(this.select));
+		$E.on(this.ob, "click", this._bind(this[WP_Album.config.click]));
 		$E.on(this._ob_cover_img, "load", this._bind(this.resizeCover));
 	},
 	_bind: function (f) {
@@ -91,10 +105,23 @@ WP_Album.prototype = {
 	hover: function () {
 		if (this.state == "selected") return;
 		this._chgState("hover");
+		if (this._tm_operation)
+			clearTimeout(this._tm_operation);
+		
+		var anim = new $Y.Anim(this._ob_operation, {
+			height: {to: 20}
+		}, 0.5);
+		anim.animate();
 	},
 	unhover: function () {
 		if (this.state == "selected") return;
 		this._chgState("normal");
+		var anim = new $Y.Anim(this._ob_operation, {
+			height: {to: 0}
+		}, 0.5);
+		this._tm_operation = setTimeout(function () {
+			anim.animate();
+		}, 500);
 	},
 	select: function () {
 		WP_Album.select(this);
@@ -109,6 +136,18 @@ WP_Album.prototype = {
 	_chgState: function (flag) {
 		this.state = flag;
 		this._ob_state.className = "wrapper " + flag;
+	},
+	modifyDialog: function (e) {
+		alert("编辑");
+		$E.stopPropagation(e);
+	},
+	delDialog: function (e) {
+		alert("删除");
+		$E.stopPropagation(e);
+	},
+	open: function () {
+		alert("转到相册 " + this.id + " （" + this.title + "）");
+		location.href = "b6.html";
 	}
 };
 
@@ -149,8 +188,9 @@ WP_Album.msgBox = function (title, params, html) {
 WP_Album.curSelect = null;		//当前选中相册
 WP_Album.items = [];
 
-WP_Album.init = function (a) {
+WP_Album.init = function (a, p) {
 	if (!a) return;
+	WP_Album.config = p || {click: "select"};
 	for (var i = 0; i < a.length; i ++) {
 		WP_Album.items.push(new WP_Album(a[i], i));
 	}
