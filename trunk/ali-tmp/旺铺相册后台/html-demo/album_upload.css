@@ -171,3 +171,7 @@ div#upload-step3 li.wp-gotopage {
 .photo table .tb-bd-9 {
 	background: #fff;
 }
+
+.album .operation {
+	display: none;
+}
