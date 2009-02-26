@@ -31,3 +31,50 @@
 	right: 0;
 	top: 10px;
 }
+
+#albumCoverPhoto {
+	position: absolute;
+	z-index: 1;
+	top: 5px;
+	left: 16px;
+}
+#albumCoverPhoto .img-middle-center {
+	width: 137px;
+	height: 153px;
+	background: url(img090216/album_cover.png) no-repeat;
+}
+.img-middle-center {
+	position: relative;
+	overflow: hidden;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle;
+}
+.img-middle-center p {
+	position: static;
+	+position: absolute;
+	top: 50%;
+}
+.img-middle-center img {
+	position: static;
+	+position: relative;
+	top: -50%;
+	left: -50%;
+}
+.img-middle-center p:after {
+	content: ".";
+	font-size: 1px;
+	line-height: 1px;
+	visibility: hidden;
+}
+
+#albumInfo-2 {
+	font-size: 14px;
+	margin-left: 170px;
+	padding: 30px 0;
+	line-height: 30px;
+}
+span.albumTitle {
+	font-weight: bold;
+	color: #FF7202;
+}

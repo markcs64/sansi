@@ -108,10 +108,12 @@
 	background-image: url(img090216/6006712.gif);
 }
 .album .count,
-.album .datetime {
+span.datetime {
 	font-size: 10px;
+	color: #999;
+	font-family: Arial;
 }
-.album .lock {
+span.lock {
 	padding-left: 25px;
 	background: transparent url(img090216/lock.png) no-repeat 8px 50%;
 	/*_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img090216/lock.png',sizingMethod='crop');
