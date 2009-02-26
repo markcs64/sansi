@@ -268,3 +268,15 @@ function mkEl(tagName, p) {
 	return o;
 }
 
+function g_imgMaxSize(img, maxWidth, maxHeight) {
+	var w = img.width,
+		h = img.height;
+	
+	if (w >= h) {
+		$D.setStyle(img, "width", maxWidth + "px");
+		$D.setStyle(img, "height", Math.floor(h * w / maxWidth) + "px");
+	} else {
+		$D.setStyle(img, "width", Math.floor(w * h / maxHeight) + "px");
+		$D.setStyle(img, "height", maxHeight + "px");
+	}
+}
