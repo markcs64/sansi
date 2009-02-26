@@ -110,7 +110,7 @@ WP_Album.prototype = {
 		
 		var anim = new $Y.Anim(this._ob_operation, {
 			height: {to: 20}
-		}, 0.5);
+		}, 0.2);
 		anim.animate();
 	},
 	unhover: function () {
@@ -118,7 +118,7 @@ WP_Album.prototype = {
 		this._chgState("normal");
 		var anim = new $Y.Anim(this._ob_operation, {
 			height: {to: 0}
-		}, 0.5);
+		}, 0.2);
 		this._tm_operation = setTimeout(function () {
 			anim.animate();
 		}, 500);
