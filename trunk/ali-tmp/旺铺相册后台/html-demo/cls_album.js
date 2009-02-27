@@ -43,14 +43,17 @@ WP_Album.prototype = {
 		if (this.cover == "") $D.addClass(tmp, "no-photo");
 		this._ob_cover.appendChild(tmp);
 		this._ob_operation = mkEl("div", {className: "operation"});
-		this._ob_cover.appendChild(this._ob_operation);
+		if (this.type <= 1)
+			this._ob_cover.appendChild(this._ob_operation);
 		tmp = mkEl("a", {className: "ope-edit"});
 		tmp.appendChild(document.createTextNode("±à¼­"));
-		this._ob_operation.appendChild(tmp);
+		if (this.type <= 1)
+			this._ob_operation.appendChild(tmp);
 		$E.on(tmp, "click", this.modifyDialog, this, true);
 		tmp = mkEl("a", {className: "ope-del"});
 		tmp.appendChild(document.createTextNode("É¾³ý"));
-		this._ob_operation.appendChild(tmp);
+		if (this.type < 1)
+			this._ob_operation.appendChild(tmp);
 		$E.on(tmp, "click", this.delDialog, this, true);
 		tmp = mkEl("div", {className: "info"});
 		this._ob_title = mkEl("span", {className: "title type-" + this.type});
