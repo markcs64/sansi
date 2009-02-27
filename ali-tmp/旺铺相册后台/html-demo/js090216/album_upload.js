@@ -83,23 +83,36 @@ WP_Album._upload_fun = {
 		$("photoTitle-" + g_photos[i + 1].id).focus();
 		return false;
 	},
-	swfUploaderInit: function () {
-		var uploader = new AliUploader("selectFilesLink", {
+	uploaderInit: function () {
+		WP_Album.uploader = new AliUploader("selectFilesLink", {
 			url:		"http://www.yswfblog.com/upload/upload_simple.php",
 			width: 		124,
 			height: 	45,
-			buttonSkin:	"img090216/selectFileButton.png",
+			buttonSkin:	"img090216/uploadBtn.png",
 			allowMulti:	true
 		});
 
-		uploader.buttonReady(function(evt) {
-			uploader.setAllowLogging(true);
+		WP_Album.uploader.buttonReady(function (evt) {
+			WP_Album.uploader.setAllowLogging(true);
 			var ff = new Array({description:"Í¼Ïñ | images", extensions:"*.jpg;*.png;*.gif"},
 				{description:"ÊÓÆµ | videos", extensions:"*.avi;*.mov;*.mpg"});
-			uploader.setFileFilters(ff);
+			WP_Album.uploader.setFileFilters(ff);
+			if (WP_Album.curSelect) {
+				WP_Album.uploader.enable();
+			} else {
+				WP_Album.uploader.disable();
+			}
 		})
 		.fileSelect(function(evt) {
 			log(evt);
+		});
+
+		WP_Album.uploader.fileSelect(function (evt) {
+			BTN902.btns["btn-upload"].disable(0);
+		});
+
+		BTN902.btns["btn-upload"].on("click", function () {
+			WP_Album.uploader.uploadAll();
 		});
 	}
 };
@@ -115,7 +128,8 @@ WP_Album.on("select", function () {
 
 		$D.setStyle("upload-step2", "background-position", "10px -263px");
 		$D.setStyle("upload-step2-toInfo", "display", "inline");
-		$D.removeClass("btn-selectPhoto", "bo_902btn_disabled");
+		//$D.removeClass("btn-selectPhoto", "bo_902btn_disabled");
+		WP_Album.uploader.enable();
 	}
 	setTimeout(function () {
 		WP_Album._upload_fun.scrollToAlbum(WP_Album.curSelect.i);
@@ -127,7 +141,4 @@ WP_Album.on("select", function () {
 function swfUploadInit() {
 }
 
-
 var g_msgbox;
-$E.onDOMReady(function () {
-});

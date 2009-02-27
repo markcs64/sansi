@@ -9,7 +9,11 @@
 	border-bottom: dotted 1px #B6C6DD;
 }
 #uploadArea ul.ul-inline,
-#uploadArea ul.ul-inline li,
+#uploadArea ul.ul-inline li {
+	height: 45px;
+	line-height: 45px;
+	padding: 0 5px;
+}
 .upload-step ul,
 .upload-step ul li {
 	height: 36px;
@@ -60,6 +64,8 @@ div#upload-step3 li.wp-gotopage {
 }
 #uploadBox {
 	margin: 10px 0;
+	font-size: 12px;
+	padding: 10px;
 	height: 200px;
 	background: #f7f7f7;
 }
@@ -174,4 +180,58 @@ div#upload-step3 li.wp-gotopage {
 
 .album .operation {
 	display: none;
+}
+
+#uploadAct .bo_902btn {
+	position: relative;
+}
+#uploadAct .bo_902btn .btn-icon {
+	position: absolute;
+	top: 10px;
+	+top: 9px;
+	left: 7px;
+	width: 15px;
+	height: 15px;
+	background: url(img090216/6001412.gif) no-repeat 50% 50%;
+}
+#uploadAct .bo_902btn_disabled .btn-icon {
+	background-image: url(img090216/6001412_gray.gif);
+}
+#uploadAct b.btnL {
+	width: 25px;
+}
+
+#uploadMainInfo {
+	width: 502px;
+	height: 180px;
+	overflow: hidden;
+}
+#uploadMainInfo .head {
+	color: #999;
+	height: 25px;
+	line-height: 25px;
+}
+#uploadMainInfo ul {
+	height: 124px;
+	overflow: auto;
+	border: solid 1px #ccc;
+	background: #fff;
+}
+#uploadMainInfo ul li {
+	height: 24px;
+	line-height: 24px;
+	border-bottom: solid 1px #E4E4E4;
+}
+#uploadMainInfo div.title,
+#uploadMainInfo div.size,
+#uploadMainInfo div.act {
+	float: left;
+	overflow: hidden;
+	width: 50px;
+	text-align: center;
+}
+#uploadMainInfo div.title {
+	width: 360px;
+	text-align: left;
+	padding-left: 8px;
 }
