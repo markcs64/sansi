@@ -16,7 +16,6 @@ function info(something){   try { console.info(something);} catch(e) {}; };
 	* @constructor
 	*/
     AliUploader = function(id, att) {	
-		
 		function event_handler(target, evt) {
 			var uploader = document.getElementById(target).owner;
 			info(evt.type);

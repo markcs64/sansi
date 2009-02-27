@@ -14,6 +14,7 @@ function BTN902(o) {
 	this.width = 0;
 	this.disabled = false;
 	this.callback = null;
+	this.evtLsner = {};
 
 	this.init();
 }
@@ -55,6 +56,19 @@ BTN902.prototype.hover = function () {
 
 BTN902.prototype.unhover = function () {
 	YAHOO.util.Dom.removeClass(this.ob, "bo_902btn_hover");
+};
+
+BTN902.prototype.on = function (evtName, f) {
+	if (!this.evtLsner[evtName]) {
+		this.evtLsner[evtName] = [];
+		$E.on(this.ob, evtName, function () {
+			if (this.disabled) return;
+			for (var i = 0; i < this.evtLsner[evtName].length; i ++) {
+				this.evtLsner[evtName][i]();
+			}
+		}, this, true);
+	}
+	this.evtLsner[evtName].push(f);
 };
 
 BTN902.btns = {};

@@ -10,7 +10,7 @@
 <script type="text/javascript" src="http://style.china.alibaba.com/js/yui/utilities.js"></script>
 <script language="javascript" type="text/javascript" src="js090216/wp-0.js"></script>
 <script language="javascript" type="text/javascript" src="js090216/cls_album.js"></script>
-<script language="javascript" type="text/javascript" src="js090216/swfobject.js.js"></script>
+<script language="javascript" type="text/javascript" src="js090216/swfobject.js"></script>
 <script language="javascript" type="text/javascript" src="js090216/aliuploader.js"></script>
 <script language="javascript" type="text/javascript" src="js090216/album_upload.js"></script>
 <script language="javascript" type="text/javascript" src="http://style.china.alibaba.com/js/alicn/alitalk.js"></script>
@@ -316,10 +316,57 @@ function treeInit2() { //菜单控件初始化
 						错误信息...
 				</div></div>
 
-				<div id="uploadBox"></div>
+				<div id="uploadBox">
+					<div id="uploadMainInfo">
+						<div class="head">
+							<div class="title">文件名</div>
+							<div class="size">大小</div>
+							<div class="act">操作</div>
+						</div>
+						<ul>
+							<li>
+								<div class="title">潺潺小溪.jpg</div>
+								<div class="size">609kb</div>
+								<div class="act"><a href="#">删除</a></div>
+							</li>
+							<li>
+								<div class="title">潺潺小溪.jpg</div>
+								<div class="size">609kb</div>
+								<div class="act"><a href="#">删除</a></div>
+							</li>
+							<li>
+								<div class="title">潺潺小溪.jpg</div>
+								<div class="size">609kb</div>
+								<div class="act"><a href="#">删除</a></div>
+							</li>
+							<li>
+								<div class="title">潺潺小溪.jpg</div>
+								<div class="size">609kb</div>
+								<div class="act"><a href="#">删除</a></div>
+							</li>
+							<li>
+								<div class="title">潺潺小溪.jpg</div>
+								<div class="size">609kb</div>
+								<div class="act"><a href="#">删除</a></div>
+							</li>
+							<li>
+								<div class="title">潺潺小溪.jpg</div>
+								<div class="size">609kb</div>
+								<div class="act"><a href="#">删除</a></div>
+							</li>
+							<li>
+								<div class="title">潺潺小溪.jpg</div>
+								<div class="size">609kb</div>
+								<div class="act"><a href="#">删除</a></div>
+							</li>
+						</ul>
+						<div id="dataTableContainer"></div>
+					</div>
+					<div id="uploadRightInfo"></div>
+				</div>
 
 				<div id="uploadAct">
-					<div id="btn-upload" class="bo_902btn right"><a href="#">上传图片</a></div>
+					<div id="btn-upload" class="bo_902btn bo_902btn_disabled right"><a href="#">上传图片</a><b class="btn-icon"></b></div>
 					<span>支持JPG、GIF图片，单张最大2M，请勿上传违规图片。</span>
 				</div>
 			</div>
@@ -377,6 +424,8 @@ function treeInit2() { //菜单控件初始化
 		};
 		$E.on("frm_albumTitle", "keyup", frm_albumTitleIsNull);
 		$E.on("frm_albumTitle", "change", frm_albumTitleIsNull);
+
+		WP_Album._upload_fun.uploaderInit();
 	});
 </script>
 <!--footer-->
