@@ -82,6 +82,25 @@ WP_Album._upload_fun = {
 		}
 		$("photoTitle-" + g_photos[i + 1].id).focus();
 		return false;
+	},
+	swfUploaderInit: function () {
+		var uploader = new AliUploader("selectFilesLink", {
+			url:		"http://www.yswfblog.com/upload/upload_simple.php",
+			width: 		124,
+			height: 	45,
+			buttonSkin:	"img090216/selectFileButton.png",
+			allowMulti:	true
+		});
+
+		uploader.buttonReady(function(evt) {
+			uploader.setAllowLogging(true);
+			var ff = new Array({description:"Í¼Ïñ | images", extensions:"*.jpg;*.png;*.gif"},
+				{description:"ÊÓÆµ | videos", extensions:"*.avi;*.mov;*.mpg"});
+			uploader.setFileFilters(ff);
+		})
+		.fileSelect(function(evt) {
+			log(evt);
+		});
 	}
 };
 
@@ -104,6 +123,10 @@ WP_Album.on("select", function () {
 
 	$("upload-step2-albumName").innerHTML = WP_Album.curSelect.title;
 });
+
+function swfUploadInit() {
+}
+
 
 var g_msgbox;
 $E.onDOMReady(function () {
