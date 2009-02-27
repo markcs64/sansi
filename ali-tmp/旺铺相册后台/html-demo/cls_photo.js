@@ -22,11 +22,13 @@ function WP_Photo_Li(ob) {
 	this.img = ob.getElementsByTagName("img")[0];
 	this.infoBar = $D.getElementsByClassName("info", "div", ob)[0];
 	this.chkbox = this.ob.getElementsByTagName("input")[0];
+	this.actSetAsCover = $D.getElementsByClassName("albumInfo-act", "span", this.ob)[0];
 	this._tm = 0;
 	g_imgMaxSize(this.img, 64, 64);
 	$E.on(this.ob, "mouseover", this.showAct, this, true);
 	$E.on(this.ob, "mouseout", this.hideAct, this, true);
 	$E.on(this.chkbox, "click", this.chkSelect, this, true);
+	$E.on(this.actSetAsCover, "click", this.setAsCover, this, true);
 }
 
 WP_Photo_Li.prototype = {
@@ -54,5 +56,9 @@ WP_Photo_Li.prototype = {
 				o.checked = false;
 			});
 		}
+	},
+	setAsCover: function () {
+		$("albumCoverPhoto").getElementsByTagName("img")[0].src = this.img.src;
+		alert("ÉèÎª·âÃæ...");
 	}
 };
