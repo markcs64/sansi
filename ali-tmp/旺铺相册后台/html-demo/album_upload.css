@@ -203,11 +203,11 @@ div#upload-step3 li.wp-gotopage {
 
 #uploadMainInfo {
 	width: 502px;
-	height: 180px;
+	height: 190px;
 	overflow: hidden;
 }
 #uploadMainInfo .head {
-	color: #999;
+	color: #ABA7C8;
 	height: 25px;
 	line-height: 25px;
 }
@@ -221,17 +221,55 @@ div#upload-step3 li.wp-gotopage {
 	height: 24px;
 	line-height: 24px;
 	border-bottom: solid 1px #E4E4E4;
+	overflow: hidden;
 }
 #uploadMainInfo div.title,
 #uploadMainInfo div.size,
 #uploadMainInfo div.act {
 	float: left;
-	overflow: hidden;
-	width: 50px;
+	width: 60px;
 	text-align: center;
 }
+#uploadMainInfo div.size {
+	text-align: right;
+	width: 60px;
+}
 #uploadMainInfo div.title {
-	width: 360px;
+	width: 340px;
 	text-align: left;
 	padding-left: 8px;
+}
+#uploadMainInfo div.act a.del {
+	display: block;
+	width: 20px;
+	margin: 0 20px;
+	height: 18px;
+	text-indent: -2000em;
+	cursor: pointer;
+	background: url(img090216/6006012.gif) no-repeat 50% 50%;
+}
+
+#uploaderStateBar {
+	line-height: 24px;
+	padding: 5px 10px;
+	background: #e4e4e4;
+	border: solid 1px #ccc;
+	border-top: 0;
+	font-size: 13px;
+}
+#uploaderStateBar span.right {
+	font-weight: bold;
+	margin: 0 30px 0 0;
+}
+#uploaderStateBar a {
+	font-size: 14px;
+	padding: 2px 0 2px 30px;
+	background: url(img090216/1001016.gif) no-repeat 10px 50%;
+	display: in-lineblock;
+}
+#uploaderStateBar a:link {
+	color: #355EBA;
+}
+#uploaderStateBar a:hover {
+	color: #f50;
 }

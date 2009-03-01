@@ -1,7 +1,9 @@
 // 上传图片相关js
 
 WP_Album._upload_var = {
-	isFolded: false
+	isFolded: false,
+	fileCount: 0,
+	fileTotalSize: 0
 };
 
 WP_Album._upload_fun = {
@@ -85,7 +87,7 @@ WP_Album._upload_fun = {
 	},
 	uploaderInit: function () {
 		WP_Album.uploader = new AliUploader("selectFilesLink", {
-			url:		"http://www.yswfblog.com/upload/upload_simple.php",
+			url:		"http://www.yswfblog.com/upload/upload_simple.php?album=0",
 			width: 		124,
 			height: 	45,
 			buttonSkin:	"img090216/uploadBtn.png",
@@ -105,15 +107,81 @@ WP_Album._upload_fun = {
 		})
 		.fileSelect(function(evt) {
 			log(evt);
-		});
-
-		WP_Album.uploader.fileSelect(function (evt) {
+			WP_Album._upload_fun.addFileList(evt.fileList);
 			BTN902.btns["btn-upload"].disable(0);
 		});
 
 		BTN902.btns["btn-upload"].on("click", function () {
 			WP_Album.uploader.uploadAll();
 		});
+	},
+	addFileList: function (lst) {
+		var ul = $("uploadFileList"), li, k;
+		while (ul.firstChild) {
+			ul.removeChild(ul.firstChild);
+		}
+		WP_Album._upload_var.list = lst;
+		for (k in lst) {
+			li = WP_Album._upload_fun.mkFileLi(lst[k]);
+			ul.appendChild(li);
+		}
+		WP_Album._upload_fun.summary();
+	},
+	summary: function () {
+		WP_Album._upload_var.fileCount = 0;
+		WP_Album._upload_var.fileTotalSize = 0;
+		var lst = WP_Album._upload_var.list;
+		for (var k in lst) {
+			WP_Album._upload_var.fileCount ++;
+			WP_Album._upload_var.fileTotalSize += lst[k].size;
+		}
+		$("uploader-fileCount").innerHTML = WP_Album._upload_var.fileCount;
+		$("uploader-fileTotleSize").innerHTML = WP_Album._upload_fun.formatSize(WP_Album._upload_var.fileTotalSize, " ");
+		if (WP_Album._upload_var.fileCount == 0) {
+			BTN902.btns["btn-upload"].disable(1);
+		}
+	},
+	mkFileLi: function (ob) {
+		var li = document.createElement("li");
+		li.id = "fileLi-" + ob.id;
+		var tmp = mkEl("div", {className: "title"});
+		tmp.appendChild(document.createTextNode(ob.name));
+		li.appendChild(tmp);
+		tmp = mkEl("div", {className: "size"});
+		tmp.appendChild(document.createTextNode(WP_Album._upload_fun.formatSize(ob.size)));
+		li.appendChild(tmp);
+		tmp = mkEl("div", {className: "act"});
+		var tmp2 = mkEl("a", {className: "del"});
+		tmp2.title = "删除";
+		$E.on(tmp2, "click", function () {WP_Album._upload_fun.removeFile(ob.id);});
+		tmp2.appendChild(document.createTextNode("删除"));
+		tmp.appendChild(tmp2);
+		li.appendChild(tmp);
+		return li;
+	},
+	removeFile: function (fId) {
+		delete WP_Album._upload_var.list[fId];
+		WP_Album.uploader.removeFile(fId);
+		var anim = new $Y.Anim("fileLi-" + fId, {
+			height: {to: 0}
+		}, 0.1);
+		anim.onComplete.subscribe(function () {
+			$("uploadFileList").removeChild($("fileLi-" + fId));
+		});
+		anim.animate();
+		WP_Album._upload_fun.summary();
+	},
+	formatSize: function (n, sp) {
+		var s = "";
+		var sp2 = sp || "";
+		if (n < 1024) {
+			s = n + sp2 + "B";
+		} else if (n < 1048576) {
+			s = Math.ceil(n / 1024) + sp2 + "KB";
+		} else {
+			s = Math.ceil(n / 1048576) + sp2 + "MB";
+		}
+		return s;
 	}
 };
 
@@ -130,6 +198,7 @@ WP_Album.on("select", function () {
 		$D.setStyle("upload-step2-toInfo", "display", "inline");
 		//$D.removeClass("btn-selectPhoto", "bo_902btn_disabled");
 		WP_Album.uploader.enable();
+		WP_Album.uploader.url = WP_Album.uploader.url.replace(/album=[^&]*?/, "album=" + WP_Album.curSelect.id);
 	}
 	setTimeout(function () {
 		WP_Album._upload_fun.scrollToAlbum(WP_Album.curSelect.i);
