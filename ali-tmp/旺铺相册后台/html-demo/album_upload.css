@@ -84,7 +84,6 @@ div#upload-step3 li.wp-gotopage {
 	margin: 10px 0;
 	font-size: 12px;
 	padding: 10px;
-	height: 185px;
 	background: #f7f7f7;
 }
 #uploadAct {
@@ -98,6 +97,20 @@ div#upload-step3 li.wp-gotopage {
 }
 #upload-step2-albumName {
 	color: #F24500;
+}
+#uploaderProcess {
+	width: 498px;
+	height: 16px;
+	background: #fff;
+	padding: 1px;
+	border: solid 1px #ccc;
+	overflow: hidden;
+	margin-top: 10px;
+}
+#uploaderProcessBar {
+	background: url(img090216/processBar.png) repeat-x;
+	height: 16px;
+	width: 0;
 }
 
 #photo-list {
@@ -221,7 +234,6 @@ div#upload-step3 li.wp-gotopage {
 
 #uploadMainInfo {
 	width: 502px;
-	height: 190px;
 	overflow: hidden;
 }
 #uploadMainInfo .head {
