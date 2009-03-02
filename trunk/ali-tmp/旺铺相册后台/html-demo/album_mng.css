@@ -25,7 +25,16 @@
 	margin: 10px 0;
 }
 #albumListFoot {
+	position: relative;
+	_position: static;
 	padding: 20px 10px;
+}
+#albumListFoot .selectOrder {
+	_right: 205px;
+}
+.photoAction .selectOrder ul,
+#albumListFoot .selectOrder ul {
+	top: 20px;
 }
 .album {
 	cursor: pointer;
@@ -47,11 +56,15 @@
 	z-index: 1;
 	top: 5px;
 	left: 16px;
+	+top: -5px;
+	_left: -155px;
 }
 #albumCoverPhoto .img-middle-center {
 	width: 137px;
 	height: 153px;
 	background: url(img090216/album_cover.png) no-repeat;
+	_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img090216/album_cover.png',sizingMethod='crop');
+	_background: none;
 }
 .img-middle-center {
 	position: relative;

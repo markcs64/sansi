@@ -58,7 +58,19 @@ WP_Photo_Li.prototype = {
 		}
 	},
 	setAsCover: function () {
-		$("albumCoverPhoto").getElementsByTagName("img")[0].src = this.img.src;
+		var img = $("albumCoverPhoto").getElementsByTagName("img")[0];
+		img.src = this.img.src;
+		var w = this.img.width,
+			h = this.img.height;
+		if (w > h) {
+			$D.setStyle(img, "width", "100px");
+			$D.setStyle(img, "height", Math.floor(h * 100 / 64) + "px");
+		} else {
+			$D.setStyle(img, "width", Math.floor(w * 100 / 64) + "px");
+			$D.setStyle(img, "height", "100px");
+		}
 		alert("设为封面...");
+
+		// 发送Ajax请求...
 	}
 };

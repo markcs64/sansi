@@ -192,7 +192,7 @@ function treeInit2() { //菜单控件初始化
 
 			<div id="albumDetailArea">
 				<div id="albumInfo">
-					<div id="albumCoverPhoto"><div class="img-middle-center"><p><img src="http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg" onload="g_imgMaxSize(this, 100, 100);" /></p></div></div>
+					<div id="albumCoverPhoto"><div class="img-middle-center"><p><img src="http://img.china.alibaba.com/club/upload/pic/user/c/h/e/n/chengsa929.tom" onload="g_imgMaxSize(this, 100, 100);" /></p></div></div>
 					<div id="albumInfo-2">
 						相册 <span class="albumTitle">连衣裙</span> 共有 <span class="num">205</span> 张图片 <span class="albumInfo-act"><a href="#" onclick="return albumModifyDialog();">修改相册属性</a></span> <span class="albumInfo-act"><a href="#" onclick="return copyAlbumUrl();">复制相册地址</a></span><br />
 						<div class="bo_902btn left" onclick="alert(1);"><a href="#">添加新图片</a></div> 
@@ -211,16 +211,24 @@ function treeInit2() { //菜单控件初始化
 								<li><label for="actSelectAll1">全部选择</label></li>
 								<li><span class="albumInfo-act"><a href="#" onclick="return delSelectPhotos();">删除</a></span></li>
 								<li><span class="albumInfo-act"><a href="#" onclick="return moveSelectPhotos();">移动</a></span></li>
+								<li class="selectOrder">
+									<div class="selectOrder-wrapper">
+										当前排序：<span class="selectOrder-curVal">新相册在前</span><span class="selectOrder-pull">&nbsp;</span>
+										<ul class="selectOrder-options">
+											<li><a href="#">新相册在前</a></li>
+											<li><a href="#">新相册在后</a></li>
+											<li><a href="#">名称升序排列[0-9][A-Z]</a></li>
+											<li><a href="#">名称降序排列[Z-A][9-0]</a></li>
+											<li><a href="#">照片数多的在前</a></li>
+											<li><a href="#">照片数多的在后</a></li>
+											<li><a href="#">最近上传的在前</a></li>
+											<li><a href="#">最近上传的在后</a></li>
+											<li class="hr"><hr size="1" noshade="noshade" /></li>
+											<li><a href="b-11.html">自定义排序</a></li>
+										</ul>
+									</div>
+								</li>
 								<li class="wp-gotopage"></li>
-								<li class="right"><select class="selectOrder">
-									<option value="0">新相片在前</option>
-									<option value="1">新相片在后</option>
-									<option value="2">名称升序排列[0-9][A-Z]</option>
-									<option value="3">名称降序排列[Z-A][9-0]</option>
-									<option value="-1" disabled="disabled">------</option>
-									<option value="9">自定义排序</option>
-								</select></li>
-								<li class="right">当前排序：</li>
 							</ul>
 						</div>
 						<div id="photoList">
@@ -385,16 +393,24 @@ function treeInit2() { //菜单控件初始化
 								<li><label for="actSelectAll2">全部选择</label></li>
 								<li><span class="albumInfo-act"><a href="#" onclick="return delSelectPhotos();">删除</a></span></li>
 								<li><span class="albumInfo-act"><a href="#" onclick="return moveSelectPhotos();">移动</a></span></li>
+								<li class="selectOrder">
+									<div class="selectOrder-wrapper">
+										当前排序：<span class="selectOrder-curVal">新相册在前</span><span class="selectOrder-pull">&nbsp;</span>
+										<ul class="selectOrder-options">
+											<li><a href="#">新相册在前</a></li>
+											<li><a href="#">新相册在后</a></li>
+											<li><a href="#">名称升序排列[0-9][A-Z]</a></li>
+											<li><a href="#">名称降序排列[Z-A][9-0]</a></li>
+											<li><a href="#">照片数多的在前</a></li>
+											<li><a href="#">照片数多的在后</a></li>
+											<li><a href="#">最近上传的在前</a></li>
+											<li><a href="#">最近上传的在后</a></li>
+											<li class="hr"><hr size="1" noshade="noshade" /></li>
+											<li><a href="b-11.html">自定义排序</a></li>
+										</ul>
+									</div>
+								</li>
 								<li class="wp-gotopage"></li>
-								<li class="right"><select class="selectOrder">
-									<option value="0">新相片在前</option>
-									<option value="1">新相片在后</option>
-									<option value="2">名称升序排列[0-9][A-Z]</option>
-									<option value="3">名称降序排列[Z-A][9-0]</option>
-									<option value="-1" disabled="disabled">------</option>
-									<option value="9">自定义排序</option>
-								</select></li>
-								<li class="right">当前排序：</li>
 							</ul>
 						</div>
 					</div>
@@ -419,6 +435,8 @@ function treeInit2() { //菜单控件初始化
 	g_pageSize = 40;
 	g_curPage = 1;		//当面页
 
+	var g_albumObj = new WP_Album(g_album);
+
 	function showPages() {
 		var c = $D.getElementsByClassName("wp-gotopage"),
 			i;
@@ -433,12 +451,17 @@ function treeInit2() { //菜单控件初始化
 	}
 
 	function albumModifyDialog() {
-		alert("修改相册属性");
+		g_albumObj.modifyDialog();
 		return false;
 	}
 
 	function copyAlbumUrl() {
-		alert("复制相册地址");
+		var albumUrl = "http://......."
+		if (typeof(clipboardData) != "undefined" && clipboardData.setData("text", albumUrl)) {
+			alert("相册地址已成功复制到您的剪切板中！");
+		} else {
+			alert("本相册地址为：\n\n" + albumUrl);
+		}
 		return false;
 	}
 
@@ -464,6 +487,8 @@ function treeInit2() { //菜单控件初始化
 				});
 			});
 		});
+
+		selectOrder();
 
 	});
 </script>
