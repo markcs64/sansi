@@ -11,11 +11,10 @@ function info(something){   try { console.info(something);} catch(e) {}; };
 
 
 	/**
-	* @singleton WizardManager - Use this object to management your wizards...
-	* Apply dynamic functionality to a wizard widget
-	* @constructor
+	* construtor
 	*/
     AliUploader = function(id, att) {	
+		
 		function event_handler(target, evt) {
 			var uploader = document.getElementById(target).owner;
 			info(evt.type);
@@ -60,13 +59,21 @@ function info(something){   try { console.info(something);} catch(e) {}; };
 			attributes.height = h;
 			attributes.data = _this.swfURL;
 			params.wmode = "transparent";
+			params.allowScriptAccess = "always";
 			flashvars.eventHandler = event_handler;
 			flashvars.elementID = id;
-			
+			flashvars.autoUpload = _this.autoUpload;
+			flashvars.compressSize = _this.compressSize;
+			flashvars.allowCompress = _this.allowCompress;
+			flashvars.sizeLimitEach = _this.sizeLimitEach;
+			flashvars.sizeLimitTotal = _this.sizeLimitTotal;
+			flashvars.fileNumLimit = _this.fileNumLimit;
+			flashvars.allowMultiple = _this.allowMultiple;			
 			
 			var str_fv = "";			
 			for (var i in flashvars) {
-				if (flashvars[i] != Object.prototype[i]) { // Filter out prototype additions from other potential libraries
+				if (flashvars[i] != Object.prototype[i]) { 
+					// Filter out prototype additions from other potential libraries
 					str_fv += "&" + i + "=" + flashvars[i];
 				}
 			}
@@ -88,28 +95,40 @@ function info(something){   try { console.info(something);} catch(e) {}; };
 	
 	AliUploader.prototype = (function(){
 		// events:
-		
-		function onFlashReady(_this){
-			_this.setAllowMultipleFiles(_this.allowMulti);
-		};
 				
+		/** 
+		*
+		*	change log
+		*	-- 20090302
+		*	add "autoUpload", "compressSize", "fileNumLimit"
+		*	change "simLimit" => "simUploadLimit"
+		*	change "allowMulti" => "allowMultiple"
+		*	change "fileLimit"	=> "sizeLimitEach"
+		*	change "totalLimit" => "sizeLimitTotal"
+		*	
+		**/
 		
 		return {
 		
 		// 一些参数的默认值
-		fileList:	[],			// 保存文件列表的变量
-		simLimit:	3,			// 同时上传的文件数目
-		url:		null,		// 上传到远程的地址
-		method:		"POST",		// 数据发送方式
-		allowMulti:	true,		// 允许多选
-		swfURL:		"assets/aliuploader.swf",	//flash所在的目录
-		buttonSkin:	null,		// 按钮皮肤
-		width:		-1,			// 宽度， -1表示与父对象一致
-		height:		-1,			// 高度， -1表示与父对象一致
-		vars:		{},			// 传输到服务器的额外变量
-		fieldName:	"FileData",	// 传输到服务器时，文件内容在form中的字段名称
-		fileLimit:	0,			// 单个文件的大小限制（KB）
-		totalLimit:	0,			// 上传的大小总和限制（KB）
+		swfURL:				"assets/aliuploader.swf",	//flash所在的目录
+		width:				-1,				// 宽度， -1表示与父对象一致
+		height:				-1,				// 高度， -1表示与父对象一
+		url:				null,			// 上传到远程的地址
+		simUploadLimit:		3,				// 同时上传的文件数目
+		method:				"POST",			// 数据发送方式
+		allowMultiple:		true,			// 允许多选
+		buttonSkin:			null,			// 按钮皮肤
+		vars:				{},				// 传输到服务器的额外变量
+		fieldName:			"Filedata",		// 传输到服务器时，文件内容在form中的字段名称
+		sizeLimitEach:		0,				// 单个文件的大小限制（Bytes）
+		sizeLimitTotal:		0,				// 上传的大小总和限制（Bytes）
+		compressSize:		0,				// 在此大小之下的文件，进行压缩处理
+		fileNumLimit:		0,				// 单次上传的文件最大数量
+		autoUpload:			false,			// 是否在选择文件后立刻自动上传
+		
+		// api
+		fileList:			[],				// 保存文件列表的变量
 		
 		
 		/*
@@ -153,7 +172,7 @@ function info(something){   try { console.info(something);} catch(e) {}; };
 		
 		setAllowLogging: function(b){ try { this.swf.setAllowLogging(b); } catch(e) {} },		
 		
-		setAllowMultipleFiles: function(b){ try { this.swf.setAllowMultipleFiles(b);} catch(e) {} },
+		setAllowMultipleFiles: function(b){ try { this.allowMultiple = b; this.swf.setAllowMultipleFiles(b);} catch(e) {} },
 		
 		removeFile: function(fileID){ try { this.swf.removeFile(fileID); } catch(e) {} },
 		
@@ -197,13 +216,17 @@ function info(something){   try { console.info(something);} catch(e) {}; };
 		// uploadError				（某文件）上传不成功
 		// uploadCancel				（某文件）上传被取消
 		// finish					上传全部完成
+		// ---- 20090208 新增:
+		// compressStart			开始对某个文件进行压缩
+		// compressProgress			（某文件）压缩进度变化
+		// compressComplete			（某文件）压缩完成
+		// compressFail				（某文件）压缩失败
 		
 		*/
 		
 		swfReady: function($){			
 			if(typeof($)=="function") this.swfReady_handler = $;
 			else {
-				onFlashReady(this);
 				try { this.swfReady_handler($); } catch(e) {};
 			}
 			return this;
@@ -294,10 +317,50 @@ function info(something){   try { console.info(something);} catch(e) {}; };
 			return this;
 		},
 		
+		fileRefused: function(){		
+			if(typeof($)=="function") this.fileRefused_handler = $;
+			else {
+				try { this.fileRefused_handler($); } catch(e) {};
+			}
+			return this;
+		},
+		
 		fileSelect: function($){		
 			if(typeof($)=="function") this.fileSelect_handler = $;
 			else {
 				try { this.fileSelect_handler($); } catch(e) {};
+			}
+			return this;
+		},
+		
+		compressStart: function($){		
+			if(typeof($)=="function") this.compressStart_handler = $;
+			else {
+				try { this.compressStart_handler($); } catch(e) {};
+			}
+			return this;
+		},
+		
+		compressProgress: function($){	
+			if(typeof($)=="function") this.compressProgress_handler = $;
+			else {
+				try { this.compressProgress_handler($); } catch(e) {};
+			}
+			return this;
+		},
+		
+		compressComplete: function($){	
+			if(typeof($)=="function") this.compressComplete_handler = $;
+			else {
+				try { this.compressComplete_handler($); } catch(e) {};
+			}
+			return this;
+		},
+		
+		compressFail: function($){	
+			if(typeof($)=="function") this.compressFail_handler = $;
+			else {
+				try { this.compressFail_handler($); } catch(e) {};
 			}
 			return this;
 		},
