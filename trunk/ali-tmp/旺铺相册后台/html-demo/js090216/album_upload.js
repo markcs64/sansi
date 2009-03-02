@@ -3,7 +3,10 @@
 WP_Album._upload_var = {
 	isFolded: false,
 	fileCount: 0,
-	fileTotalSize: 0
+	fileList: null,
+	fileTotalSize: 0,
+	fileUploadCount: 0,
+	fileUploadSize: 0
 };
 
 WP_Album._upload_fun = {
@@ -107,6 +110,7 @@ WP_Album._upload_fun = {
 		})
 		.fileSelect(function (evt) {
 			log(evt);
+			WP_Album._upload_var.fileList = evt.fileList;
 			WP_Album._upload_fun.addFileList(evt.fileList);
 			BTN902.btns["btn-upload"].disable(0);
 		})
@@ -116,10 +120,22 @@ WP_Album._upload_fun = {
 			log(evt);
 		})
 		.uploadStart(function (evt) {
-			alert("!!!!");
+			//info(evt);
 		})
 		.uploadComplete(function (evt) {
-			alert("~~~~~~");
+			info(evt);
+			//alert("ob size: " + WP_Album._upload_var.fileList[evt.id].size);
+			WP_Album._upload_var.fileUploadCount ++;
+			WP_Album._upload_var.fileUploadSize += WP_Album._upload_var.fileList[evt.id].size;
+			//alert("total: " + WP_Album._upload_var.fileUploadSize);
+			$D.setStyle("uploaderProcessBar", "width", Math.floor(100 * WP_Album._upload_var.fileUploadSize / WP_Album._upload_var.fileTotalSize) + "%");
+		})
+		.uploadProgress(function (evt) {
+			info(evt);
+			var t = WP_Album._upload_var.fileUploadSize,
+				t2 = t + evt.bytesLoaded;
+			//alert("cur: " + t2);
+			//$D.setStyle("uploaderProcessBar", "width", Math.floor(100 * t2 / WP_Album._upload_var.fileTotalSize) + "%");
 		});
 
 		BTN902.btns["btn-upload"].on("click", function () {
@@ -141,6 +157,8 @@ WP_Album._upload_fun = {
 	summary: function () {
 		WP_Album._upload_var.fileCount = 0;
 		WP_Album._upload_var.fileTotalSize = 0;
+		WP_Album._upload_var.fileUploadCount = 0;
+		WP_Album._upload_var.fileUploadSize = 0;
 		var lst = WP_Album._upload_var.list;
 		for (var k in lst) {
 			WP_Album._upload_var.fileCount ++;

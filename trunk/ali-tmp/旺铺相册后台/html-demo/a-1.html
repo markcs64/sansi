@@ -325,6 +325,7 @@ function treeInit2() { //菜单控件初始化
 						<ul id="uploadFileList">
 						</ul>
 						<div id="uploaderStateBar"><span class="right">总大小 <span id="uploader-fileTotleSize">0 KB</span></span><span id="uploader-fileCount">0</span> 张图片 <a href="#">增加图片</a></div>
+						<div id="uploaderProcess"><div id="uploaderProcessBar"></div></div>
 					</div>
 					<div id="uploadRightInfo">
 						<span>支持JPG、GIF图片，单张最大2M，请勿上传违规图片。</span>
@@ -341,17 +342,6 @@ function treeInit2() { //菜单控件初始化
 <!--right part end-->
 </div>
 
-<div id="formAlbumAct" class="hidden">
-	<form action="#" method="post">
-		<span>相册名称：</span><input type="text" id="frm_albumTitle" name="frm_albumTitle" value="" /><br />
-		<span>访问权限：</span><input type="radio" id="frm_albumLocked0" name="frm_albumLocked" value="0" checked="checked" /><label for="frm_albumLocked0">公开</label> <input type="radio" id="frm_albumLocked" name="frm_albumLocked" value="1" /><label for="frm_albumLocked">密码访问</label><br />
-		<div id="frm_pswdDiv" class="hidden">
-			<span>　　密码：</span><input type="password" id="frm_albumPswd" name="frm_albumPswd" /><br />
-			<span>确认密码：</span><input type="password" id="frm_albumPswd2" name="frm_albumPswd2" />
-		</div>
-	</form>
-</div>
-
 <script type="text/javascript">
 	//设置高度,高度是更具screen_placeholder的内容而定的，所以要放在screen_placeholder后面
 	getTreeHeight();
@@ -364,31 +354,13 @@ function treeInit2() { //菜单控件初始化
 			WP_Album.msgBox("创建相册", {
 				action: "create"
 				},
-				$("formAlbumAct")
+				WP_Album.frmStr
 			);
-			frm_albumTitleIsNull();
+			WP_Album.frmInit();
 			if ($("frm_albumLocked").checked) {
 				$D.removeClass("frm_pswdDiv", "hidden");
 			}
 		});
-
-		$E.on("frm_albumLocked0", "click", function () {
-			$D.addClass("frm_pswdDiv", "hidden");
-		});
-
-		$E.on("frm_albumLocked", "click", function () {
-			$D.removeClass("frm_pswdDiv", "hidden");
-		});
-
-		var frm_albumTitleIsNull = function () {
-			if ($("frm_albumTitle").value.length) {
-				WP_Album._msgbox.btns[0].disable(0);
-			} else {
-				WP_Album._msgbox.btns[0].disable(1);
-			}
-		};
-		$E.on("frm_albumTitle", "keyup", frm_albumTitleIsNull);
-		$E.on("frm_albumTitle", "change", frm_albumTitleIsNull);
 
 		WP_Album._upload_fun.uploaderInit();
 	});
