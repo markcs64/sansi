@@ -245,3 +245,45 @@ div.bo_902btn_disabled b.btnR {
 	background: #3266cc;
 	color: #fff;
 }
+li.selectOrder {
+	position: absolute;
+	right: 160px;
+	font-weight: normal;
+	font-size: 12px;
+}
+li.selectOrder .selectOrder-wrapper {
+	position: relative;
+}
+li.selectOrder .selectOrder-curVal {
+}
+li.selectOrder ul {
+	position: absolute;
+	top: 20px;
+	left: 5em;
+	border: solid 1px #a2a2a2;
+	background: #fff;
+	padding: 5px 0;
+	line-height: 18px;
+	white-space: nowrap;
+}
+li.selectOrder ul li {
+	float: none;
+	padding: 0 !important;
+}
+li.selectOrder ul li a {
+	color: gray;
+	display: block;
+	padding: 0 5px;
+}
+li.selectOrder ul li.hr {
+	margin: 0 5px;
+	+magin: 0;
+	+padding: 0 !important;
+	background: #ffc;
+	display: block;
+}
+li.selectOrder ul li a:hover {
+	border: 0;
+	background: #EFF2F9;
+	text-decoration: none;
+}

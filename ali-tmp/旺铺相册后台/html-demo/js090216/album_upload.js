@@ -17,7 +17,7 @@ WP_Album._upload_fun = {
 
 		var f = function () {
 			ds = t1 - o.scrollTop;
-			location.hash = "i=" + i + ",t0=" + t0 + ",t1=" + t1 + ",ds=" + ds;
+			//location.hash = "i=" + i + ",t0=" + t0 + ",t1=" + t1 + ",ds=" + ds;
 			if (ds == 0) return;
 			//step = ds > 0 ? Math.ceil(ds / 10) : Math.floor(ds / 3);
 			if (Math.abs(ds) < Math.abs(step)) step = ds;
@@ -94,7 +94,7 @@ WP_Album._upload_fun = {
 			allowMulti:	true
 		});
 
-		WP_Album.uploader.buttonReady(function (evt) {
+		WP_Album.uploader.swfReady(function (evt) {
 			WP_Album.uploader.setAllowLogging(true);
 			var ff = new Array({description:"Í¼Ïñ | images", extensions:"*.jpg;*.png;*.gif"},
 				{description:"ÊÓÆµ | videos", extensions:"*.avi;*.mov;*.mpg"});
@@ -105,10 +105,20 @@ WP_Album._upload_fun = {
 				WP_Album.uploader.disable();
 			}
 		})
-		.fileSelect(function(evt) {
+		.fileSelect(function (evt) {
 			log(evt);
 			WP_Album._upload_fun.addFileList(evt.fileList);
 			BTN902.btns["btn-upload"].disable(0);
+		})
+		.fileRefused(function (evt) {
+			info(";;;;;;;;;;;;;;;;;");
+			log(evt);
+		})
+		.uploadStart(function (evt) {
+			alert("!!!!");
+		})
+		.uploadComplete(function (evt) {
+			alert("~~~~~~");
 		});
 
 		BTN902.btns["btn-upload"].on("click", function () {
@@ -193,6 +203,9 @@ WP_Album.on("select", function () {
 			},
 			0.5);
 		anim_Album_fold.animate();
+		anim_Album_fold.onComplete.subscribe(function () {
+			getTreeHeight();
+		});
 
 		$D.setStyle("upload-step2", "background-position", "10px -263px");
 		$D.setStyle("upload-step2-toInfo", "display", "inline");
@@ -205,6 +218,9 @@ WP_Album.on("select", function () {
 	}, 1);
 
 	$("upload-step2-albumName").innerHTML = WP_Album.curSelect.title;
+	$D.removeClass("uploadBox", "hidden");
+	$D.removeClass("uploadAct", "hidden");
+	getTreeHeight();
 });
 
 function swfUploadInit() {
