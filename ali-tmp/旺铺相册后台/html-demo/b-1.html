@@ -480,8 +480,7 @@ function treeInit2() { //菜单控件初始化
 					<li><div id="btn_createNewAlbum" class="bo_902btn"><a href="#">新建相册</a></div></li>
 					<li class="selectOrder">
 						<div class="selectOrder-wrapper">
-							当前排序：
-							<span class="selectOrder-curVal">新相册在前</span>
+							当前排序：<span class="selectOrder-curVal">新相册在前</span><span class="selectOrder-pull">&nbsp;</span>
 							<ul class="selectOrder-options">
 								<li><a href="#">新相册在前</a></li>
 								<li><a href="#">新相册在后</a></li>
@@ -491,8 +490,8 @@ function treeInit2() { //菜单控件初始化
 								<li><a href="#">照片数多的在后</a></li>
 								<li><a href="#">最近上传的在前</a></li>
 								<li><a href="#">最近上传的在后</a></li>
-								<li class="hr">--</li>
-								<li><a href="#">自定义排序</a></li>
+								<li class="hr"><hr size="1" noshade="noshade" /></li>
+								<li><a href="b-5.html">自定义排序</a></li>
 							</ul>
 						</div>
 					</li>
@@ -504,6 +503,23 @@ function treeInit2() { //菜单控件初始化
 
 			<div id="albumListFoot">
 				<ul class="ul-inline">
+					<li class="selectOrder">
+						<div class="selectOrder-wrapper">
+							当前排序：<span class="selectOrder-curVal">新相册在前</span><span class="selectOrder-pull">&nbsp;</span>
+							<ul class="selectOrder-options">
+								<li><a href="#">新相册在前</a></li>
+								<li><a href="#">新相册在后</a></li>
+								<li><a href="#">名称升序排列[0-9][A-Z]</a></li>
+								<li><a href="#">名称降序排列[Z-A][9-0]</a></li>
+								<li><a href="#">照片数多的在前</a></li>
+								<li><a href="#">照片数多的在后</a></li>
+								<li><a href="#">最近上传的在前</a></li>
+								<li><a href="#">最近上传的在后</a></li>
+								<li class="hr"><hr size="1" noshade="noshade" /></li>
+								<li><a href="b-5.html">自定义排序</a></li>
+							</ul>
+						</div>
+					</li>
 					<li class="wp-gotopage"></li>
 				</ul>
 			</div>
@@ -564,6 +580,8 @@ function treeInit2() { //菜单控件初始化
 			);
 			WP_Album.frmInit();
 		});
+
+		selectOrder();
 	});
 </script>
 <!--footer-->

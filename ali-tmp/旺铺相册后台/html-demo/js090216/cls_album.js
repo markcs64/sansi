@@ -212,6 +212,7 @@ WP_Album.msgBox = function (title, params, html) {
 
 WP_Album.curSelect = null;		//当前选中相册
 WP_Album.items = [];
+WP_Album.config = {click: "select"};
 
 WP_Album.init = function (a, p) {
 	if (!a) return;

@@ -111,6 +111,7 @@ WP_Album._upload_fun = {
 			BTN902.btns["btn-upload"].disable(0);
 		})
 		.fileRefused(function (evt) {
+			alert(1);
 			info(";;;;;;;;;;;;;;;;;");
 			log(evt);
 		})
@@ -174,7 +175,7 @@ WP_Album._upload_fun = {
 		WP_Album.uploader.removeFile(fId);
 		var anim = new $Y.Anim("fileLi-" + fId, {
 			height: {to: 0}
-		}, 0.1);
+		}, 0.2);
 		anim.onComplete.subscribe(function () {
 			$("uploadFileList").removeChild($("fileLi-" + fId));
 		});

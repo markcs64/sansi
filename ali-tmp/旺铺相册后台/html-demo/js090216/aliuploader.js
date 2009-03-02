@@ -317,7 +317,7 @@ function info(something){   try { console.info(something);} catch(e) {}; };
 			return this;
 		},
 		
-		fileRefused: function(){		
+		fileRefused: function($){		
 			if(typeof($)=="function") this.fileRefused_handler = $;
 			else {
 				try { this.fileRefused_handler($); } catch(e) {};

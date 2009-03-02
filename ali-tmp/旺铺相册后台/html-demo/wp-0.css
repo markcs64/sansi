@@ -247,40 +247,64 @@ div.bo_902btn_disabled b.btnR {
 }
 li.selectOrder {
 	position: absolute;
+	z-index: 50;
 	right: 160px;
 	font-weight: normal;
 	font-size: 12px;
 }
 li.selectOrder .selectOrder-wrapper {
 	position: relative;
+	z-index: 50;
 }
 li.selectOrder .selectOrder-curVal {
+	background: url(img090216/selectBg.png) no-repeat;
+	padding: 5px;
+}
+li.selectOrder .selectOrder-pull {
+	background: url(img090216/selectBg.png) no-repeat right -20px;
+	padding: 5px 8px 5px 3px;
+	cursor: pointer;
 }
 li.selectOrder ul {
 	position: absolute;
-	top: 20px;
+	top: 30px;
+	+top: 20px;
 	left: 5em;
+	z-index: 50;
 	border: solid 1px #a2a2a2;
 	background: #fff;
-	padding: 5px 0;
+	padding: 5px 0 0 0;
 	line-height: 18px;
 	white-space: nowrap;
+	width: 145px;
+	overflow: hidden;
+	display: none;
 }
 li.selectOrder ul li {
-	float: none;
+	clear: both;
 	padding: 0 !important;
+	width: 100%;
+	height: 20px;
+	overflow: hidden;
+	background: #fff;
+}
+li.selectOrder ul li.hr {
+	text-align: center;
+	height: 12px;
+	margin-top: -5px;
+}
+li.selectOrder ul li.hr hr {
+	width: 92%;
 }
 li.selectOrder ul li a {
-	color: gray;
 	display: block;
 	padding: 0 5px;
 }
-li.selectOrder ul li.hr {
-	margin: 0 5px;
-	+magin: 0;
-	+padding: 0 !important;
-	background: #ffc;
-	display: block;
+li.selectOrder ul li a:link {
+	color: gray;
+}
+li.selectOrder ul li a:visited {
+	color: gray;
 }
 li.selectOrder ul li a:hover {
 	border: 0;
