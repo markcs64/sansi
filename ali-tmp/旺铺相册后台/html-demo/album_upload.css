@@ -14,7 +14,8 @@
 	line-height: 45px;
 	padding: 0 5px;
 }
-#albumArea .overlay {
+#albumArea .overlay,
+#uploadMainInfo .overlay {
 	position: absolute;
 	z-index: 100;
 	top: 0;
@@ -22,6 +23,9 @@
 	background: #fff;
 	opacity: 0.8;
 	filter:alpha(opacity=80);
+}
+#uploadMainInfo .overlay {
+	background: #f7f7f7;
 }
 .upload-step ul,
 .upload-step ul li {
@@ -75,6 +79,18 @@ div#upload-step3 li.wp-gotopage {
 	padding-left: 25px;
 	background: transparent url(img090216/1000116.gif) no-repeat 0 50%;
 }
+#uploadTopInfo div#uploadTopInfo2 .bigInfo {
+	font-weight: bold;
+	padding-left: 60px;
+	height: 50px;
+	line-height: 50px;
+	background: transparent url(img090216/1000148.png) no-repeat 0 50%;
+	_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img090216/1000148.png',sizingMethod='crop');
+	_background-image: none;
+}
+#uploadTopInfo div#uploadTopInfo2 .refusedList span {
+	color: #F24500;
+}
 #uploadRightInfo {
 	float: right;
 	margin-top: 25px;
@@ -99,6 +115,9 @@ div#upload-step3 li.wp-gotopage {
 	font-size: 12px;
 	padding: 10px;
 	background: #f7f7f7;
+}
+#uploadBox form p {
+	padding: 10px 0;
 }
 #uploadAct {
 	font-size: 12px;
@@ -249,6 +268,7 @@ div#upload-step3 li.wp-gotopage {
 }
 
 #uploadMainInfo {
+	position: relative;
 	width: 502px;
 	overflow: hidden;
 }
