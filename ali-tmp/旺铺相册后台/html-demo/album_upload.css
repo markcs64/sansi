@@ -14,6 +14,15 @@
 	line-height: 45px;
 	padding: 0 5px;
 }
+#albumArea .overlay {
+	position: absolute;
+	z-index: 100;
+	top: 0;
+	left: 0;
+	background: #fff;
+	opacity: 0.8;
+	filter:alpha(opacity=80);
+}
 .upload-step ul,
 .upload-step ul li {
 	height: 36px;
@@ -55,15 +64,20 @@ div#upload-step3 li.wp-gotopage {
 	margin-top: 10px;
 	display: none;
 }
-#uploadTopInfo div {
+#uploadTopInfo div#uploadTopInfo2 {
 	background: #EFF2F9;
 	border-top: solid 2px #d4dced;
 	border-left: solid 2px #d4dced;
 	padding: 4px 8px;
 }
+#uploadTopInfo div#uploadTopInfo2 .smallInfo {
+	font-weight: bold;
+	padding-left: 25px;
+	background: transparent url(img090216/1000116.gif) no-repeat 0 50%;
+}
 #uploadRightInfo {
 	float: right;
-	margin-top: -165px;
+	margin-top: 25px;
 	width: 215px;
 	padding-left: 20px;
 	background: url(img090216/1000312.gif) no-repeat 0 2px;
@@ -106,6 +120,7 @@ div#upload-step3 li.wp-gotopage {
 	border: solid 1px #ccc;
 	overflow: hidden;
 	margin-top: 10px;
+	display: none;
 }
 #uploaderProcessBar {
 	background: url(img090216/processBar.png) repeat-x;
@@ -215,6 +230,7 @@ div#upload-step3 li.wp-gotopage {
 
 #uploadAct .bo_902btn {
 	position: relative;
+	_width: 106px !important;
 }
 #uploadAct .bo_902btn .btn-icon {
 	position: absolute;
@@ -253,12 +269,22 @@ div#upload-step3 li.wp-gotopage {
 	border-bottom: solid 1px #E4E4E4;
 	overflow: hidden;
 }
+#uploadMainInfo ul li.ready {
+	background: url(img090216/fileUp-process-bar.png) no-repeat 0 0;
+}
+#uploadMainInfo ul li.ok {
+	background: url(img090216/uploadLi_ok.png) no-repeat -1px -1px !important;
+	border-bottom: solid 1px #ccc;
+}
 #uploadMainInfo div.title,
 #uploadMainInfo div.size,
 #uploadMainInfo div.act {
 	float: left;
 	width: 60px;
 	text-align: center;
+}
+#uploadMainInfo div.ok {
+	background: url(img090216/1000812.gif) no-repeat 50% 50%;
 }
 #uploadMainInfo div.size {
 	text-align: right;
@@ -295,7 +321,8 @@ div#upload-step3 li.wp-gotopage {
 	font-size: 14px;
 	padding: 2px 0 2px 30px;
 	background: url(img090216/1001016.gif) no-repeat 10px 50%;
-	display: in-lineblock;
+	/*display: in-lineblock;*/
+	display: none;
 }
 #uploaderStateBar a:link {
 	color: #355EBA;
