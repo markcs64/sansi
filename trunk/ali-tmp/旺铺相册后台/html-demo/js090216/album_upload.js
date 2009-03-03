@@ -6,7 +6,9 @@ WP_Album._upload_var = {
 	fileList: null,
 	fileTotalSize: 0,
 	fileUploadCount: 0,
-	fileUploadSize: 0
+	fileUploadSize: 0,
+	refusedList: [],
+	url: "http://q.pnq.cc/works/uploader/upload-receiver.php?album=0"
 };
 
 WP_Album._upload_fun = {
@@ -88,15 +90,94 @@ WP_Album._upload_fun = {
 		$("photoTitle-" + g_photos[i + 1].id).focus();
 		return false;
 	},
+	jsUpInit: function () {
+		$("uploadArea").getElementsByTagName("li")[0].innerHTML += "，单张最大200K"
+		$("uploadArea").getElementsByTagName("li")[1].innerHTML = "";
+		//$D.removeClass("uploadBox", "hidden");
+		$D.setStyle("uploadRightInfo", "margin-top", "10px");
+
+		var html = "<form id=\"frmJsUploader\" action=\"" + WP_Album._upload_var.url + " method=\"post\">"
+			+ "<p>1.<span><input type=\"file\" id=\"file1\" name=\"file1\" /></span>　　"
+			+ "5.<span><input type=\"file\" id=\"file5\" name=\"file5\" /></span></p>"
+			+ "<p>2.<span><input type=\"file\" id=\"file2\" name=\"file2\" /></span>　　"
+			+ "6.<span><input type=\"file\" id=\"file6\" name=\"file6\" /></span></p>"
+			+ "<p>3.<span><input type=\"file\" id=\"file3\" name=\"file3\" /></span>　　"
+			+ "7.<span><input type=\"file\" id=\"file7\" name=\"file7\" /></span></p>"
+			+ "<p>4.<span><input type=\"file\" id=\"file4\" name=\"file4\" /></span>　　"
+			+ "8.<span><input type=\"file\" id=\"file8\" name=\"file8\" /></span></p>"
+			+ "</form>"
+			+ "<div class=\"hidden\"><form id=\"frmTmp\"></form></div>";	//用于清空file域
+		$("uploadMainInfo").innerHTML = html;
+
+		var chkSubmitEnable = function () {
+			var enable = 1;
+			$D.getElementsBy(function (o) {
+				return o.type == "file";
+			}, "input", "uploadMainInfo", function (o) {
+				//alert("v: \"" + o.value + "\"");
+				if (o.value != "") enable = 0;
+			});
+			BTN902.btns["btn-upload"].disable(enable);
+		};
+
+		$D.getElementsBy(function (o) {
+			return o.type == "file";
+		}, "input", "uploadMainInfo", function (o) {
+			$E.on(o, "change", function () {
+				var size = 0;
+				var img = new Image();
+				//alert(this.value);
+				try {
+					img.dynsrc = this.value;
+					size = img.fileSize;
+				} catch (e) {
+					//var fso = new ActiveXObject("Scripting.FileSystemObject");
+					//size = fso.GetFile(this.value).size;
+				}
+				if (size > 200 * 1024) {
+					alert("上传图片大小超过200K，请压缩后重新上传。");
+					var p = this.parentNode;
+					$("frmTmp").appendChild(this);
+					$("frmTmp").reset();
+					p.appendChild(this);
+				}
+				chkSubmitEnable();
+			});
+		});
+
+		BTN902.btns["btn-upload"].on("click", function () {
+			$("uploadTopInfo2").innerHTML = "<div class=\"smallInfo\">上传中... 请勿刷新本页面</div>";
+			$D.setStyle("uploadTopInfo", "display", "block");
+			BTN902.btns["btn-upload"].disable(1);
+			//$("frmJsUploader").submit();
+			
+			var ovlay = mkEl("div", {className: "overlay"});
+			$D.setStyle(ovlay, "width", $("albumArea").offsetWidth - 20 + "px");
+			$D.setStyle(ovlay, "height", $("albumArea").scrollHeight + "px");
+			$("albumArea").appendChild(ovlay);
+
+			var ovlay2 = mkEl("div", {className: "overlay"});
+			$D.setStyle(ovlay2, "width", $("uploadMainInfo").offsetWidth - 20 + "px");
+			$D.setStyle(ovlay2, "height", $("uploadMainInfo").offsetHeight + "px");
+			$("uploadMainInfo").appendChild(ovlay2);
+		});
+	},
 	uploaderInit: function () {
+		//if (true) {
+		if (!swfobject.hasFlashPlayerVersion("10")) {
+			//如果不支持相应的Flash版本
+			WP_Album._upload_fun.jsUpInit();
+			return;
+		}
+
 		WP_Album.uploader = new AliUploader("selectFilesLink", {
-			url: "http://q.pnq.cc/works/uploader/upload-receiver.php?album=0",
+			url: WP_Album._upload_var.url,
 			width: 124,
 			height: 45,
 			buttonSkin: "img090216/uploadBtn.png",
 			allowMulti: true,
-			sizeLimitEach2: 200 * 1024,
-			compressSize2: 3 * 1024 * 1024
+			sizeLimitEach: 200 * 1024,
+			compressSize: 3 * 1024 * 1024
 		});
 
 		WP_Album.uploader.swfReady(function (evt) {
@@ -115,11 +196,13 @@ WP_Album._upload_fun = {
 			WP_Album._upload_var.fileList = evt.fileList;
 			WP_Album._upload_fun.addFileList(evt.fileList);
 			BTN902.btns["btn-upload"].disable(0);
+			if (WP_Album._upload_var.refusedList.length) {
+				$("uploadTopInfo2").innerHTML = "<div class=\"bigInfo\">抱歉，以下图片因大于 5M 已被移除上传队列：</div><div class=\"refusedList\"><span>" + WP_Album._upload_var.refusedList.join("</span> / <span>") + "</span></div>";
+				$D.setStyle("uploadTopInfo", "display", "block");
+			}
 		})
 		.fileRefused(function (evt) {
-			alert(1);
-			info(";;;;;;;;;;;;;;;;;");
-			log(evt);
+			WP_Album._upload_var.refusedList.push(evt.name);
 		})
 		.uploadStart(function (evt) {
 			//info(evt);
@@ -271,8 +354,10 @@ WP_Album.on("select", function () {
 		$D.setStyle("upload-step2", "background-position", "10px -263px");
 		$D.setStyle("upload-step2-toInfo", "display", "inline");
 		//$D.removeClass("btn-selectPhoto", "bo_902btn_disabled");
-		WP_Album.uploader.enable();
-		WP_Album.uploader.url = WP_Album.uploader.url.replace(/album=[^&]*?/, "album=" + WP_Album.curSelect.id);
+		if (WP_Album.uploader) {
+			WP_Album.uploader.enable();
+			WP_Album.uploader.url = WP_Album.uploader.url.replace(/album=[^&]*?/, "album=" + WP_Album.curSelect.id);
+		}
 	}
 	setTimeout(function () {
 		WP_Album._upload_fun.scrollToAlbum(WP_Album.curSelect.i);
