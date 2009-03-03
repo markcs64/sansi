@@ -2,8 +2,9 @@
 
 function selectOrder() {
 	$D.getElementsByClassName("selectOrder-pull", "span", "main_right_body", function (o) {
-		$E.on(o, "mouseover", function () {
+		$E.on(o, "click", function (e) {
 			$D.setStyle(o.parentNode.getElementsByTagName("ul")[0], "display", "block");
+			$E.stopPropagation(e);
 		});
 	});
 

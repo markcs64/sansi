@@ -1,0 +1,411 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="gb2312">
+<head>
+<title>欢迎光临旺铺管理后台</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta name="description" content="阿里巴巴（china.alibaba.com）是全球企业间（B2B）电子商务的著名品牌，汇集海量供求信息，是全球领先的网上交易市场和商人社区。首家拥有超过1400万网商的电子商务网站，遍布220个国家地区，成为全球商人销售产品、拓展市场及网络推广的首选网站" />
+<meta name="keywords" content="阿里巴巴，行业门户，网上贸易，b2b，电子商务，内贸，外贸，批发，行业资讯，网上贸易，网上交易，交易市场，在线交易，买卖信息，贸易机会，商业信息，供求信息，采购，求购信息，供应信息，加工合作，代理，商机，行业资讯，商务服务，商务网，商人社区，网商" />
+<link rel="stylesheet" rev="stylesheet" href="http://style.china.alibaba.com/css/danai/bo_4.css?version=3" type="text/css" media="screen" />
+<script language="javascript" type="text/javascript" src="http://style.china.alibaba.com/js/danai/bo_2.js"></script>
+<script type="text/javascript" src="http://style.china.alibaba.com/js/yui/utilities.js"></script>
+<script language="javascript" type="text/javascript" src="js090216/wp-0.js"></script>
+<script language="javascript" type="text/javascript" src="js090216/cls_album.js"></script>
+<script language="javascript" type="text/javascript" src="js090216/album_mng.js"></script>
+<script language="javascript" type="text/javascript" src="js090216/cls_gotoPage.js"></script>
+<script language="javascript" type="text/javascript" src="http://style.china.alibaba.com/js/alicn/alitalk.js"></script>
+<script language="JavaScript" src="http://img.china.alibaba.com/stat/aliclick.js"></script>
+<link rel="stylesheet" rev="stylesheet" href="http://style.china.alibaba.com/css/store/ecs/eCustomerService_bo.css" type="text/css" />
+<link id="ecsColorStyle" rel="stylesheet" rev="stylesheet" href="http://style.china.alibaba.com/css/store/ecs/eCustomerService0.css" type="text/css" />
+<link rel="stylesheet" rev="stylesheet" href="wp-0.css" type="text/css" media="screen" />
+<link rel="stylesheet" rev="stylesheet" href="cls_album.css" type="text/css" media="screen" />
+<link rel="stylesheet" rev="stylesheet" href="album_mng.css" type="text/css" media="screen" />
+
+<script type="text/javascript">
+/* 如果没有相册 */
+/*
+var g_albums = [
+	{
+		id: "asfaefe",
+		title: "我的相册",
+		datetime: new Date(2008, 10, 27)
+	}
+];
+*/
+/* 如果有相册 */
+var g_albums = [
+	{
+		id: "abcdefg_123",	//相册ID
+		title: "相册名",
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"					//相册封面图片（可选）
+	},
+	{
+		id: "abcdefg_124",
+		title: "相册2",
+		cover: "http://i02.c.aliimg.com/img/offer/32/06/00/34/8/320600348"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册名长度最多显示七个字符",
+		cover: "http://i02.c.aliimg.com/img/offer/32/82/88/98/2/328288982"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://i00.c.aliimg.com/img/offer/33/28/81/45/4/332881454"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://i02.c.aliimg.com/news/upload/9/news/2008/9/26/350x350_11c9d4bd119.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://i05.c.aliimg.com/news/upload/9/news/2008/9/26/350x350_11c9d4bd132.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		title: "空相册",
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		title: "相册3",
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		type: 1,
+		title: "我的相册",
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		type: 2,
+		title: "下架图片",
+	},
+	{
+		id: "abcdefg_125",
+		type: 3,
+		title: "审核未通过",
+	}
+];
+</script>
+
+</head>
+<body>
+<!--顶部标头-->
+<div class="top_pic">
+	<div class="top_pic_main">
+		<div class="pic_user">
+			<ul class="left">
+				<li>您好，</li>
+				<li>junbiaozhujb</li>
+				<li class="san_ico"><a href="http://china.alibaba.com/member/bo_signout.htm">[退出]</a></li>
+				<li class="homePage">贵公司的旺铺是 <a href="http://www.junbiaozhujb.cn"  target="_blank">http://www.junbiaozhujb.cn</a></li>
+			<li class="setHome"><a onclick="javascript:aliclick(this,'?tracelog=wp_homepage_asdefault');try{this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.junbiaozhujb.cn');}catch(e){return false;}" target="_self" href="#">点此设为首页</a></li>
+			</ul>
+		</div>
+		<div class="pic_company">
+			<ul class="pic_info">
+				<li class="info_com">咿咿呀呀专卖</li>
+				<li class="info_houtai">旺铺管理后台</li>
+			</ul>
+		</div>
+		<div class="clr">
+		</div>
+	</div>
+
+
+<!--modif 顶部导航 by zhujunbiao at 2008-08-07 -->
+	<div class="top_nav_content">
+		<ul class="left">
+			<li class="now m">旺铺管理首页</li>
+			<li class="list_nor"><a href="http://china.alibaba.com/misc/ymail/biz_mail_login.htm" target="_blank" onmousedown="return aliclick(this,'?tracelog=wp_bohome_post');">企业邮局</a><div id="emailTipsRoot"><div class="emailTips">20个员工邮箱，每个邮箱1G超大空间<br/>企业域名结尾，彰显企业实力</div><a class="emailTipsClose" href="javascript:closeTips('emailTipsRoot')"><img src="http://img.china.alibaba.com/images/cn/market/danai/080307/icon_tips.gif"/></a></div></li>
+					</ul>
+	</div>
+	
+    <div class="top_nav_bottom"></div>
+</div>
+
+<div style="background:#FFF7EA;height:32px;">
+    <div class="currentPage">
+    	<div class="left"><a href="http://china.alibaba.com/member/back_office.htm" target='_self'>旺铺管理首页</a> > </div>
+    	<div class="right">
+    		    			<a href="http://www.junbiaozhujb.cn" target="_blank">进入旺铺首页</a>&nbsp;
+    		    		<a href="http://china.alibaba.com/member/myalibaba.htm" target="_blank">进入阿里助手</a>
+    	</div>
+    </div>
+</div>
+
+<!--main-->
+<div id="main_body">
+<!--left导航-->
+<script type="text/javascript">
+var roots = {menu:[
+    {id:"11",name:"供应信息",url: "http://china.alibaba.com/offer/bo_select_page.htm", target:"_self", children:
+    [
+        {id:"11.1",name:"发布供应信息", url:"http://china.alibaba.com/offer/bo_select_page.htm", children:[]},
+        {id:"11.2",name:"管理供应信息", url:"http://china.alibaba.com/offer/bo_manage.htm", children:[]},
+        {id:"11.3",name:"自定义分类", url:"http://china.alibaba.com/offer/bo_manage_offer_group.htm", children:[]},
+        {id:"11.4",name:"推荐供应信息", url:"http://athena.china.alibaba.com/mysite/bo_recommend_view.htm", children:[]}
+    ]},
+	{id: "16", name: "搬家工具", url: "http://china.alibaba.com/", target: "_self", children: []},
+
+    {id:"12",name:"公司相册",url: "http://china.alibaba.com/product/bo_product_post.htm", target:"_self",children:
+    [		
+        {id:"12.1",name:"上传图片",url:"http://china.alibaba.com/product/bo_product_post.htm", children:[]},
+        {id:"12.2",name:"管理相册",url:"http://china.alibaba.com/product/bo_manage.htm", children:[]},
+        {id:"12.3",name:"设置相册展示",url:"http://athena.china.alibaba.com/mysite/bo_recommend_album_view.htm", children:[]},
+        {id:"12.4",name:"推荐公司相册",url:"http://athena.china.alibaba.com/mysite/bo_recommend_album_view.htm", children:[]}
+    ]},
+	
+    {id:"13",name:"公司介绍", url: "http://china.alibaba.com/company/bo_my_company.htm", target:"_self", children:[]},
+	
+    {id:"14",name:"公司动态", url: "http://blog.china.alibaba.com/bizblog/article/new.html?from=gsdt&tracelog=myali_menu_publishcompanynews", target:"_blank", children:[]},
+	
+    {id:"15",name:"招聘中心", url: "http://china.alibaba.com/offer/bo_zhao_pin.htm", target:"_self",children:
+    [
+        {id:"15.1",name:"发布招聘信息",url:"http://china.alibaba.com/offer/bo_zhao_pin.htm", children:[]},
+        {id:"15.2",name:"管理招聘信息",url:"http://china.alibaba.com/offer/bo_zhao_pin_list.htm", children:[]}	    
+    ]
+	}
+]};
+
+function treeInit() { //菜单控件初始化
+  var menu = null;
+  var parent1 = document.getElementById("tree1");
+  menu=new AlicnMenu("menu");
+  menu.bindData(roots.menu);
+  menu.draw(parent1);
+  menu.setActivedItem("12.2");
+}
+
+var roots2 = {menu2:[	
+		
+    {id:"22",name:"网站外观设计", statusIcon:"http://img.china.alibaba.com/images/cn/common/icon/v2/icon_hot01_12x.gif", url: "http://esite.china.alibaba.com/esite/esite_config.htm", target:"_blank", children:[]},
+
+    {id:"23",name:"网站浏览分析", statusIcon:"http://img.china.alibaba.com/images/cn/common/icon/v2/icon_hot01_12x.gif", url: "http://athena.china.alibaba.com/statistics/bo_offer_view.htm", target:"_self", children:[]},
+	
+    {id:"24",name:"企业在线管理",statusIcon:"http://img.china.alibaba.com/images/cn/common/icon/v2/icon_new02_12x.gif", url: "http://athena.china.alibaba.com/mysite/bo_contacts_window_config.htm", target:"_self",children:
+    [
+        {id:"24.1",name:"企业在线设置",url:"http://athena.china.alibaba.com/mysite/bo_contacts_window_config.htm", children:[]},
+        {id:"24.2",name:"联系人设置",url:"http://athena.china.alibaba.com/mysite/bo_enterprise_contacts.htm", children:[]},
+        {id:"24.3",name:"收到的邀请",url:"http://athena.china.alibaba.com/mysite/bo_belonged_enterprises.htm", children:[]}				
+    ]},
+
+    {id:"25",name:"网站友情链接",url: "http://athena.china.alibaba.com/mysite/bo_friend_link.htm", target:"_self", children:[]},
+
+	{id:"26",name:"ICP备案",url: "http://china.alibaba.com/domain/bo_domain_icp.htm", target:"_self", children:[]}
+]};
+
+function treeInit2() { //菜单控件初始化
+  var menu2 = null;
+  var parent2 = document.getElementById("tree2");
+  menu2=new AlicnMenu("menu2");
+  menu2.bindData(roots2.menu2);
+  menu2.draw(parent2);
+}
+
+</script>
+
+<div class="main_tree" id="main_tree">
+<!--菜单数据初始化-->
+  <div class="tree_title">信息管理</div>
+  <div id="tree1" class="tree"></div>
+  <script type="text/javascript">treeInit();</script>
+  <div class="tree_end tree_fe"></div>
+  <div class="tree_title">网站管理</div>
+  <div id="tree2" class="tree"></div>
+  <script type="text/javascript">treeInit2();</script>
+  <div class="tree_end"></div>
+</div>
+<!--right part-->
+<div
+	class="main_right"
+	id="main_right">
+	<!-- content -->
+
+	    <table width="100%"  border="0" cellspacing="0" cellpadding="1">
+          <tr>
+            <td bgcolor="#eff2f9" class="tx_title">&nbsp;&nbsp;管理相册</td>
+			<td bgcolor="#eff2f9" class="tx_title" width="250"><span id="mainTRHelp"><a href="#">发布相册指导</a> <span style="font-weight:normal;">|</span> <a href="#">查看范例</a></span></td>
+          </tr>
+        </table>
+
+		<div id="main_right_body">
+			<div id="albumListHead">
+				<ul class="ul-inline">
+					<li>相册自定义排序</li>
+				</ul>
+			</div>
+
+		</div>
+	<!-- content end -->
+</div>
+<!--right part end-->
+</div>
+
+<!--
+<div id="formAlbumAct" class="hidden">
+	<form action="#" method="post">
+		<span>相册名称：</span><input type="text" id="frm_albumTitle" name="frm_albumTitle" value="" /><br />
+		<span>访问权限：</span><input type="radio" id="frm_albumLocked0" name="frm_locked" value="0" checked="checked" /><label for="frm_albumLocked0">公开</label> <input type="radio" id="frm_albumLocked" name="frm_locked" value="1" /><label for="frm_albumLocked">密码访问</label><br />
+		<div id="frm_pswdDiv" class="hidden">
+			<span>　　密码：</span><input type="password" id="frm_albumPswd" name="frm_albumPswd" /><br />
+			<span>确认密码：</span><input type="password" id="frm_albumPswd2" name="frm_albumPswd2" />
+		</div>
+	</form>
+</div>
+-->
+
+<script type="text/javascript">
+	$E.onDOMReady(function () {
+		//设置高度,高度是更具screen_placeholder的内容而定的，所以要放在screen_placeholder后面
+		getTreeHeight();
+	});
+</script>
+<!--footer-->
+  <div id="footer">
+  <ul>
+    <li class="no_border">咿咿呀呀专卖</li>
+  </ul> 
+  <ul>
+    <li class="no_border">技术支持 <a href="http://china.alibaba.com" target="_blank">阿里巴巴</a></li>
+  </ul>
+</div>
+<div>
+	<font color="#ffffff">exodus_web38</font>
+</div>
+<!--/footer-->
+</body>
+</html>
