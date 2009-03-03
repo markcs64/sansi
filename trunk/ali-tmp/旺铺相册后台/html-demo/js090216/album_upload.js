@@ -90,11 +90,13 @@ WP_Album._upload_fun = {
 	},
 	uploaderInit: function () {
 		WP_Album.uploader = new AliUploader("selectFilesLink", {
-			url:		"http://www.yswfblog.com/upload/upload_simple.php?album=0",
-			width: 		124,
-			height: 	45,
-			buttonSkin:	"img090216/uploadBtn.png",
-			allowMulti:	true
+			url: "http://q.pnq.cc/works/uploader/upload-receiver.php?album=0",
+			width: 124,
+			height: 45,
+			buttonSkin: "img090216/uploadBtn.png",
+			allowMulti: true,
+			sizeLimitEach2: 200 * 1024,
+			compressSize2: 3 * 1024 * 1024
 		});
 
 		WP_Album.uploader.swfReady(function (evt) {
@@ -128,18 +130,58 @@ WP_Album._upload_fun = {
 			WP_Album._upload_var.fileUploadCount ++;
 			WP_Album._upload_var.fileUploadSize += WP_Album._upload_var.fileList[evt.id].size;
 			//alert("total: " + WP_Album._upload_var.fileUploadSize);
-			$D.setStyle("uploaderProcessBar", "width", Math.floor(100 * WP_Album._upload_var.fileUploadSize / WP_Album._upload_var.fileTotalSize) + "%");
+			//$D.setStyle("uploaderProcessBar", "width", Math.floor(100 * WP_Album._upload_var.fileUploadSize / WP_Album._upload_var.fileTotalSize) + "%");
+			$D.setStyle("uploaderProcessBar", "width", Math.floor(100 * WP_Album._upload_var.fileUploadCount / WP_Album._upload_var.fileCount) + "%");
+			$D.getElementsByClassName("act", "div", "fileLi-" + evt.id, function (o) {
+				$D.replaceClass(o, "ready", "ok");
+			});
+			$D.addClass("fileLi-" + evt.id, "ok");
+			$("uploadFileList").scrollTop += 25;
+		})
+		.uploadCompleteData(function (evt) {
+
 		})
 		.uploadProgress(function (evt) {
 			info(evt);
 			var t = WP_Album._upload_var.fileUploadSize,
 				t2 = t + evt.bytesLoaded;
+			$D.setStyle("fileLi-" + evt.id, "background-position", evt.percent + "% 50%");
 			//alert("cur: " + t2);
 			//$D.setStyle("uploaderProcessBar", "width", Math.floor(100 * t2 / WP_Album._upload_var.fileTotalSize) + "%");
+		})
+		.finish(function (evt) {
+			alert("finish!");
+			//location.href = "a-7.html";
+		})
+		.uploadError(function (evt) {
+			info(evt);
 		});
 
 		BTN902.btns["btn-upload"].on("click", function () {
+			$("uploadTopInfo2").innerHTML = "<div class=\"smallInfo\">上传中... 请勿刷新本页面</div>";
+			$D.setStyle("uploadTopInfo", "display", "block");
+			$("uploadFileList").scrollTop = 0;
 			WP_Album.uploader.uploadAll();
+			WP_Album.uploader.disable();
+			BTN902.btns["btn-upload"].disable(1);
+			$D.setStyle("uploaderProcess", "display", "block");
+
+			$D.getElementsByClassName("size", "div", "uploadMainInfo", function (o) {
+				o.innerHTML = "&nbsp;";
+			});
+			$D.getElementsByClassName("act", "div", "uploadMainInfo", function (o) {
+				o.innerHTML = "&nbsp;";
+			})[0].innerHTML = "状态";
+			$D.getElementsBy(function (o) {
+				return true;
+			}, "li", "uploadFileList", function (o) {
+				$D.addClass(o, "ready");
+			});
+
+			var ovlay = mkEl("div", {className: "overlay"});
+			$D.setStyle(ovlay, "width", $("albumArea").offsetWidth - 20 + "px");
+			$D.setStyle(ovlay, "height", $("albumArea").scrollHeight + "px");
+			$("albumArea").appendChild(ovlay);
 		});
 	},
 	addFileList: function (lst) {
