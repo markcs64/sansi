@@ -9,8 +9,12 @@
 <script language="javascript" type="text/javascript" src="http://style.china.alibaba.com/js/danai/bo_2.js"></script>
 <script language="javascript" type="text/javascript" src="http://style.china.alibaba.com/js/alicn/alitalk.js"></script>
 <script language="JavaScript" src="http://img.china.alibaba.com/stat/aliclick.js"></script>
+<script type="text/javascript" src="http://style.china.alibaba.com/js/yui/utilities.js"></script>
+<script language="javascript" type="text/javascript" src="js090216/wp-0.js"></script>
 <link rel="stylesheet" rev="stylesheet" href="http://style.china.alibaba.com/css/store/ecs/eCustomerService_bo.css" type="text/css" />
 <link id="ecsColorStyle" rel="stylesheet" rev="stylesheet" href="http://style.china.alibaba.com/css/store/ecs/eCustomerService0.css" type="text/css" />
+<link rel="stylesheet" rev="stylesheet" href="wp-0.css" type="text/css" media="screen" />
+<link id="ecsColorStyle" rel="stylesheet" rev="stylesheet" href="album_recommend.css" type="text/css" />
 </head>
 <body>
 <!--顶部标头-->
@@ -191,20 +195,13 @@ function findPath(menus,targetId){
 		<td bgcolor="#eff2f9" class="tx_title">&nbsp;&nbsp;推荐公司相册</td>
 	</tr>
 </table>
-    <table width="100%"  border="0" cellspacing="0" cellpadding="12">
+    <table id="rcmdAlbum" width="100%"  border="0" cellspacing="0" cellpadding="12">
       <tr>
         <td>
-<table width="100%" align="center" cellpadding="0" cellspacing="0" class="tx_box">
-	<tr>
-		<td width="80" rowspan="2" align="center" valign="middle"><img src="http://img.china.alibaba.com/images/cn/market/myalibaba/newmyali/icon1.gif" width="53" height="53" /></td>
-        <td height="20" class="tx_title">操作小贴士：</td>
-	</tr>
-	<tr>
-		<td class="tx_content">建议您推荐与主营产品或服务相关的相册。 <br />
-           推荐的相册能展现在企业网站首页导航位置，并显示相册中靠前的5个公开状态的图片，曝光率大大增加！
-        </td>
-	</tr>
-</table>
+	<div id="main_right_info" class="bigOK"><div>
+		<h3>操作小贴士</h3>
+		<p>建议您推荐与主营产品或服务相关的相册；<br />推荐的相册能展示现在企业网站首页导航位置，并显示相册中靠前的5个公开状态的图片，曝光率将大大增加！</p>
+	</div></div>
     <script language="javascript">
 		//取消推荐
         function cancelRecAlbum(delId) {        
@@ -245,31 +242,58 @@ function findPath(menus,targetId){
     <table width="100%"  border="0" cellspacing="0" cellpadding="2"
 				>
 		<tr>
-			<td colspan="2" class="list_right_box">
+			<td colspan="2">
 				<table width="100%" >
 					<tr>
 																			<td width="25%">
 																									<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
 										<tr>
 											<td width="25%" height="60%" style="padding-bottom:3px; padding-top:12px;" align="center">
-												<table width="102" height="118"  border="0" align="center" cellpadding="0" cellspacing="0" background="http://img.china.alibaba.com/images/cn/market/athena/0711/picture_bg.gif">
-													<tr >
-																												<td align="center"><a href="http://company.china.alibaba.com/athena/picdetail/junbiaozhujb-2-6223250.html" target="_blank"><img id="img_a_6223250" src="http://img.china.alibaba.com/img/product/15/82/19/15821974.summ.jpg"  border="0" onerror="javascript:reloadPic('img_a_6223250')"></a></td>														
+												<table class="album" cellpadding="0" cellspacing="0">
+													<tr>
+													<td align="center"><a href="http://company.china.alibaba.com/athena/picdetail/junbiaozhujb-2-6223250.html" target="_blank"><img id="img_a_6223250" src="http://img.china.alibaba.com/img/product/15/82/19/15821974.summ.jpg"  border="0" onerror="javascript:reloadPic('img_a_6223250')"></a></td>
                         							</tr>
+													<tr class="tr1h"><td><div class="rcmdAlbumBox"><div class="rcmdFlag"></div></div></td></tr>
                       							</table>
            									</td>
                   						</tr>
 										<tr>
+											<td width="23%" height="10%" align="center" style="padding-bottom:10px;" vlign="bottom">
+											<table><tr>
+											<td><div class="bo_902btn" onclick="javascript:replaceRecAlbum(6223250)"><a href="#">更换</a></div></td>
+											<td><div class="bo_902btn" onclick="javascript:cancelRecAlbum(6223250)"><a href="#">撤销</a></div></td>
+											</tr></table>
+											</td>
+										</tr>
+										<tr>
 											<td height="7%" align="center" style="padding-bottom:2px; padding-top:2px;">
-																																					相册名称：<a href="http://company.china.alibaba.com/athena/picdetail/junbiaozhujb-2-6223250.html" target="_blank">aaaaaaa</a><br/>
-													创建时间：2008年05月01日
+																																					相册名称：<a class="albumName" href="http://company.china.alibaba.com/athena/picdetail/junbiaozhujb-2-6223250.html" target="_blank">aaaaaaa</a><br/>
+																																					创建时间：<span class="datetime">2008-05-01</span>
 												                  							 </td>
                   						</tr>
+									</table>
+															</td>
+																				<td width="25%">
+																																		<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+										<tr>
+											<td width="25%" height="60%" style="padding-bottom:3px; padding-top:12px;" align="center">
+												<table class="album" cellpadding="0" cellspacing="0">
+													<tr>
+													<td>&nbsp;</td>
+													</tr>
+													<tr class="tr1h"><td><div class="rcmdAlbumBox"><div class="rcmdFlag"></div></div></td></tr>
+												</table>
+											</td>
+										</tr>
 										<tr>
 											<td width="23%" height="10%" align="center" style="padding-bottom:10px;" vlign="bottom">
-												    												<input type="button" name="button_modify" value="更换" onclick="javascript:replaceRecAlbum(6223250)" />&nbsp;
-    												<input type="button" name="button_delete" value="撤销" onclick="javascript:cancelRecAlbum(6223250)" />
-																							</td>
+												<table><tr>
+													<td><div class="bo_902btn" onclick="javascript:recAlbum()"><a href="#">推荐</a></div></td>
+												</tr></table>
+                    						</td>
+										</tr>
+										<tr>
+											<td height="7%" align="center" style="padding-bottom:2px; padding-top:2px;"><br />&nbsp;</td>
 										</tr>
 									</table>
 															</td>
@@ -277,20 +301,24 @@ function findPath(menus,targetId){
 																																		<table width="100%"  border="0" cellspacing="0" cellpadding="0">
 										<tr>
 											<td width="25%" height="60%" style="padding-bottom:3px; padding-top:12px;" align="center">
-												<table width="102" height="118"  border="0" align="center" cellpadding="0" cellspacing="0" background="http://img.china.alibaba.com/images/cn/market/athena/0711/picture_bg.gif">
+												<table class="album" cellpadding="0" cellspacing="0">
 													<tr>
-														<td>&nbsp;</td>
+													<td>&nbsp;</td>
 													</tr>
+													<tr class="tr1h"><td><div class="rcmdAlbumBox"><div class="rcmdFlag"></div></div></td></tr>
 												</table>
 											</td>
 										</tr>
 										<tr>
-											<td height="7%" align="center" style="padding-bottom:2px; padding-top:2px;">请推荐相册！<br />&nbsp;</td>
+											<td width="23%" height="10%" align="center" style="padding-bottom:10px;" vlign="bottom">
+												<table><tr>
+													<td><div class="bo_902btn" onclick="javascript:recAlbum()"><a href="#">推荐</a></div></td>
+												</tr></table>
+										
+                    						</td>
 										</tr>
 										<tr>
-											<td width="23%" height="10%" align="center" style="padding-bottom:10px;" vlign="bottom">
-												<input type="button" name="button_insert" value="推荐" onclick="javascript:recAlbum()" />
-                    						</td>
+											<td height="7%" align="center" style="padding-bottom:2px; padding-top:2px;"><br />&nbsp;</td>
 										</tr>
 									</table>
 															</td>
@@ -298,127 +326,24 @@ function findPath(menus,targetId){
 																																		<table width="100%"  border="0" cellspacing="0" cellpadding="0">
 										<tr>
 											<td width="25%" height="60%" style="padding-bottom:3px; padding-top:12px;" align="center">
-												<table width="102" height="118"  border="0" align="center" cellpadding="0" cellspacing="0" background="http://img.china.alibaba.com/images/cn/market/athena/0711/picture_bg.gif">
+												<table class="album" cellpadding="0" cellspacing="0">
 													<tr>
-														<td>&nbsp;</td>
+													<td>&nbsp;</td>
 													</tr>
+													<tr class="tr1h"><td><div class="rcmdAlbumBox"><div class="rcmdFlag"></div></div></td></tr>
 												</table>
 											</td>
 										</tr>
 										<tr>
-											<td height="7%" align="center" style="padding-bottom:2px; padding-top:2px;">请推荐相册！<br />&nbsp;</td>
-										</tr>
-										<tr>
 											<td width="23%" height="10%" align="center" style="padding-bottom:10px;" vlign="bottom">
-												<input type="button" name="button_insert" value="推荐" onclick="javascript:recAlbum()" />
+												<table><tr>
+													<td><div class="bo_902btn" onclick="javascript:recAlbum()"><a href="#">推荐</a></div></td>
+												</tr></table>
+											
                     						</td>
 										</tr>
-									</table>
-															</td>
-																				<td width="25%">
-																																		<table width="100%"  border="0" cellspacing="0" cellpadding="0">
 										<tr>
-											<td width="25%" height="60%" style="padding-bottom:3px; padding-top:12px;" align="center">
-												<table width="102" height="118"  border="0" align="center" cellpadding="0" cellspacing="0" background="http://img.china.alibaba.com/images/cn/market/athena/0711/picture_bg.gif">
-													<tr>
-														<td>&nbsp;</td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-										<tr>
-											<td height="7%" align="center" style="padding-bottom:2px; padding-top:2px;">请推荐相册！<br />&nbsp;</td>
-										</tr>
-										<tr>
-											<td width="23%" height="10%" align="center" style="padding-bottom:10px;" vlign="bottom">
-												<input type="button" name="button_insert" value="推荐" onclick="javascript:recAlbum()" />
-                    						</td>
-										</tr>
-									</table>
-															</td>
-																							</tr>
-								<tr>
-																				<td width="25%">
-																																		<table width="100%"  border="0" cellspacing="0" cellpadding="0">
-										<tr>
-											<td width="25%" height="60%" style="padding-bottom:3px; padding-top:12px;" align="center">
-												<table width="102" height="118"  border="0" align="center" cellpadding="0" cellspacing="0" background="http://img.china.alibaba.com/images/cn/market/athena/0711/picture_bg.gif">
-													<tr>
-														<td>&nbsp;</td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-										<tr>
-											<td height="7%" align="center" style="padding-bottom:2px; padding-top:2px;">请推荐相册！<br />&nbsp;</td>
-										</tr>
-										<tr>
-											<td width="23%" height="10%" align="center" style="padding-bottom:10px;" vlign="bottom">
-												<input type="button" name="button_insert" value="推荐" onclick="javascript:recAlbum()" />
-                    						</td>
-										</tr>
-									</table>
-															</td>
-																				<td width="25%">
-																																		<table width="100%"  border="0" cellspacing="0" cellpadding="0">
-										<tr>
-											<td width="25%" height="60%" style="padding-bottom:3px; padding-top:12px;" align="center">
-												<table width="102" height="118"  border="0" align="center" cellpadding="0" cellspacing="0" background="http://img.china.alibaba.com/images/cn/market/athena/0711/picture_bg.gif">
-													<tr>
-														<td>&nbsp;</td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-										<tr>
-											<td height="7%" align="center" style="padding-bottom:2px; padding-top:2px;">请推荐相册！<br />&nbsp;</td>
-										</tr>
-										<tr>
-											<td width="23%" height="10%" align="center" style="padding-bottom:10px;" vlign="bottom">
-												<input type="button" name="button_insert" value="推荐" onclick="javascript:recAlbum()" />
-                    						</td>
-										</tr>
-									</table>
-															</td>
-																				<td width="25%">
-																																		<table width="100%"  border="0" cellspacing="0" cellpadding="0">
-										<tr>
-											<td width="25%" height="60%" style="padding-bottom:3px; padding-top:12px;" align="center">
-												<table width="102" height="118"  border="0" align="center" cellpadding="0" cellspacing="0" background="http://img.china.alibaba.com/images/cn/market/athena/0711/picture_bg.gif">
-													<tr>
-														<td>&nbsp;</td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-										<tr>
-											<td height="7%" align="center" style="padding-bottom:2px; padding-top:2px;">请推荐相册！<br />&nbsp;</td>
-										</tr>
-										<tr>
-											<td width="23%" height="10%" align="center" style="padding-bottom:10px;" vlign="bottom">
-												<input type="button" name="button_insert" value="推荐" onclick="javascript:recAlbum()" />
-                    						</td>
-										</tr>
-									</table>
-															</td>
-																				<td width="25%">
-																																		<table width="100%"  border="0" cellspacing="0" cellpadding="0">
-										<tr>
-											<td width="25%" height="60%" style="padding-bottom:3px; padding-top:12px;" align="center">
-												<table width="102" height="118"  border="0" align="center" cellpadding="0" cellspacing="0" background="http://img.china.alibaba.com/images/cn/market/athena/0711/picture_bg.gif">
-													<tr>
-														<td>&nbsp;</td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-										<tr>
-											<td height="7%" align="center" style="padding-bottom:2px; padding-top:2px;">请推荐相册！<br />&nbsp;</td>
-										</tr>
-										<tr>
-											<td width="23%" height="10%" align="center" style="padding-bottom:10px;" vlign="bottom">
-												<input type="button" name="button_insert" value="推荐" onclick="javascript:recAlbum()" />
-                    						</td>
+											<td height="7%" align="center" style="padding-bottom:2px; padding-top:2px;"><br />&nbsp;</td>
 										</tr>
 									</table>
 															</td>
@@ -428,20 +353,24 @@ function findPath(menus,targetId){
 																																		<table width="100%"  border="0" cellspacing="0" cellpadding="0">
 										<tr>
 											<td width="25%" height="60%" style="padding-bottom:3px; padding-top:12px;" align="center">
-												<table width="102" height="118"  border="0" align="center" cellpadding="0" cellspacing="0" background="http://img.china.alibaba.com/images/cn/market/athena/0711/picture_bg.gif">
+												<table class="album" cellpadding="0" cellspacing="0">
 													<tr>
-														<td>&nbsp;</td>
+													<td>&nbsp;</td>
 													</tr>
+													<tr class="tr1h"><td><div class="rcmdAlbumBox"><div class="rcmdFlag"></div></div></td></tr>
 												</table>
 											</td>
 										</tr>
 										<tr>
-											<td height="7%" align="center" style="padding-bottom:2px; padding-top:2px;">请推荐相册！<br />&nbsp;</td>
+											<td width="23%" height="10%" align="center" style="padding-bottom:10px;" vlign="bottom">
+												<table><tr>
+													<td><div class="bo_902btn" onclick="javascript:recAlbum()"><a href="#">推荐</a></div></td>
+												</tr></table>
+											
+                    						</td>
 										</tr>
 										<tr>
-											<td width="23%" height="10%" align="center" style="padding-bottom:10px;" vlign="bottom">
-												<input type="button" name="button_insert" value="推荐" onclick="javascript:recAlbum()" />
-                    						</td>
+											<td height="7%" align="center" style="padding-bottom:2px; padding-top:2px;"><br />&nbsp;</td>
 										</tr>
 									</table>
 															</td>
@@ -449,20 +378,126 @@ function findPath(menus,targetId){
 																																		<table width="100%"  border="0" cellspacing="0" cellpadding="0">
 										<tr>
 											<td width="25%" height="60%" style="padding-bottom:3px; padding-top:12px;" align="center">
-												<table width="102" height="118"  border="0" align="center" cellpadding="0" cellspacing="0" background="http://img.china.alibaba.com/images/cn/market/athena/0711/picture_bg.gif">
+												<table class="album" cellpadding="0" cellspacing="0">
 													<tr>
-														<td>&nbsp;</td>
+													<td>&nbsp;</td>
 													</tr>
+													<tr class="tr1h"><td><div class="rcmdAlbumBox"><div class="rcmdFlag"></div></div></td></tr>
 												</table>
 											</td>
 										</tr>
 										<tr>
-											<td height="7%" align="center" style="padding-bottom:2px; padding-top:2px;">请推荐相册！<br />&nbsp;</td>
+											<td width="23%" height="10%" align="center" style="padding-bottom:10px;" vlign="bottom">
+												<table><tr>
+													<td><div class="bo_902btn" onclick="javascript:recAlbum()"><a href="#">推荐</a></div></td>
+												</tr></table>
+											
+                    						</td>
+										</tr>
+										<tr>
+											<td height="7%" align="center" style="padding-bottom:2px; padding-top:2px;"><br />&nbsp;</td>
+										</tr>
+									</table>
+															</td>
+																				<td width="25%">
+																																		<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+										<tr>
+											<td width="25%" height="60%" style="padding-bottom:3px; padding-top:12px;" align="center">
+												<table class="album" cellpadding="0" cellspacing="0">
+													<tr>
+													<td>&nbsp;</td>
+													</tr>
+													<tr class="tr1h"><td><div class="rcmdAlbumBox"><div class="rcmdFlag"></div></div></td></tr>
+												</table>
+											</td>
 										</tr>
 										<tr>
 											<td width="23%" height="10%" align="center" style="padding-bottom:10px;" vlign="bottom">
-												<input type="button" name="button_insert" value="推荐" onclick="javascript:recAlbum()" />
+												<table><tr>
+													<td><div class="bo_902btn" onclick="javascript:recAlbum()"><a href="#">推荐</a></div></td>
+												</tr></table>
+											
                     						</td>
+										</tr>
+										<tr>
+											<td height="7%" align="center" style="padding-bottom:2px; padding-top:2px;"><br />&nbsp;</td>
+										</tr>
+									</table>
+															</td>
+																				<td width="25%">
+																																		<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+										<tr>
+											<td width="25%" height="60%" style="padding-bottom:3px; padding-top:12px;" align="center">
+												<table class="album" cellpadding="0" cellspacing="0">
+													<tr>
+													<td>&nbsp;</td>
+													</tr>
+													<tr class="tr1h"><td><div class="rcmdAlbumBox"><div class="rcmdFlag"></div></div></td></tr>
+												</table>
+											</td>
+										</tr>
+										<tr>
+											<td width="23%" height="10%" align="center" style="padding-bottom:10px;" vlign="bottom">
+												<table><tr>
+													<td><div class="bo_902btn" onclick="javascript:recAlbum()"><a href="#">推荐</a></div></td>
+												</tr></table>
+											
+                    						</td>
+										</tr>
+										<tr>
+											<td height="7%" align="center" style="padding-bottom:2px; padding-top:2px;"><br />&nbsp;</td>
+										</tr>
+									</table>
+															</td>
+																							</tr>
+								<tr>
+																				<td width="25%">
+																																		<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+										<tr>
+											<td width="25%" height="60%" style="padding-bottom:3px; padding-top:12px;" align="center">
+												<table class="album" cellpadding="0" cellspacing="0">
+													<tr>
+													<td>&nbsp;</td>
+													</tr>
+													<tr class="tr1h"><td><div class="rcmdAlbumBox"><div class="rcmdFlag"></div></div></td></tr>
+												</table>
+											</td>
+										</tr>
+										<tr>
+											<td width="23%" height="10%" align="center" style="padding-bottom:10px;" vlign="bottom">
+												<table><tr>
+													<td><div class="bo_902btn" onclick="javascript:recAlbum()"><a href="#">推荐</a></div></td>
+												</tr></table>
+											
+                    						</td>
+										</tr>
+										<tr>
+											<td height="7%" align="center" style="padding-bottom:2px; padding-top:2px;"><br />&nbsp;</td>
+										</tr>
+									</table>
+															</td>
+																				<td width="25%">
+																																		<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+										<tr>
+											<td width="25%" height="60%" style="padding-bottom:3px; padding-top:12px;" align="center">
+												<table class="album" cellpadding="0" cellspacing="0">
+													<tr>
+													<td>&nbsp;</td>
+													</tr>
+													<tr class="tr1h"><td><div class="rcmdAlbumBox"><div class="rcmdFlag"></div></div></td></tr>
+												</table>
+											</td>
+										</tr>
+										<tr>
+											<td width="23%" height="10%" align="center" style="padding-bottom:10px;" vlign="bottom">
+												<table><tr>
+													<td><div class="bo_902btn" onclick="javascript:recAlbum()"><a href="#">推荐</a></div></td>
+												</tr></table>
+											
+                    						</td>
+										</tr>
+										<tr>
+											<td height="7%" align="center" style="padding-bottom:2px; padding-top:2px;"><br />&nbsp;</td>
 										</tr>
 									</table>
 															</td>
@@ -488,8 +523,6 @@ function findPath(menus,targetId){
         </td>
 	  </tr>
 	</table>
-
-   	
 
 
 <script language="JavaScript">
