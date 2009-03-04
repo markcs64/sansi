@@ -1,0 +1,164 @@
+/* setEffect.css */
+
+#main_right_info {
+	margin: 10px 0;
+}
+#main_right_info div {
+	padding-left: 25px;
+	background: #EFF2F9 url(img090216/1000312.gif) no-repeat 10px 5px;
+}
+#main_right_info h3 {
+	padding: 0;
+	margin: 0 0 5px 0;
+	font-size: 14px;
+}
+#main_right_info div p {
+	padding: 0;
+	font-weight: normal;
+	font-size: 12px;
+}
+
+#effectList {
+	margin: 10px 0 30px 0;
+}
+.tabArea .tabHead {
+	height: 33px;
+	font-weight: bold;
+	font-size: 14px;
+}
+.tabArea ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.tabArea .tabHead ul {
+	padding: 0 0 0 10px;
+	height: 32px;
+	border-bottom: solid 1px #A2B7E8;
+	_overflow: hidden;
+}
+.tabArea .tabHead ul li {
+	float: left;
+	position: relative;
+	color: #345EBA;
+	height: 33px;
+	line-height: 40px;
+	background: url(img090216/tabHeadBg.png) repeat-x 0 -140px;
+	margin-right: 4px;
+}
+.tabArea .tabHead ul li.selected {
+	color: #000;
+	line-height: 35px;
+	background: #fff url(img090216/tabHeadBg.png) repeat-x 0 -35px;
+}
+.tabArea .tabHead ul li a {
+	padding: 0 20px 0 30px;
+	background: transparent url(img090216/2003408.gif) no-repeat 20px 50%;
+}
+.tabArea .tabHead ul li b.tabHL,
+.tabArea .tabHead ul li b.tabHR {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 7px;
+	height: 33px;
+	background: #fff url(img090216/tabHeadBg.png) no-repeat 0 -105px;
+}
+.tabArea .tabHead ul li b.tabHR {
+	left: auto;
+	right: 0;
+	background-position: 0 -175px;
+}
+.tabArea .tabHead ul li.selected b.tabHL {
+	background-position: 0 0;
+}
+.tabArea .tabHead ul li.selected b.tabHR {
+	background-position: 0 -70px;
+}
+.tabArea .tabHead ul li span {
+	color: #000;
+	font-size: 12px;
+	font-weight: normal;
+	margin-left: -20px;
+	padding-right: 10px;
+}
+.tabArea .tabBody {
+	clear: both;
+	padding-top: 15px;
+	font-size: 14px;
+}
+.tabArea .tabBody ul li {
+	display: none;
+}
+.tabArea .tabBody ul li.selected {
+	display: block;
+}
+.tabArea .tabBody ul li .pic-demo {
+	float: left;
+	position: relative;
+	width: 492px;
+	height: 264px;
+	background: #eee;
+	margin-right: 20px;
+}
+.tabArea .tabBody ul li .pic-demo .pic-demo-img {
+	width: 492px;
+	height: 264px;
+	overflow: hidden;
+}
+.tabArea .tabBody .inuse-bd {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border: solid 8px #DE0000;
+	width: 476px;
+	height: 248px;
+	display: none;
+}
+.tabArea .tabBody .effect-intro {
+	+margin-top: -15px;
+	line-height: 20px;
+}
+.tabArea .tabBody .effect-intro .effect-stars img {
+	margin: 0 5px 0 0;
+}
+.tabArea .tabBody .effect-action {
+	height: 50px;
+}
+.tabArea .tabBody .effect-intro .bo_902btn {
+	float: left;
+}
+.tabArea .tabBody .effect-intro .effect-inuse {
+	float: left;
+	display: none;
+	border-bottom: dashed 1px #C7C7C7;
+	margin: 9px 5px 9px 0;
+	padding-left: 22px;
+	background: url(img090216/1000816.gif) no-repeat 0 50%;
+	font-weight: bold;
+	color: #CC6600;
+}
+.tabArea .tabBody .effect-intro a.effect-preview {
+	line-height: 36px;
+	padding-left: 15px;
+	background: url(img090216/2000512.gif) no-repeat 0 50%;
+}
+.tabArea .inuse-flag {
+	position: absolute;
+	z-index: 10;
+	width: 64px;
+	height: 64px;
+	background: transparent url(img090216/1000864.gif) no-repeat;
+	right: -8px;
+	bottom: -16px;
+	display: none;
+}
+.tabArea .tabBody .inuse .inuse-flag,
+.tabArea .tabBody .inuse .inuse-bd,
+.tabArea .tabBody .inuse .effect-inuse {
+	display: block;
+}
+.tabArea .tabBody .inuse .bo_902btn {
+	display: none;
+}
