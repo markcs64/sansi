@@ -20,186 +20,155 @@
 <link rel="stylesheet" rev="stylesheet" href="dragOrder.css" type="text/css" media="screen" />
 
 <script type="text/javascript">
-/* 如果没有相册 */
-/*
-var g_albums = [
-	{
-		id: "asfaefe",
-		title: "我的相册",
-		datetime: new Date(2008, 10, 27)
-	}
-];
-*/
-/* 如果有相册 */
-var g_albums = [
+	// 相册信息
+	var g_album = {
+		id: "sadfwefe",
+		title: "连衣裙",
+		count: 205,			//照片数
+		datetime: new Date(2008, 10, 27),		//相册最后修改日期（年，月-1，日）
+		lock: 1,			//是否需要密码访问（0：否；1：是）
+		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"					//相册封面图片（可选）
+	};
+
+var g_photos = [
 	{
 		id: "abcdefg_123",	//相册ID
-		title: "相册名",
-		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"					//相册封面图片（可选）
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"					//相册封面图片（可选）
 	},
 	{
 		id: "abcdefg_124",
-		title: "相册2",
-		cover: "http://i02.c.aliimg.com/img/offer/32/06/00/34/8/320600348"
+		src: "http://i02.c.aliimg.com/img/offer/32/06/00/34/8/320600348"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册名长度最多显示七个字符",
-		cover: "http://i02.c.aliimg.com/img/offer/32/82/88/98/2/328288982"
+		src: "http://i02.c.aliimg.com/img/offer/32/82/88/98/2/328288982"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://i00.c.aliimg.com/img/offer/33/28/81/45/4/332881454"
+		src: "http://i00.c.aliimg.com/img/offer/33/28/81/45/4/332881454"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://i02.c.aliimg.com/news/upload/9/news/2008/9/26/350x350_11c9d4bd119.jpg"
+		src: "http://i02.c.aliimg.com/news/upload/9/news/2008/9/26/350x350_11c9d4bd119.jpg"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://i05.c.aliimg.com/news/upload/9/news/2008/9/26/350x350_11c9d4bd132.jpg"
+		src: "http://i05.c.aliimg.com/news/upload/9/news/2008/9/26/350x350_11c9d4bd132.jpg"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
 		id: "abcdefg_125",
-		title: "空相册"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	},
 	{
 		id: "abcdefg_125",
-		title: "相册3",
-		cover: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
+	},
+	{
+		id: "abcdefg_125",
+		src: "http://img.china.alibaba.com/news/upload/king/pifajinhuo/200807/200901/8_1234754783900.jpg"
 	}
 ];
 </script>
@@ -348,13 +317,13 @@ function treeInit2() { //菜单控件初始化
 		<div id="main_right_body">
 			<div id="albumListHead">
 				<ul class="ul-inline">
-					<li>相册自定义排序</li>
+					<li>相片自定义排序</li>
 				</ul>
 			</div>
 
 			<div id="main_right_info"><div>
 				<h3>操作小贴士：</h3>
-				<p>1. 您可以使用鼠标拖拽的方式，对相册进行排序；</p>
+				<p>1. 您可以使用鼠标拖拽的方式，对相片进行排序；</p>
 				<p>2. 如对排序顺序不满意，可点击恢复原顺序进行恢复。</p>
 			</div></div>
 
@@ -368,7 +337,6 @@ function treeInit2() { //菜单控件初始化
 
 			<div id="orderArea">
 				<ul id="orderItems"></ul>
-				<div id="dd-proxy" class="item"></div>
 			</div>
 
 			<div class="orderOperation">
@@ -386,7 +354,7 @@ function treeInit2() { //菜单控件初始化
 
 <script type="text/javascript">
 	$E.onDOMReady(function () {
-		$DD.init(g_albums);
+		DragOrder.init(g_albums);
 
 		//设置高度,高度是更具screen_placeholder的内容而定的，所以要放在screen_placeholder后面
 		getTreeHeight();

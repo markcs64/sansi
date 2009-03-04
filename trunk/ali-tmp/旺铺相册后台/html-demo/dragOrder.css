@@ -1,1 +1,70 @@
 /* dragOrder */
+
+#main_right_body {
+	padding-bottom: 30px;
+}
+#main_right_info {
+	margin: 10px 0;
+}
+#main_right_info div {
+	padding-left: 25px;
+	background: #EFF2F9 url(img090216/1000312.gif) no-repeat 10px 5px;
+}
+#main_right_info h3 {
+	padding: 0;
+	margin: 0 0 5px 0;
+	font-size: 14px;
+}
+#main_right_info div p {
+	padding: 0;
+	font-weight: normal;
+	font-size: 12px;
+}
+.orderOperation {
+	height: 36px;
+	line-height: 36px;
+	font-size: 12px;
+	clear: both;
+}
+.orderOperation ul li {
+	padding-right: 10px;
+}
+.orderOperation a.reset {
+	background: url(img090216/2004112.gif) no-repeat;
+	padding-left: 20px;
+}
+.orderOperation a.cancel {
+	background: url(img090216/2004116.gif) no-repeat;
+	font-weight: bold;
+	padding: 5px 0 5px 20px;
+}
+#orderArea {
+	margin: 20px 0;
+	background: #ffc;
+	overflow: hidden;
+}
+ul#orderItems {
+	width: 780px;
+	background: #fcc;
+}
+#ygddfdiv,
+ul#orderItems li.item {
+	float: left;
+	width: 12%;
+	height: 100px;
+	overflow: hidden;
+	text-align: center;
+	background: #f33;
+}
+#ygddfdiv div.itemWrapper,
+ul#orderItems li.item div.itemWrapper {
+	width: 85px;
+	height: 85px;
+	margin: 0 auto;
+	border: solid 1px #999;
+	overflow: hidden;
+	cursor: pointer;
+}
+#dd-proxy {
+	background: #000;
+}
