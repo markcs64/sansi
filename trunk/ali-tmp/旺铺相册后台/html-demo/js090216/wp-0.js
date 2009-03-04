@@ -161,12 +161,15 @@ MsgBox_oj.prototype.init = function () {
 	var innerWrapper = document.createElement("div");
 	innerWrapper.className = "msgbox_oj_innerWrapper";
 	this.wrapper.appendChild(innerWrapper);
+	this.topBg = mkEl("div", {className: "msgbox_oj_topBg"});
+	innerWrapper.appendChild(this.topBg);
 	var wrapper2 = document.createElement("div");
 	wrapper2.className = "msgbox_oj_inner";
 	innerWrapper.appendChild(wrapper2);
 	var box = document.createElement("div");
 	box.className = "msgbox_oj_box";
 	wrapper2.appendChild(box);
+	this.wrapper2 = wrapper2;
 	this.box = box;
 	var close = document.createElement("div");
 	close.className = "close";
@@ -206,6 +209,7 @@ MsgBox_oj.prototype.init = function () {
 };
 
 MsgBox_oj.prototype.show = function (title, html, btnsAndCallback) {
+	this.isShow = true;
 	this.head.innerHTML = title || "温馨提示";
 	if (typeof(html) == "string") {
 		this.body.innerHTML = html|| "无提示信息";
@@ -227,8 +231,18 @@ MsgBox_oj.prototype.show = function (title, html, btnsAndCallback) {
 
 	YAHOO.util.Dom.setStyle(this.overlay, "display", "block");
 	YAHOO.util.Dom.setStyle(this.wrapper, "display", "block");
+	this.chkBg();
 	this.center();
 	//this.animShow.animate();
+};
+
+MsgBox_oj.prototype.chkBg = function () {
+	if (!this.isShow) return;
+	var _this = this;
+	$D.setStyle(this.topBg, "height", this.wrapper2.offsetHeight + "px");
+	setTimeout(function () {
+		_this.chkBg();
+	}, 50);
 };
 
 MsgBox_oj.prototype.center = function () {
@@ -243,6 +257,7 @@ MsgBox_oj.prototype.hide = function () {
 	this.btns = [];
 	this.btnsWidth = 0;
 	this.foot.innerHTML = "";
+	this.isShow = false;
 };
 
 MsgBox_oj.prototype.mkBtn = function (btnObj) {

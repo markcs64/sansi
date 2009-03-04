@@ -8,6 +8,7 @@ WP_Album._upload_var = {
 	fileUploadCount: 0,
 	fileUploadSize: 0,
 	refusedList: [],
+	refusedIDs: [],
 	url: "http://q.pnq.cc/works/uploader/upload-receiver.php?album=0"
 };
 
@@ -191,18 +192,23 @@ WP_Album._upload_fun = {
 				WP_Album.uploader.disable();
 			}
 		})
+		.fileRefused(function (evt) {
+			WP_Album._upload_var.refusedList.push(evt.name);
+			WP_Album._upload_var.refusedIDs.push(evt.id);
+			//WP_Album._upload_fun.removeFile(evt.id);
+		})
 		.fileSelect(function (evt) {
 			log(evt);
 			WP_Album._upload_var.fileList = evt.fileList;
-			WP_Album._upload_fun.addFileList(evt.fileList);
+			for (var i = 0, l = WP_Album._upload_var.refusedList.length; i < l; i ++) {
+				delete WP_Album._upload_var.fileList[WP_Album._upload_var.refusedIDs[i]];
+			}
+			WP_Album._upload_fun.addFileList(WP_Album._upload_var.fileList);
 			BTN902.btns["btn-upload"].disable(0);
 			if (WP_Album._upload_var.refusedList.length) {
 				$("uploadTopInfo2").innerHTML = "<div class=\"bigInfo\">抱歉，以下图片因大于 5M 已被移除上传队列：</div><div class=\"refusedList\"><span>" + WP_Album._upload_var.refusedList.join("</span> / <span>") + "</span></div>";
 				$D.setStyle("uploadTopInfo", "display", "block");
 			}
-		})
-		.fileRefused(function (evt) {
-			WP_Album._upload_var.refusedList.push(evt.name);
 		})
 		.uploadStart(function (evt) {
 			//info(evt);
@@ -265,6 +271,7 @@ WP_Album._upload_fun = {
 			$D.setStyle(ovlay, "width", $("albumArea").offsetWidth - 20 + "px");
 			$D.setStyle(ovlay, "height", $("albumArea").scrollHeight + "px");
 			$("albumArea").appendChild(ovlay);
+			getTreeHeight();
 		});
 	},
 	addFileList: function (lst) {

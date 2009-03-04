@@ -122,7 +122,7 @@ div#upload-step3 li.wp-gotopage {
 #uploadAct {
 	font-size: 12px;
 	color: #999;
-	height: 100px;
+	height: 40px;
 	width: 510px;
 }
 #upload-step2-toInfo {
@@ -282,12 +282,19 @@ div#upload-step3 li.wp-gotopage {
 	overflow: auto;
 	border: solid 1px #ccc;
 	background: #fff;
+	+overflow-x: hidden;
+	+overflow-y: auto;
 }
 #uploadMainInfo ul li {
 	height: 24px;
 	line-height: 24px;
+	margin: 0;
+	padding: 0;
 	border-bottom: solid 1px #E4E4E4;
 	overflow: hidden;
+	+float: left;
+	+clear: both;
+	+width: 99%;
 }
 #uploadMainInfo ul li.ready {
 	background: url(img090216/fileUp-process-bar.png) no-repeat 0 0;
