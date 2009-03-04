@@ -297,7 +297,7 @@ function treeInit2() { //菜单控件初始化
 				</ul>
 			</div>
 
-			<div id="albumArea">
+			<div id="albumArea" class="upload">
 			</div>
 
 			<div id="upload-step2" class="upload-step">
@@ -343,9 +343,6 @@ function treeInit2() { //菜单控件初始化
 </div>
 
 <script type="text/javascript">
-	//设置高度,高度是更具screen_placeholder的内容而定的，所以要放在screen_placeholder后面
-	getTreeHeight();
-
 	$E.onDOMReady(function () {
 		WP_Album.init(g_albums);
 		WP_Album.show("albumArea");
@@ -363,6 +360,9 @@ function treeInit2() { //菜单控件初始化
 		});
 
 		WP_Album._upload_fun.uploaderInit();
+
+		//设置高度,高度是更具screen_placeholder的内容而定的，所以要放在screen_placeholder后面
+		getTreeHeight();
 	});
 </script>
 <!--footer-->
