@@ -1,0 +1,56 @@
+/* album_recommend.css 推荐公司相册 */
+
+#main_right_info {
+}
+#main_right_info div {
+	padding-left: 25px;
+	background: #EFF2F9 url(img090216/1000312.gif) no-repeat 10px 5px;
+}
+#main_right_info h3 {
+	padding: 0;
+	margin: 0 0 5px 0;
+	font-size: 14px;
+}
+#main_right_info div p {
+	padding: 5px 0 10px 0;
+	font-weight: normal;
+	font-size: 12px;
+}
+#main_right_info span.num {
+	color: #FF6700;
+	font-size: 15px;
+	font-weight: bold;
+}
+#albumSearchBox {
+	margin-bottom: 10px;
+}
+#albumSearchBox td {
+	font-size: 14px;
+	font-weight: bold;
+}
+#albumSearchBox input {
+	font-weight: normal;
+	color: #999;
+	width: 260px;
+	margin-right: 5px;
+}
+#albumListTb {
+	background: #A0B6E8;
+	width: 100%;
+}
+#albumListTb td {
+	text-align: center;
+}
+#albumListTb thead td {
+	background: #EFF3FA;
+	font-size: 14px;
+	padding: 5px;
+}
+#albumListTb tbody td {
+	background: #fff;
+	height: 165px;
+}
+#albumListTb tbody td.album {
+	background: #fff url(img090216/album.png) no-repeat 50% 50%;
+	_background: #fff url(img090216/album.gif) no-repeat 50% 50%;
+}

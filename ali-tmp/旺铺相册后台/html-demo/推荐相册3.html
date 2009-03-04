@@ -1,0 +1,537 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="gb2312">
+<head>
+<title>欢迎光临旺铺管理后台</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta name="description" content="阿里巴巴（china.alibaba.com）是全球企业间（B2B）电子商务的著名品牌，汇集海量供求信息，是全球领先的网上交易市场和商人社区。首家拥有超过1400万网商的电子商务网站，遍布220个国家地区，成为全球商人销售产品、拓展市场及网络推广的首选网站" />
+<meta name="keywords" content="阿里巴巴，行业门户，网上贸易，b2b，电子商务，内贸，外贸，批发，行业资讯，网上贸易，网上交易，交易市场，在线交易，买卖信息，贸易机会，商业信息，供求信息，采购，求购信息，供应信息，加工合作，代理，商机，行业资讯，商务服务，商务网，商人社区，网商" />
+<link rel="stylesheet" rev="stylesheet" href="http://style.china.alibaba.com/css/danai/bo_4.css?version=3" type="text/css" media="screen" />
+<script language="javascript" type="text/javascript" src="http://style.china.alibaba.com/js/danai/bo_2.js"></script>
+<script language="javascript" type="text/javascript" src="http://style.china.alibaba.com/js/alicn/alitalk.js"></script>
+<script language="JavaScript" src="http://img.china.alibaba.com/stat/aliclick.js"></script>
+<link rel="stylesheet" rev="stylesheet" href="http://style.china.alibaba.com/css/store/ecs/eCustomerService_bo.css" type="text/css" />
+<link id="ecsColorStyle" rel="stylesheet" rev="stylesheet" href="http://style.china.alibaba.com/css/store/ecs/eCustomerService0.css" type="text/css" />
+</head>
+<body>
+<!--顶部标头-->
+<div class="top_pic">
+	<div class="top_pic_main">
+		<div class="pic_user">
+			<ul class="left">
+				<li>您好，</li>
+				<li>junbiaozhujb</li>
+				<li class="san_ico"><a href="http://china.alibaba.com/member/bo_signout.htm">[退出]</a></li>
+				    				<li class="homePage">贵公司的旺铺是 <a href="http://www.junbiaozhujb.cn"  target="_blank">http://www.junbiaozhujb.cn</a></li>
+    				<li class="setHome"><a onclick="javascript:aliclick(this,'?tracelog=wp_homepage_asdefault');try{this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.junbiaozhujb.cn');}catch(e){return false;}" target="_self" href="#">点此设为首页</a></li>
+							</ul>
+		</div>
+		<div class="pic_company">
+						<ul class="pic_info">
+				<li class="info_com">咿咿呀呀专卖</li>
+				<li class="info_houtai">旺铺管理后台</li>
+			</ul>
+		</div>
+		<div class="clr">
+		</div>
+	</div>
+
+
+<!--modif 顶部导航 by zhujunbiao at 2008-08-07 -->
+	<div class="top_nav_content">
+		<ul class="left">
+			<li class="now m">旺铺管理首页</li>
+			<li class="list_nor"><a href="http://china.alibaba.com/misc/ymail/biz_mail_login.htm" target="_blank" onmousedown="return aliclick(this,'?tracelog=wp_bohome_post');">企业邮局</a><div id="emailTipsRoot"><div class="emailTips">20个员工邮箱，每个邮箱1G超大空间<br/>企业域名结尾，彰显企业实力</div><a class="emailTipsClose" href="javascript:closeTips('emailTipsRoot')"><img src="http://img.china.alibaba.com/images/cn/market/danai/080307/icon_tips.gif"/></a></div></li>
+					</ul>
+	</div>
+	
+    <div class="top_nav_bottom"></div>
+</div>
+
+<div style="background:#FFF7EA;height:32px;">
+    <div class="currentPage">
+    	<div class="left"><a href="http://china.alibaba.com/member/back_office.htm" target='_self'>旺铺管理首页</a> > </div>
+    	<div class="right">
+    		    			<a href="http://www.junbiaozhujb.cn" target="_blank">进入旺铺首页</a>&nbsp;
+    		    		<a href="http://china.alibaba.com/member/myalibaba.htm" target="_blank">进入阿里助手</a>
+    	</div>
+    </div>
+</div>
+
+<!--main-->
+<div id="main_body">
+<!--left导航-->
+<script type="text/javascript">
+var roots = {menu:[
+    {id:"11",name:"供应信息",url: "http://china.alibaba.com/offer/bo_select_page.htm", target:"_self", children:
+    [
+        {id:"11.1",name:"发布供应信息", url:"http://china.alibaba.com/offer/bo_select_page.htm", children:[]},
+        {id:"11.2",name:"管理供应信息", url:"http://china.alibaba.com/offer/bo_manage.htm", children:[]},
+        {id:"11.3",name:"自定义分类", url:"http://china.alibaba.com/offer/bo_manage_offer_group.htm", children:[]},
+        {id:"11.4",name:"推荐供应信息", url:"http://athena.china.alibaba.com/mysite/bo_recommend_view.htm", children:[]}
+    ]},
+
+    {id:"12",name:"公司相册",url: "http://china.alibaba.com/product/bo_product_post.htm", target:"_self",children:
+    [		
+        {id:"12.1",name:"发布图片",url:"http://china.alibaba.com/product/bo_product_post.htm", children:[]},
+        {id:"12.2",name:"管理图片",url:"http://china.alibaba.com/product/bo_manage.htm", children:[]},
+        {id:"12.3",name:"管理相册",url:"http://china.alibaba.com/product/bo_manage_product_group.htm", children:[]},
+        {id:"12.4",name:"推荐公司相册",url:"http://athena.china.alibaba.com/mysite/bo_recommend_album_view.htm", children:[]}		
+    ]},
+	
+    {id:"13",name:"公司介绍", url: "http://china.alibaba.com/company/bo_my_company.htm", target:"_self", children:[]},
+	
+    {id:"14",name:"公司动态", url: "http://blog.china.alibaba.com/bizblog/article/new.html?from=gsdt&tracelog=myali_menu_publishcompanynews", target:"_blank", children:[]},
+	
+    {id:"15",name:"招聘中心", url: "http://china.alibaba.com/offer/bo_zhao_pin.htm", target:"_self",children:
+    [
+        {id:"15.1",name:"发布招聘信息",url:"http://china.alibaba.com/offer/bo_zhao_pin.htm", children:[]},
+        {id:"15.2",name:"管理招聘信息",url:"http://china.alibaba.com/offer/bo_zhao_pin_list.htm", children:[]}	    
+    ]
+	}
+]};
+
+function treeInit() { //菜单控件初始化
+  var menu = null;
+  var parent1 = document.getElementById("tree1");
+  menu=new AlicnMenu("menu");
+  menu.bindData(roots.menu);
+  menu.draw(parent1);
+  menu.setActivedItem(12.4);
+}
+
+var roots2 = {menu2:[	
+		
+    {id:"22",name:"网站外观设计", statusIcon:"http://img.china.alibaba.com/images/cn/common/icon/v2/icon_hot01_12x.gif", url: "http://esite.china.alibaba.com/esite/esite_config.htm", target:"_blank", children:[]},
+
+    {id:"23",name:"网站浏览分析", statusIcon:"http://img.china.alibaba.com/images/cn/common/icon/v2/icon_hot01_12x.gif", url: "http://athena.china.alibaba.com/statistics/bo_offer_view.htm", target:"_self", children:[]},
+	
+    {id:"24",name:"企业在线管理",statusIcon:"http://img.china.alibaba.com/images/cn/common/icon/v2/icon_new02_12x.gif", url: "http://athena.china.alibaba.com/mysite/bo_contacts_window_config.htm", target:"_self",children:
+    [
+        {id:"24.1",name:"企业在线设置",url:"http://athena.china.alibaba.com/mysite/bo_contacts_window_config.htm", children:[]},
+        {id:"24.2",name:"联系人设置",url:"http://athena.china.alibaba.com/mysite/bo_enterprise_contacts.htm", children:[]},
+        {id:"24.3",name:"收到的邀请",url:"http://athena.china.alibaba.com/mysite/bo_belonged_enterprises.htm", children:[]}				
+    ]},
+
+    {id:"25",name:"网站友情链接",url: "http://athena.china.alibaba.com/mysite/bo_friend_link.htm", target:"_self", children:[]},
+
+	{id:"26",name:"ICP备案",url: "http://china.alibaba.com/domain/bo_domain_icp.htm", target:"_self", children:[]}
+]};
+
+function treeInit2() { //菜单控件初始化
+  var menu2 = null;
+  var parent2 = document.getElementById("tree2");
+  menu2=new AlicnMenu("menu2");
+  menu2.bindData(roots2.menu2);
+  menu2.draw(parent2);
+}
+
+</script>
+
+<script type="text/javascript">
+function setNavigate(spanId){
+	var path = findPath(roots.menu,"12.4");
+	var navigateSpan = document.getElementById(spanId);
+	if(path != null && navigateSpan !=null ){
+		var spanInnerHtml = "";
+		for(var i=0;i<path.length;i++){
+    		if(i != path.length-1){
+    			spanInnerHtml = spanInnerHtml + "<a href='"+path[i].url+"'>"+path[i].name+"</a> > ";
+    		}else{
+				spanInnerHtml = spanInnerHtml + path[i].name;
+    		}
+		}
+		navigateSpan.innerHTML = spanInnerHtml;
+	}
+}
+
+function findPath(menus,targetId){
+	var path = new Array();
+	for(var i=0;i<menus.length;i++){
+		path[0] = menus[i];
+		if(menus[i].id == targetId){
+			return path;
+		}
+		if(menus[i].children.length != 0 ){
+			var subPath = findPath(menus[i].children,targetId);
+			if(subPath != null){
+				for(var j=0;j<subPath.length;j++){
+					path[j+1] = subPath[j];
+				}
+				return path;
+			}
+    	}
+	}
+	return null;
+}
+</script>
+<div class="main_tree" id="main_tree">
+<!--菜单数据初始化-->
+  <div class="tree_title">信息管理</div>
+  <div id="tree1" class="tree"></div>
+  <script type="text/javascript">treeInit();</script>
+  <div class="tree_end tree_fe"></div>
+  <div class="tree_title">网站管理</div>
+  <div id="tree2" class="tree"></div>
+  <script type="text/javascript">treeInit2();</script>
+  <div class="tree_end"></div>
+</div>
+<!--right part-->
+<script >
+	//设置导航栏
+	setNavigate("navigateSpan");
+</script>
+<div
+	class="main_right"
+	id="main_right">
+	<!-- content -->   
+	
+  
+<table width="100%" border="0" cellspacing="0" cellpadding="1">
+	<tr>
+		<td bgcolor="#eff2f9" class="tx_title">&nbsp;&nbsp;推荐公司相册</td>
+	</tr>
+</table>
+    <table width="100%"  border="0" cellspacing="0" cellpadding="12">
+      <tr>
+        <td>
+<table width="100%" align="center" cellpadding="0" cellspacing="0" class="tx_box">
+	<tr>
+		<td width="80" rowspan="2" align="center" valign="middle"><img src="http://img.china.alibaba.com/images/cn/market/myalibaba/newmyali/icon1.gif" width="53" height="53" /></td>
+        <td height="20" class="tx_title">操作小贴士：</td>
+	</tr>
+	<tr>
+		<td class="tx_content">建议您推荐与主营产品或服务相关的相册。 <br />
+           推荐的相册能展现在企业网站首页导航位置，并显示相册中靠前的5个公开状态的图片，曝光率大大增加！
+        </td>
+	</tr>
+</table>
+    <script language="javascript">
+		//取消推荐
+        function cancelRecAlbum(delId) {        
+             if (window.confirm("您确实撤消对该相册的推荐吗？")) {
+                 document.recommendAlbumForm.deleteId.value = delId;
+                 document.recommendAlbumForm.addIds.value = "";
+                 document.recommendAlbumForm.modifyOldId.value = "";
+                 document.recommendAlbumForm.modifyNewId.value = "";
+				 
+				 document.recommendAlbumForm.eventSubmit_doRec.value = "";
+				 document.recommendAlbumForm.eventSubmit_doCancel.value = "anything";
+				 document.recommendAlbumForm.eventSubmit_doReplace.value = "";
+				 
+                 document.recommendAlbumForm.submit();
+              } else {
+              	 return false;
+              }
+        }
+        
+		//推荐
+        function recAlbum() {
+			document.recAlbumForm.modifyId.value = "";
+            document.recAlbumForm.submit();
+        }
+        
+		//更换
+        function replaceRecAlbum(oldId) {
+            document.recAlbumForm.modifyId.value = oldId;
+         	document.recAlbumForm.submit();
+        } 
+		//在图片部分使用，onerror事件
+    	function reloadPic(id) {
+    		var imgObj = document.getElementById(id);
+    		imgObj.style.display = "none";
+    	}
+    </script>
+	<BR/>		
+    <table width="100%"  border="0" cellspacing="0" cellpadding="2"
+				>
+		<tr>
+			<td colspan="2" class="list_right_box">
+				<table width="100%" >
+					<tr>
+																			<td width="25%">
+																									<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+										<tr>
+											<td width="25%" height="60%" style="padding-bottom:3px; padding-top:12px;" align="center">
+												<table width="102" height="118"  border="0" align="center" cellpadding="0" cellspacing="0" background="http://img.china.alibaba.com/images/cn/market/athena/0711/picture_bg.gif">
+													<tr >
+																												<td align="center"><a href="http://company.china.alibaba.com/athena/picdetail/junbiaozhujb-2-6223250.html" target="_blank"><img id="img_a_6223250" src="http://img.china.alibaba.com/img/product/15/82/19/15821974.summ.jpg"  border="0" onerror="javascript:reloadPic('img_a_6223250')"></a></td>														
+                        							</tr>
+                      							</table>
+           									</td>
+                  						</tr>
+										<tr>
+											<td height="7%" align="center" style="padding-bottom:2px; padding-top:2px;">
+																																					相册名称：<a href="http://company.china.alibaba.com/athena/picdetail/junbiaozhujb-2-6223250.html" target="_blank">aaaaaaa</a><br/>
+													创建时间：2008年05月01日
+												                  							 </td>
+                  						</tr>
+										<tr>
+											<td width="23%" height="10%" align="center" style="padding-bottom:10px;" vlign="bottom">
+												    												<input type="button" name="button_modify" value="更换" onclick="javascript:replaceRecAlbum(6223250)" />&nbsp;
+    												<input type="button" name="button_delete" value="撤销" onclick="javascript:cancelRecAlbum(6223250)" />
+																							</td>
+										</tr>
+									</table>
+															</td>
+																				<td width="25%">
+																																		<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+										<tr>
+											<td width="25%" height="60%" style="padding-bottom:3px; padding-top:12px;" align="center">
+												<table width="102" height="118"  border="0" align="center" cellpadding="0" cellspacing="0" background="http://img.china.alibaba.com/images/cn/market/athena/0711/picture_bg.gif">
+													<tr>
+														<td>&nbsp;</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+										<tr>
+											<td height="7%" align="center" style="padding-bottom:2px; padding-top:2px;">请推荐相册！<br />&nbsp;</td>
+										</tr>
+										<tr>
+											<td width="23%" height="10%" align="center" style="padding-bottom:10px;" vlign="bottom">
+												<input type="button" name="button_insert" value="推荐" onclick="javascript:recAlbum()" />
+                    						</td>
+										</tr>
+									</table>
+															</td>
+																				<td width="25%">
+																																		<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+										<tr>
+											<td width="25%" height="60%" style="padding-bottom:3px; padding-top:12px;" align="center">
+												<table width="102" height="118"  border="0" align="center" cellpadding="0" cellspacing="0" background="http://img.china.alibaba.com/images/cn/market/athena/0711/picture_bg.gif">
+													<tr>
+														<td>&nbsp;</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+										<tr>
+											<td height="7%" align="center" style="padding-bottom:2px; padding-top:2px;">请推荐相册！<br />&nbsp;</td>
+										</tr>
+										<tr>
+											<td width="23%" height="10%" align="center" style="padding-bottom:10px;" vlign="bottom">
+												<input type="button" name="button_insert" value="推荐" onclick="javascript:recAlbum()" />
+                    						</td>
+										</tr>
+									</table>
+															</td>
+																				<td width="25%">
+																																		<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+										<tr>
+											<td width="25%" height="60%" style="padding-bottom:3px; padding-top:12px;" align="center">
+												<table width="102" height="118"  border="0" align="center" cellpadding="0" cellspacing="0" background="http://img.china.alibaba.com/images/cn/market/athena/0711/picture_bg.gif">
+													<tr>
+														<td>&nbsp;</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+										<tr>
+											<td height="7%" align="center" style="padding-bottom:2px; padding-top:2px;">请推荐相册！<br />&nbsp;</td>
+										</tr>
+										<tr>
+											<td width="23%" height="10%" align="center" style="padding-bottom:10px;" vlign="bottom">
+												<input type="button" name="button_insert" value="推荐" onclick="javascript:recAlbum()" />
+                    						</td>
+										</tr>
+									</table>
+															</td>
+																							</tr>
+								<tr>
+																				<td width="25%">
+																																		<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+										<tr>
+											<td width="25%" height="60%" style="padding-bottom:3px; padding-top:12px;" align="center">
+												<table width="102" height="118"  border="0" align="center" cellpadding="0" cellspacing="0" background="http://img.china.alibaba.com/images/cn/market/athena/0711/picture_bg.gif">
+													<tr>
+														<td>&nbsp;</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+										<tr>
+											<td height="7%" align="center" style="padding-bottom:2px; padding-top:2px;">请推荐相册！<br />&nbsp;</td>
+										</tr>
+										<tr>
+											<td width="23%" height="10%" align="center" style="padding-bottom:10px;" vlign="bottom">
+												<input type="button" name="button_insert" value="推荐" onclick="javascript:recAlbum()" />
+                    						</td>
+										</tr>
+									</table>
+															</td>
+																				<td width="25%">
+																																		<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+										<tr>
+											<td width="25%" height="60%" style="padding-bottom:3px; padding-top:12px;" align="center">
+												<table width="102" height="118"  border="0" align="center" cellpadding="0" cellspacing="0" background="http://img.china.alibaba.com/images/cn/market/athena/0711/picture_bg.gif">
+													<tr>
+														<td>&nbsp;</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+										<tr>
+											<td height="7%" align="center" style="padding-bottom:2px; padding-top:2px;">请推荐相册！<br />&nbsp;</td>
+										</tr>
+										<tr>
+											<td width="23%" height="10%" align="center" style="padding-bottom:10px;" vlign="bottom">
+												<input type="button" name="button_insert" value="推荐" onclick="javascript:recAlbum()" />
+                    						</td>
+										</tr>
+									</table>
+															</td>
+																				<td width="25%">
+																																		<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+										<tr>
+											<td width="25%" height="60%" style="padding-bottom:3px; padding-top:12px;" align="center">
+												<table width="102" height="118"  border="0" align="center" cellpadding="0" cellspacing="0" background="http://img.china.alibaba.com/images/cn/market/athena/0711/picture_bg.gif">
+													<tr>
+														<td>&nbsp;</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+										<tr>
+											<td height="7%" align="center" style="padding-bottom:2px; padding-top:2px;">请推荐相册！<br />&nbsp;</td>
+										</tr>
+										<tr>
+											<td width="23%" height="10%" align="center" style="padding-bottom:10px;" vlign="bottom">
+												<input type="button" name="button_insert" value="推荐" onclick="javascript:recAlbum()" />
+                    						</td>
+										</tr>
+									</table>
+															</td>
+																				<td width="25%">
+																																		<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+										<tr>
+											<td width="25%" height="60%" style="padding-bottom:3px; padding-top:12px;" align="center">
+												<table width="102" height="118"  border="0" align="center" cellpadding="0" cellspacing="0" background="http://img.china.alibaba.com/images/cn/market/athena/0711/picture_bg.gif">
+													<tr>
+														<td>&nbsp;</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+										<tr>
+											<td height="7%" align="center" style="padding-bottom:2px; padding-top:2px;">请推荐相册！<br />&nbsp;</td>
+										</tr>
+										<tr>
+											<td width="23%" height="10%" align="center" style="padding-bottom:10px;" vlign="bottom">
+												<input type="button" name="button_insert" value="推荐" onclick="javascript:recAlbum()" />
+                    						</td>
+										</tr>
+									</table>
+															</td>
+																							</tr>
+								<tr>
+																				<td width="25%">
+																																		<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+										<tr>
+											<td width="25%" height="60%" style="padding-bottom:3px; padding-top:12px;" align="center">
+												<table width="102" height="118"  border="0" align="center" cellpadding="0" cellspacing="0" background="http://img.china.alibaba.com/images/cn/market/athena/0711/picture_bg.gif">
+													<tr>
+														<td>&nbsp;</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+										<tr>
+											<td height="7%" align="center" style="padding-bottom:2px; padding-top:2px;">请推荐相册！<br />&nbsp;</td>
+										</tr>
+										<tr>
+											<td width="23%" height="10%" align="center" style="padding-bottom:10px;" vlign="bottom">
+												<input type="button" name="button_insert" value="推荐" onclick="javascript:recAlbum()" />
+                    						</td>
+										</tr>
+									</table>
+															</td>
+																				<td width="25%">
+																																		<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+										<tr>
+											<td width="25%" height="60%" style="padding-bottom:3px; padding-top:12px;" align="center">
+												<table width="102" height="118"  border="0" align="center" cellpadding="0" cellspacing="0" background="http://img.china.alibaba.com/images/cn/market/athena/0711/picture_bg.gif">
+													<tr>
+														<td>&nbsp;</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+										<tr>
+											<td height="7%" align="center" style="padding-bottom:2px; padding-top:2px;">请推荐相册！<br />&nbsp;</td>
+										</tr>
+										<tr>
+											<td width="23%" height="10%" align="center" style="padding-bottom:10px;" vlign="bottom">
+												<input type="button" name="button_insert" value="推荐" onclick="javascript:recAlbum()" />
+                    						</td>
+										</tr>
+									</table>
+															</td>
+																		</tr>
+				</table>
+			</td>
+		</tr>
+    </table>
+	<form name="recAlbumForm" method="post" action="http://athena.china.alibaba.com/mysite/bo_recommend_album.htm?current_site=backOffice">
+		<input type="hidden" name="modifyId" value="">
+	</form>	
+    <form name="recommendAlbumForm" method="post" action="http://athena.china.alibaba.com/mysite/bo_recommend_album_view.htm?current_site=backOffice">
+         <input type="hidden" name="action" value="recommendAlbumAction"/>
+         <input type="hidden" name="eventSubmit_doRec" value="anywhere"/>
+		 <input type="hidden" name="eventSubmit_doCancel" value="anywhere"/>
+		 <input type="hidden" name="eventSubmit_doReplace" value="anywhere"/>
+         <input type="hidden" name="albumIds" value="">
+         <input type="hidden" name="addIds" value="">
+         <input type="hidden" name="modifyOldId" value="">
+         <input type="hidden" name="modifyNewId" value="">
+         <input type="hidden" name="deleteId" value="">
+    </form>
+        </td>
+	  </tr>
+	</table>
+
+   	
+
+
+<script language="JavaScript">
+	liveStatLog();
+
+    function liveStatLog(){
+	    var param = "";
+		var digurl = "http://stat.china.alibaba.com/feedback/livetrace.html";
+		param = param + "?x1=bo";
+		param = param + "&x2=album";
+		param = param + "&x3=recomm";
+		param = param + "&x4=y";
+		param = param + "&x5=common";
+		param = param + "&x6=junbiaozhujb";
+		logurl = digurl + param;
+		try{
+			(new Image()).src = logurl;
+			}catch(e){}
+		return true;
+	}
+</script>
+
+	<!-- content end -->
+    <script >
+		//设置高度,高度是更具screen_placeholder的内容而定的，所以要放在screen_placeholder后面
+        getTreeHeight();
+    </script>
+</div>
+<!--right part end-->
+</div>
+<!--footer-->
+  <div id="footer">
+  <ul>
+    <li class="no_border">咿咿呀呀专卖</li>
+  </ul> 
+  <ul>
+    <li class="no_border">技术支持 <a href="http://china.alibaba.com" target="_blank">阿里巴巴</a></li>
+  </ul>
+</div>
+<div>
+	<font color="#ffffff">certupload7</font>
+</div>
+<!--/footer-->
+</body>
+</html>
