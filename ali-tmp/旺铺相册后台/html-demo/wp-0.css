@@ -136,6 +136,9 @@ div.bo_902btn_disabled b.btnR {
 .ul-inline li {
 	float: left;
 }
+.ul-inline li.right {
+	float: right;
+}
 
 #mainTRHelp {
 	font-size: 12px;
