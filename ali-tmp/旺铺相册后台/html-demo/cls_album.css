@@ -49,8 +49,6 @@
 .album .cover {
 	position: relative;
 	background: transparent url(img090216/album.png) no-repeat 50% 0;
-	_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img090216/album.png',sizingMethod='crop');
-	_background: none;
 	width: 140px;
 	height: 153px;
 	overflow: hidden;
