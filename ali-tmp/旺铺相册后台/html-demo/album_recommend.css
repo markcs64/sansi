@@ -12,9 +12,10 @@
 	font-size: 14px;
 }
 #main_right_info div p {
-	padding: 5px 0 10px 0;
+	padding: 0 0 10px 0;
 	font-weight: normal;
 	font-size: 12px;
+	line-height: 16px;
 }
 #main_right_info span.num {
 	color: #FF6700;
@@ -69,10 +70,11 @@
 	color: #ff6700;
 }
 #albumListTb tbody span.num,
+#rcmdAlbum span.datetime,
 #albumListTb tbody span.datetime {
 	font-family: Arial;
 	color: #A9A9A9;
-	font-size: 10px;
+	font-size: 11px;
 }
 #albumListTb tbody span.lock {
 	color: #c00;
@@ -85,4 +87,37 @@
 }
 #showPage li.wp-gotopage {
 	margin-bottom: 8px;
+}
+#rcmdAlbum table.album {
+	width: 137px;
+	background: url(img090216/album.gif) no-repeat 50% 50%;
+}
+#rcmdAlbum table.album tr {
+	height: 157px;
+}
+#rcmdAlbum table.album tr.tr1h {
+	height: 10px;
+}
+#rcmdAlbum table.album .rcmdAlbumBox {
+	position: relative;
+	width: 100%;
+	height: 1px;
+}
+#rcmdAlbum table.album td .rcmdFlag {
+	position: absolute;
+	background: url(img090216/recommend.png) no-repeat;
+	_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img090216/recommend.png',sizingMethod='crop');
+	_background: none;
+	width: 147px;
+	height: 34px;
+	left: -5px;
+	top: -22px;
+}
+#rcmdAlbum a.albumName {
+	font-size: 14px;
+	font-weight: bold;
+	color: #000;
+}
+#rcmdAlbum a.albumName:hover {
+	color: #ff6700;
 }
