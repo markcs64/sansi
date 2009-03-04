@@ -50,7 +50,39 @@
 	background: #fff;
 	height: 165px;
 }
+#albumListTb tbody tr.selected td {
+	background: #F1F3FA;
+}
 #albumListTb tbody td.album {
 	background: #fff url(img090216/album.png) no-repeat 50% 50%;
 	_background: #fff url(img090216/album.gif) no-repeat 50% 50%;
+}
+#albumListTb tbody tr.selected td.album {
+	background: #F1F3FA url(img090216/album.png) no-repeat 50% 50%;
+	_background: #F1F3FA url(img090216/album_F1F3FA.png) no-repeat 50% 50%;
+}
+#albumListTb tbody td a {
+	font-weight: bold;
+	color: #000;
+}
+#albumListTb tbody td a:hover {
+	color: #ff6700;
+}
+#albumListTb tbody span.num,
+#albumListTb tbody span.datetime {
+	font-family: Arial;
+	color: #A9A9A9;
+	font-size: 10px;
+}
+#albumListTb tbody span.lock {
+	color: #c00;
+	padding-left: 15px;
+	background: url(img090216/6006312.gif) no-repeat 0 50%;
+}
+#showPage li {
+	clear: both;
+	font-size: 14px;
+}
+#showPage li.wp-gotopage {
+	margin-bottom: 8px;
 }
