@@ -11,6 +11,7 @@
 <script language="JavaScript" src="http://img.china.alibaba.com/stat/aliclick.js"></script>
 <script type="text/javascript" src="http://style.china.alibaba.com/js/yui/utilities.js"></script>
 <script language="JavaScript" src="js090216/wp-0.js"></script>
+<script language="javascript" type="text/javascript" src="js090216/cls_gotoPage.js"></script>
 <link rel="stylesheet" rev="stylesheet" href="http://style.china.alibaba.com/css/store/ecs/eCustomerService_bo.css" type="text/css" />
 <link id="ecsColorStyle" rel="stylesheet" rev="stylesheet" href="http://style.china.alibaba.com/css/store/ecs/eCustomerService0.css" type="text/css" />
 <link rel="stylesheet" rev="stylesheet" href="wp-0.css" type="text/css" media="screen" />
@@ -210,6 +211,10 @@ function findPath(menus,targetId){
             var checkedNum = 0;
         	var idstring = document.gotoPageForm.idsString.value;
         	var idstringArray = idstring.split(",");
+			var tr = albumBox.parentNode;
+			while (tr.tagName.toLowerCase() != "tr") {
+				tr = tr.parentNode;
+			}
             if(albumBox.checked == true) {
         	    if (idstring.length > 0) {
         	        checkedNum = idstring.split(",").length;
@@ -224,7 +229,8 @@ function findPath(menus,targetId){
         		} else {
         		    document.gotoPageForm.idsString.value = idstring + "," + albumBox.value;
         		}
-        		addColor(albumBox);
+        		//addColor(albumBox);
+				$D.addClass(tr, "selected");
         
         	} else {
         		var offValue = albumBox.value;
@@ -247,7 +253,8 @@ function findPath(menus,targetId){
         		    newIdstring = postfix;
         		}
         	    document.gotoPageForm.idsString.value = newIdstring;
-        		rmColor(albumBox);
+        		//rmColor(albumBox);
+				$D.removeClass(tr, "selected");
         	}
         }
         
@@ -357,7 +364,7 @@ function findPath(menus,targetId){
 						<td>
 							<a href="http://company.china.alibaba.com/athena/picdetail/junbiaozhujb-2-6223250.html" target="_blank">aaaaaaa</a> <span class="num">(53)</span>
 						</td>
-						<td><span class="datetime">2008年05月01日</span><br /><span class="lock">密码访问</span></td>
+						<td><span class="datetime">2008-05-01</span><br /><span class="lock">密码访问</span></td>
 						<td>
 							<input id="albumBox1" type="checkbox" name="album_recomm" value="6223250" onclick="javascript:recAlbumCheckbox(this)" >
 						</td>
@@ -369,9 +376,9 @@ function findPath(menus,targetId){
 						<td>
 							<a href="http://company.china.alibaba.com/athena/picdetail/junbiaozhujb-2-6930750.html" target="_blank">bbbbb</a> <span class="num">(11)</span>
 						</td>
-						<td>2009年03月04日</td>
+						<td><span class="datetime">2009-03-04</span></td>
 						<td>
-														<input id="albumBox2" type="checkbox" name="album_recomm" value="6930750" onclick="javascript:recAlbumCheckbox(this)" >
+							<input id="albumBox2" type="checkbox" name="album_recomm" value="6930750" onclick="javascript:recAlbumCheckbox(this)" >
 												</td>
 					</tr>
 					</tbody>
@@ -380,19 +387,23 @@ function findPath(menus,targetId){
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 			<tr>
 				<td class="s lh15" align="right" style="padding-bottom:4px; padding-top:4px;">
-														上一页
-																				1
-																			下一页
-									<br>共 <strong>2</strong> 条信息，当前显示 <strong>1-2</strong> 条，共 <strong>1</strong> 页
+					<ul id="showPage">
+						<li class="wp-gotopage"></li>
+						<li>共 <strong>2</strong> 条信息，当前显示 <strong>1-2</strong> 条，共 <strong>1</strong> 页</li>
+					</ul>
 				 </td>
 			</tr>
-		</table>	
+			</table>
+		<div id="showPage">
+		
+		</div>
 	<br/>
 	<table width="100%"  border="0" cellspacing="0" cellpadding="0">
 		<tr>
-			<td align="center">
-													<input name="button_add" type="button" class="M" value=" 提交 " onclick="javascript:recAlbum()">
-											&nbsp;&nbsp;<input name="button_return" type="button" class="M" value=" 返回 " onclick="javascript:returnViewPage()">
+			<td align="right">
+				<div class="bo_902btn" onclick="javascript:recAlbum()"><a href="#">提交</a></div>
+			</td><td>
+				<div class="bo_902btn" onclick="javascript:returnViewPage()"><a href="#">返回</a></div>
 			</td>
 		</tr>
 	</table>
@@ -403,7 +414,21 @@ function findPath(menus,targetId){
 <br/>
 </div>
 	<!-- content end -->
-    <script >
+    <script type="text/javascript">
+		g_pageSize = 10;
+		g_recordCount = 2;
+		g_curPage = 1;		//当面页
+
+		function showPages() {
+			var c = $D.getElementsByClassName("wp-gotopage"),
+				i;
+			for (i = 0; c[i]; i ++) {
+				new WP_GotoPage(c[i], g_curPage, Math.ceil(g_recordCount / g_pageSize), function () {
+					alert("转到第 " + WP_GotoPage.curPage + " 页");
+				});
+			}
+		}
+		showPages();
 		//设置高度,高度是更具screen_placeholder的内容而定的，所以要放在screen_placeholder后面
         getTreeHeight();
     </script>
