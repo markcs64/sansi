@@ -27,7 +27,7 @@ function delSelectPhotos () {
 
 function g_mvPhoto_albumListSelect () {
 	var select = "";
-	select += "<select onchange=\"g_mvPhoto_targetChg(this)\">";
+	select += "<select style=\"width:18em;\" onchange=\"g_mvPhoto_targetChg(this)\">";
 
 	for (var i = 0; i < g_albumList.length; i ++) {
 		select += "<option value=\"" + g_albumList[i].id + "\""

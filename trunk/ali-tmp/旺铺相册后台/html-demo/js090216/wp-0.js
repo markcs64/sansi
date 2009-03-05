@@ -301,16 +301,22 @@ function mkEl(tagName, p) {
 
 function g_imgMaxSize(img, maxWidth, maxHeight) {
 	if (!img) return;
-	var w = img.width,
-		h = img.height;
+	var w = parseInt(img.width),
+		h = parseInt(img.height);
 	
-	if (w >= h) {
-		$D.setStyle(img, "width", maxWidth + "px");
-		$D.setStyle(img, "height", Math.floor(h * maxWidth / w) + "px");
+	if (w == h) {
+		w = maxWidth;
+		h = maxHeight;
+	} else if (w > h) {
+		h = Math.floor(h * maxWidth / w);
+		w = maxWidth;
 	} else {
-		$D.setStyle(img, "width", Math.floor(w * maxHeight / h) + "px");
-		$D.setStyle(img, "height", maxHeight + "px");
+		w = Math.floor(w * maxHeight / h);
+		h = maxHeight;
 	}
+	$D.setStyle(img, "width", w + "px");
+	$D.setStyle(img, "height", h + "px");
+	return [w, h];
 }
 
 (function () {

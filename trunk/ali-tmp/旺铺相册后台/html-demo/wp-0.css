@@ -312,10 +312,19 @@ li.selectOrder ul li a:link {
 	color: gray;
 }
 li.selectOrder ul li a:visited {
-	color: gray;
+	color: #000;
 }
 li.selectOrder ul li a:hover {
 	border: 0;
 	background: #EFF2F9;
 	text-decoration: none;
+}
+.clrL {
+	clear: left;
+}
+.clrR {
+	clear: right;
+}
+.clrLR {
+	clear: both;
 }

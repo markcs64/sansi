@@ -14,6 +14,9 @@
 		} else if (typeof(p) == "object" && typeof(p.length) == "number") {
 			for (var i = 0, l = p.length; i < l; i ++)
 				this.items.push(p[i]);
+		} else if (typeof(p) == "object") {
+			for (var k in p)
+				this.items.push(p[k]);
 		} else {
 			this.items.push(p);
 		}
