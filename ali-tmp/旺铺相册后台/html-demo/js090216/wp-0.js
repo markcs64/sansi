@@ -10,7 +10,8 @@ var $Y = YAHOO.util,
 function BTN902(o) {
 	this.ob = typeof(o) == "string" ? YAHOO.util.Dom.get(o) : o;
 	this.a = YAHOO.util.Dom.getFirstChild(this.ob);
-	this.charLen = this.ob.innerHTML.replace(/<[^>]*?>/g, "").length;
+	this.text = this.ob.innerHTML.replace(/<[^>]*?>/g, "");
+	this.charLen = this.text.length;
 	this.width = 0;
 	this.disabled = false;
 	this.callback = null;
@@ -312,33 +313,40 @@ function g_imgMaxSize(img, maxWidth, maxHeight) {
 	}
 }
 
-function $W(p) {
-	return new $W.p.cls(p);
-}
-
-$W.p = {
-	cls: function (p) {
+(function () {
+	var oj = function (p) {
+		return new oj.cls(p);
+	};
+	
+	oj.$ = function (p) { return document.getElementById(p); };
+	
+	oj.cls = function (p) {
 		this.items = [];
 		if (typeof(p) == "string") {
-			this.items.push($(p));
+			this.items.push(oj.$(p));
 		} else if (typeof(p) == "object" && typeof(p.length) == "number") {
 			for (var i = 0, l = p.length; i < l; i ++)
 				this.items.push(p[i]);
+		} else if (typeof(p) == "object") {
+			for (var k in p)
+				this.items.push(p[k]);
 		} else {
 			this.items.push(p);
 		}
-	}
-}
-
-$W.p.cls.prototype = {
-	each: function (f) {
-		var args = [];
-		for (var i = 1, l = arguments.length; i < l; i ++) {
-			args.push(arguments[i]);
+	};
+	
+	oj.cls.prototype = {
+		each: function (f) {
+			var args = [];
+			for (var i = 1, l = arguments.length; i < l; i ++) {
+				args.push(arguments[i]);
+			}
+			for (i = 0, l = this.items.length; i < l; i ++) {
+				f.apply(this.items[i], args);
+			}
+			return this;
 		}
-		for (i = 0, l = this.items.length; i < l; i ++) {
-			f.apply(this.items[i], args);
-		}
-		return this;
 	}
-};
+	
+	$J = oj;
+})();

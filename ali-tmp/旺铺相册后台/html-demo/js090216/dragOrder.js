@@ -4,6 +4,7 @@ var $DD = {
 	container: null,
 	items: [],
 	order0: [],
+	saveBtns: [],
 	init: function (arr) {
 		$DD.container = $("orderItems");
 		for (var i = 0, l = arr.length; i < l; i ++) {
@@ -11,16 +12,48 @@ var $DD = {
 		}
 		$DD.show();
 		$DD.app.init();
+		$J($DD.container.getElementsByTagName("img")).each(function () {
+			g_imgMaxSize(this, 64, 64);
+			$D.setStyle(this, "margin", (64 - this.offsetHeight) / 2 + "px 0");
+		});
+
+		$D.getElementsByClassName("resetOrder", "a", "main_right_body", function (o) {
+			o.onclick = function () {
+				$DD.resetOrder();
+				return false;
+			};
+		});
+		$J(BTN902.btns).each(function () {
+			if (this.text == "±£´æË³Ðò") {
+				$DD.saveBtns.push(this);
+				this.disable(1);
+			}
+			this.on("click", $DD.saveOrder);
+		});
 	},
 	show: function () {
 		for (var i = 0, l = $DD.items.length; i < l; i ++) {
 			$DD.container.appendChild($DD.items[i].ob);
 		}
 	},
+	saveOrder: function () {
+		var od = [],
+		obs = $D.getElementsByClassName("itemWrapper", "div", $("orderItems"), function (o) {
+			od.push(o.id.substring(8));
+		});
+		alert("±£´æË³Ðò\n\n" + od.join(", "));
+	},
+	resetOrder: function () {
+		var ul = $("orderItems");
+		for (var i = 0, l = $DD.order0.length; i < l; i ++) {
+			ul.appendChild($DD.order0[i]);
+		}
+		$J($DD.saveBtns).each(function () { this.disable(1); });
+	},
 	item: function (ob) {
 		this.id = ob.id;
 		this.ob = mkEl("li", {className: "item"});
-		this.ob.innerHTML = "<div class=\"itemWrapper\"><img src=\""
+		this.ob.innerHTML = "<div id=\"dd-item-" + this.id + "\" class=\"itemWrapper\"><img src=\""
 			+ (ob.cover || ob.src) + "\" />"
 			+ (ob.title ? "<div class=\"title\">" + ob.title + "</div>" : "")
 			+ "</div>";
@@ -47,7 +80,9 @@ var $DD = {
 	list: function (id, sGroup, config) {
 		$DD.list.superclass.constructor.call(this, id, sGroup, config);
 		var el = this.getDragEl();
-		$D.setStyle(el, "opacity", 0.67);
+		//$D.setStyle(el, "opacity", 0.8);
+		if ($("photoArea-head"))
+			$D.addClass(el, "photo");
 
 		this.goingUp = true;
 		this.lastY = 0;
@@ -60,10 +95,14 @@ YAHOO.extend($DD.list, $Y.DDProxy, {
 		var clickEl = this.getEl();
 		$D.addClass(dragEl, "item");
 		//$D.setStyle(clickEl, "visibility", "hidden");
-		dragEl.innerHTML = clickEl.innerHTML;
+		dragEl.innerHTML = "<div class=\"wrapper\"><div id=\"dragHand\"></div>" + clickEl.innerHTML + "</div>";
+		$D.getElementsByClassName("itemWrapper", "div", dragEl, function (o) {
+			$D.setStyle(o, "opacity", 0.8);
+		});
 		//$D.setStyle(dragEl, "color", $D.getStyle(clickEl, "color"));
 		//$D.setStyle(dragEl, "backgroundColor", $D.getStyle(clickEl, "backgroundColor"));
-		$D.setStyle(dragEl, "border", "2px solid gray");
+		//$D.setStyle(dragEl, "border", "2px solid gray");
+		$D.setStyle(clickEl, "border", "1px solid #A0B6E8");
 	},
 	endDrag: function (e) {
 		var srcEl = this.getEl();
@@ -88,6 +127,8 @@ YAHOO.extend($DD.list, $Y.DDProxy, {
 			$D.setStyle(thisId, "visibility", "");
 		});
 		a.animate();
+		$J($DD.saveBtns).each(function () { this.disable(0); });
+		$D.setStyle(srcEl, "border", "1px solid #fff");
 	},
 	onDragDrop: function (e, id) {
 		if ($Y.DragDropMgr.interactionInfo.drop.length === 1) {
@@ -115,7 +156,9 @@ YAHOO.extend($DD.list, $Y.DDProxy, {
 		var srcEl = this.getEl();
 		var destEl = $(id);
 		var a;
-		if (this.vars.onEl != destEl) {
+		if (destEl.tagName.toLowerCase() == "li" && 
+				destEl.className == "item" && 
+				this.vars.onEl != destEl) {
 			$D.setStyle(this.vars.onEl, "margin-left", "0");
 			/*a = new $Y.Anim(this.vars.onEl, {
 				marginLeft: {to: 0}
@@ -137,7 +180,7 @@ YAHOO.extend($DD.list, $Y.DDProxy, {
 			}
 			$Y.DragDropMgr.refreshCache();
 		}
-		a.animate();
+		//a.animate();
 	},
 	vars: {
 		onEl: null

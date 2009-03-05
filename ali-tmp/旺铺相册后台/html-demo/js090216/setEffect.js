@@ -19,7 +19,7 @@ var $Tab = {
 			$D.getElementsByClassName("tabBody")[0], function (o) {
 				$Tab.tabBodys.push(o);
 			});
-		$W($("effectList").getElementsByTagName("a")).each(function () {
+		$J($("effectList").getElementsByTagName("a")).each(function () {
 			this.onclick = function () {this.blur();return false;}
 		});
 	},
@@ -27,14 +27,14 @@ var $Tab = {
 	tabItems: [],
 	tabBodys: [],
 	select: function () {
-		$W($Tab.tabItems).each(function () {
+		$J($Tab.tabItems).each(function () {
 			$D.removeClass(this, "selected");
 		});
 		$D.addClass(this, "selected");
 		for (var i = 0; i < $Tab.tabItems.length; i ++) {
 			if ($Tab.tabItems[i] == this) $Tab.curIdx = i;
 		}
-		$W($Tab.tabBodys).each(function () {
+		$J($Tab.tabBodys).each(function () {
 			$D.removeClass(this, "selected");
 		});
 		$D.addClass($Tab.tabBodys[$Tab.curIdx], "selected");
@@ -42,7 +42,7 @@ var $Tab = {
 };
 
 function initStars() {
-	$W($D.getElementsByClassName("effect-stars")).each(function () {
+	$J($D.getElementsByClassName("effect-stars")).each(function () {
 		var v = parseInt(this.innerHTML) || 0,
 			html = "";
 		for (var i = 1; i <= 5; i ++) {
