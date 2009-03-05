@@ -33,14 +33,16 @@ function WP_Photo_Li(ob) {
 
 WP_Photo_Li.prototype = {
 	showAct: function () {
-		clearTimeout(this._tm);
-		var anim = new $Y.Anim(this.infoBar, {
+		//clearTimeout(this._tm);
+		$D.addClass(this.ob, "hover");
+		/*var anim = new $Y.Anim(this.infoBar, {
 			height: {to: 20}
 		}, 0.2);
-		anim.animate();
+		anim.animate();*/
 	},
 	hideAct: function () {
-		var _this;
+		$D.removeClass(this.ob, "hover");
+		/*var _this;
 		var anim = new $Y.Anim(this.infoBar, {
 			height: {to: 0}
 		}, 0.2);
@@ -48,7 +50,7 @@ WP_Photo_Li.prototype = {
 		clearTimeout(this._tm);
 		this._tm = setTimeout(function () {
 			anim.animate();
-		}, 200);
+		}, 200);*/
 	},
 	chkSelect: function () {
 		if (!this.chkbox.checked) {
@@ -60,15 +62,16 @@ WP_Photo_Li.prototype = {
 	setAsCover: function () {
 		var img = $("albumCoverPhoto").getElementsByTagName("img")[0];
 		img.src = this.img.src;
-		var w = this.img.width,
-			h = this.img.height;
-		if (w > h) {
-			$D.setStyle(img, "width", "100px");
-			$D.setStyle(img, "height", Math.floor(h * 100 / 64) + "px");
+		var w = this.img.offsetWidth,
+			h = this.img.offsetHeight;
+		if (w >= h) {
+			$D.setStyle(img, "width", "108px");
+			$D.setStyle(img, "height", Math.floor(h * 108 / 64) + "px");
 		} else {
-			$D.setStyle(img, "width", Math.floor(w * 100 / 64) + "px");
-			$D.setStyle(img, "height", "100px");
+			$D.setStyle(img, "width", Math.floor(w * 125 / 64) + "px");
+			$D.setStyle(img, "height", "125px");
 		}
+		//g_imgMaxSize(img, 108, 125);
 		alert("设为封面...");
 
 		// 发送Ajax请求...

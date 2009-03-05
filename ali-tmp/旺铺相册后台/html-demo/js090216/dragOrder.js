@@ -54,7 +54,7 @@ var $DD = {
 		this.id = ob.id;
 		this.ob = mkEl("li", {className: "item"});
 		this.ob.innerHTML = "<div id=\"dd-item-" + this.id + "\" class=\"itemWrapper\"><img src=\""
-			+ (ob.cover || ob.src) + "\" />"
+			+ (ob.cover || ob.src || "img090216/no_photo.gif") + "\" />"
 			+ (ob.title ? "<div class=\"title\">" + ob.title + "</div>" : "")
 			+ "</div>";
 
@@ -109,7 +109,8 @@ YAHOO.extend($DD.list, $Y.DDProxy, {
 		var proxy = this.getDragEl();
 
 		this.vars.onEl.parentNode.insertBefore(srcEl, this.vars.onEl);
-		$D.setStyle(this.vars.onEl, "margin-left", "0");
+		//$D.setStyle(this.vars.onEl, "margin-left", "0");
+		$D.removeClass(this.vars.onEl, "target");
 		$D.setStyle(proxy, "visibility", "");
 		var a = new $Y.Motion(
 			proxy, {
@@ -159,7 +160,8 @@ YAHOO.extend($DD.list, $Y.DDProxy, {
 		if (destEl.tagName.toLowerCase() == "li" && 
 				destEl.className == "item" && 
 				this.vars.onEl != destEl) {
-			$D.setStyle(this.vars.onEl, "margin-left", "0");
+			//$D.setStyle(this.vars.onEl, "margin-left", "0");
+			$D.removeClass(this.vars.onEl, "target");
 			/*a = new $Y.Anim(this.vars.onEl, {
 				marginLeft: {to: 0}
 			}, 0.2);
@@ -171,7 +173,8 @@ YAHOO.extend($DD.list, $Y.DDProxy, {
 			var p = destEl.parentNode;
 			if (this.goingUp) {
 				//p.insertBefore(srcEl, destEl);
-				$D.setStyle(destEl, "margin-left", "10px");
+				//$D.setStyle(destEl, "margin-left", "10px");
+				$D.addClass(this.vars.onEl, "target");
 				/*a = new $Y.Anim(destEl, {
 					marginLeft: {to: 10}
 				}, 0.1);*/

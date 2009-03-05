@@ -68,6 +68,9 @@
 	height: 0;
 	overflow: hidden;
 }
+.album .hover .cover .operation {
+	height: 20px;
+}
 .album .cover .operation a {
 	color: #00f;
 	padding: 0 5px 0 15px;
@@ -117,7 +120,8 @@ span.datetime {
 	font-family: Arial;
 }
 span.lock {
-	padding-left: 25px;
+	padding-left: 23px;
+	margin-left: 5px;
 	background: transparent url(img090216/lock.png) no-repeat 8px 50%;
 	/*_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img090216/lock.png',sizingMethod='crop');
 	_background: none;*/

@@ -43,6 +43,8 @@ WP_Album.prototype = {
 		if (this.cover == "") $D.addClass(tmp, "no-photo");
 		this._ob_cover.appendChild(tmp);
 		this._ob_operation = mkEl("div", {className: "operation"});
+		/*if (this.type == 1)
+			$D.addClass(this.ob, "clrL");*/
 		if (this.type <= 1)
 			this._ob_cover.appendChild(this._ob_operation);
 		tmp = mkEl("a", {className: "ope-edit"});
@@ -91,18 +93,11 @@ WP_Album.prototype = {
 		};
 	},
 	resizeCover: function () {
-		var w = this._ob_cover_img.width,
-			h = this._ob_cover_img.height;
-
-		if (w >= h) {
-			h = Math.floor(h * 100 / w);
-			$D.setStyle(this._ob_cover_img, "width", "100px");
-			$D.setStyle(this._ob_cover_img, "height", h + "px");
-			$D.setStyle(this._ob_cover_img, "margin-top", Math.floor(62.5 - h / 2) + "px");
+		var wh = g_imgMaxSize(this._ob_cover_img, 108, 125);
+		if (wh[0] >= wh[1]) {
+			$D.setStyle(this._ob_cover_img, "margin-top", Math.floor(60 - wh[1] / 2) + "px");
 		} else {
-			$D.setStyle(this._ob_cover_img, "width", Math.floor(w * 100 / h) + "px");
-			$D.setStyle(this._ob_cover_img, "height", "100px");
-			$D.setStyle(this._ob_cover_img, "margin-top", "12px");
+			$D.setStyle(this._ob_cover_img, "margin-top", "2px");
 		}
 	},
 	hover: function () {
@@ -111,20 +106,20 @@ WP_Album.prototype = {
 		if (this._tm_operation)
 			clearTimeout(this._tm_operation);
 		
-		var anim = new $Y.Anim(this._ob_operation, {
+		/*var anim = new $Y.Anim(this._ob_operation, {
 			height: {to: 20}
 		}, 0.2);
-		anim.animate();
+		anim.animate();*/
 	},
 	unhover: function () {
 		if (this.state == "selected") return;
 		this._chgState("normal");
-		var anim = new $Y.Anim(this._ob_operation, {
+		/*var anim = new $Y.Anim(this._ob_operation, {
 			height: {to: 0}
 		}, 0.2);
 		this._tm_operation = setTimeout(function () {
 			anim.animate();
-		}, 500);
+		}, 100);*/
 	},
 	select: function () {
 		WP_Album.select(this);

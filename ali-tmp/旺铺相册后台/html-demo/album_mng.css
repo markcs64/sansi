@@ -184,6 +184,9 @@ span.albumInfo-act {
 	overflow: hidden;
 	line-height: 20px;
 }
+#photoList ul li.hover .photo .info {
+	height: 20px;
+}
 #photoArea .albumNoPhoto {
 	margin: 10px 10px 20px 3px;
 	font-size: 14px;
