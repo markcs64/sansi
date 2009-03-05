@@ -91,6 +91,7 @@
 #rcmdAlbum table.album {
 	width: 137px;
 	background: url(img090216/album.gif) no-repeat 50% 50%;
+	text-align: center;
 }
 #rcmdAlbum table.album tr {
 	height: 157px;

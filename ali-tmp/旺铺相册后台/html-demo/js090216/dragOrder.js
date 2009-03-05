@@ -49,7 +49,7 @@ var $DD = {
 		var el = this.getDragEl();
 		$D.setStyle(el, "opacity", 0.67);
 
-		this.goingUp = false;
+		this.goingUp = true;
 		this.lastY = 0;
 	}
 };
@@ -61,8 +61,8 @@ YAHOO.extend($DD.list, $Y.DDProxy, {
 		$D.addClass(dragEl, "item");
 		//$D.setStyle(clickEl, "visibility", "hidden");
 		dragEl.innerHTML = clickEl.innerHTML;
-		$D.setStyle(dragEl, "color", $D.getStyle(clickEl, "color"));
-		$D.setStyle(dragEl, "backgroundColor", $D.getStyle(clickEl, "backgroundColor"));
+		//$D.setStyle(dragEl, "color", $D.getStyle(clickEl, "color"));
+		//$D.setStyle(dragEl, "backgroundColor", $D.getStyle(clickEl, "backgroundColor"));
 		$D.setStyle(dragEl, "border", "2px solid gray");
 	},
 	endDrag: function (e) {
