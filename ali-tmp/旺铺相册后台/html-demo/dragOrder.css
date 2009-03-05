@@ -41,6 +41,7 @@
 #orderArea {
 	margin: 20px 0;
 	background: #ffc;
+	width: 763px;
 	overflow: hidden;
 }
 ul#orderItems {
