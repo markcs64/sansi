@@ -69,6 +69,8 @@ YAHOO.extend($DD.list, $Y.DDProxy, {
 		var srcEl = this.getEl();
 		var proxy = this.getDragEl();
 
+		this.vars.onEl.parentNode.insertBefore(srcEl, this.vars.onEl);
+		$D.setStyle(this.vars.onEl, "margin-left", "0");
 		$D.setStyle(proxy, "visibility", "");
 		var a = new $Y.Motion(
 			proxy, {
@@ -112,16 +114,33 @@ YAHOO.extend($DD.list, $Y.DDProxy, {
 	onDragOver: function (e, id) {
 		var srcEl = this.getEl();
 		var destEl = $(id);
+		var a;
+		if (this.vars.onEl != destEl) {
+			$D.setStyle(this.vars.onEl, "margin-left", "0");
+			/*a = new $Y.Anim(this.vars.onEl, {
+				marginLeft: {to: 0}
+			}, 0.2);
+			a.animate();*/
+			this.vars.onEl = destEl;
+		}
 		if (destEl.nodeName.toLowerCase() == "li") {
 			var orig_p = srcEl.parentNode;
 			var p = destEl.parentNode;
 			if (this.goingUp) {
-				p.insertBefore(srcEl, destEl);
+				//p.insertBefore(srcEl, destEl);
+				$D.setStyle(destEl, "margin-left", "10px");
+				/*a = new $Y.Anim(destEl, {
+					marginLeft: {to: 10}
+				}, 0.1);*/
 			} else {
 				p.insertBefore(srcEl, destEl.nextSibling);
 			}
 			$Y.DragDropMgr.refreshCache();
 		}
+		a.animate();
+	},
+	vars: {
+		onEl: null
 	}
 });
 
