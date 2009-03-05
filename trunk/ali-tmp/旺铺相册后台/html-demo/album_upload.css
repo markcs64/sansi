@@ -295,6 +295,7 @@ div#upload-step3 li.wp-gotopage {
 	+float: left;
 	+clear: both;
 	+width: 99%;
+	_width: 97%;
 }
 #uploadMainInfo ul li.ready {
 	background: url(img090216/fileUp-process-bar.png) no-repeat 0 0;

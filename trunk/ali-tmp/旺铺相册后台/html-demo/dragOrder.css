@@ -29,7 +29,7 @@
 .orderOperation ul li {
 	padding-right: 10px;
 }
-.orderOperation a.reset {
+.orderOperation a.resetOrder {
 	background: url(img090216/2004112.gif) no-repeat;
 	padding-left: 20px;
 }
@@ -40,32 +40,75 @@
 }
 #orderArea {
 	margin: 20px 0;
-	background: #ffc;
 	width: 763px;
 	overflow: hidden;
 }
 ul#orderItems {
 	width: 780px;
-	background: #fcc;
 }
 #ygddfdiv,
 ul#orderItems li.item {
 	float: left;
 	width: 12%;
-	height: 100px;
+	height: 115px;
 	overflow: hidden;
 	text-align: center;
-	background: #f33;
+	border: solid 1px #fff;
 }
 #ygddfdiv div.itemWrapper,
 ul#orderItems li.item div.itemWrapper {
-	width: 85px;
-	height: 85px;
-	margin: 0 auto;
-	border: solid 1px #999;
+	width: 92px;
+	height: 100px;
 	overflow: hidden;
 	cursor: pointer;
+	background: url(img090216/album_small.png) no-repeat 50% 0;
+	+background-image: url(img090216/album_small.gif);
+	margin: 0 auto;
+	padding: 10px 0 0 0;
 }
-#dd-proxy {
-	background: #000;
+#ygddfdiv div.itemWrapper div.title,
+ul#orderItems li.item div.title {
+	height: 14px;
+	overflow: hidden;
+	margin-top: 15px;
+}
+#ygddfdiv {
+	border: 0 !important;
+	padding-top: 5px;
+	margin-top: -5px;
+}
+
+/* photo order */
+#photoArea #orderArea {
+	margin: 0 0 0 5px;
+	width: 720px;
+}
+#photoArea ul#orderItems {
+	width: 725px;
+}
+#photoArea ul#orderItems li.item {
+	height: 90px;
+}
+div.photo div.wrapper div.itemWrapper,
+#photoArea ul#orderItems li.item div.itemWrapper {
+	background: url(img090216/photo_bg.png) no-repeat 2px 7px !important;
+	width: 74px !important;
+}
+
+/* hand */
+#ygddfdiv .wrapper {
+	position: relative;
+}
+#ygddfdiv .wrapper #dragHand {
+	position: absolute;
+	width: 15px;
+	height: 12px;
+	top: -4px;
+	right: 20px;
+	z-index: 1001;
+	background: transparent url(img090216/6005812.gif) no-repeat;
+}
+div.photo div.wrapper #dragHand {
+	top: 0px !important;
+	right: 20px !important;
 }
