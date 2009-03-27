@@ -10,7 +10,9 @@ var park = {
 	init: function () {
 		park.ga = new GA({
 			lifeCount: g_lifeCount,
-			geneLength: 41 * 10
+			geneLength: 41 * 15,
+			xRate: parseFloat($("#xRate").val()) || 0.7,
+			mutationRate: parseFloat($("#mutationRate").val()) || 0.005
 		});
 		var canvas;
 		for (var i = 0; i < g_lifeCount; i ++) {
@@ -40,8 +42,8 @@ var park = {
 	},
 	drawOne: function (canvas, gene) {
 		var i, l = gene.length;
-		for (i = 0; i < l; i += 50) {
-			park.drawOneClip(canvas, gene.substr(i, 50));
+		for (i = 0; i < l; i += 41) {
+			park.drawOneClip(canvas, gene.substr(i, 41));
 		}
 	},
 	drawOneClip: function (canvas, geneClip) {
@@ -122,5 +124,19 @@ $(document).ready(function () {
 		$(this).val("重新开始");
 	});
 
-	$("#showHistory").toggle(park.showHistory, park.hideHistory);
+	$("#xRate").change(function () {
+		var v = parseFloat($(this).val()) || 0.7;
+		park.ga.xRate = v;
+		$(this).val(v);
+	});
+
+	$("#mutationRate").change(function () {
+		var v = parseFloat($(this).val()) || 0.005;
+		park.ga.mutationRate = v;
+		$(this).val(v);
+	});
+
+	$("#showHistory").toggle(park.showHistory, park.hideHistory).click(function () {
+		$(this).blur();
+	});
 });
