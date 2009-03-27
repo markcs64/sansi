@@ -6,9 +6,10 @@
 	GA = function (params) {
 		if (!params) params = {};
 		this.xRate = params.xRate || 0.7;
-		this.x
 		this.mutationRate = params.mutationRate || 0.005;
 		this.generation = 0;
+		this.liveCount = params.lives || 50;
+		this.geneLength = params.geneLength || 100;
 	};
 
 	GA.prototype = {
@@ -24,4 +25,7 @@
 		} else {
 		}
 	};
+
+	GA.Life.prototype = {
+	}
 })();

@@ -3,7 +3,10 @@
  *
  */
 
+var ga;
+
 var park = {
+	ga: null,
 	init: function () {
 		var canvas;
 		for (var i = 0; i < 9; i ++) {
@@ -14,6 +17,7 @@ var park = {
 			park.cells.push(canvas);
 			canvas.show();
 		}
+		park.ga = ga = new GA();
 	},
 	cells: []
 };
