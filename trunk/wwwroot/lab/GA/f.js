@@ -10,7 +10,7 @@ var park = {
 	init: function () {
 		park.ga = new GA({
 			lifeCount: g_lifeCount,
-			geneLength: 41 * 15,
+			geneLength: 41 * 10,
 			xRate: parseFloat($("#xRate").val()) || 0.7,
 			mutationRate: parseFloat($("#mutationRate").val()) || 0.005
 		});
