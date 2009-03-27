@@ -5,7 +5,7 @@
 (function () {
 	GA = function (params) {
 		if (!params) params = {};
-		this.xRate = params.xRate || 0.7;
+		this.xRate = params.xRate || 0.9;
 		this.mutationRate = params.mutationRate || 0.005;
 		this.mutationCount = 0;
 		this.generation = 0;
@@ -28,6 +28,8 @@
 			if (r < this.xRate) {
 				r = Math.floor(Math.random() * this.geneLength);
 				gene = p1.gene.substr(0, r) + p2.gene.substr(r);
+			} else {
+				gene = p1.gene;
 			}
 			r = Math.random();
 			if (r < this.mutationRate) {

@@ -10,7 +10,7 @@ var park = {
 	init: function () {
 		park.ga = new GA({
 			lifeCount: g_lifeCount,
-			geneLength: 41 * 50
+			geneLength: 41 * 10
 		});
 		var canvas;
 		for (var i = 0; i < g_lifeCount; i ++) {
