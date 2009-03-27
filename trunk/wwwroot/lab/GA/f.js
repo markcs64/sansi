@@ -21,6 +21,9 @@ var park = {
 			park.cells.push(canvas);
 			canvas.show();
 		}
+		park.draw();
+		park.updateInfo(0);
+		park.hideHistory();
 	},
 	busy: true,
 	cells: [],
@@ -57,6 +60,15 @@ var park = {
 		park.ga.lives[i].addScore(reward);
 		$("#reward").val(reward);
 	},
+	updateInfo: function (t0) {
+		t1 = new Date();
+		if (!t0) t0 = t1;
+		$("#gen").html(park.ga.generation.toString());
+		$("#mutation").html(park.ga.mutationCount.toString());
+		$("#time").html(Math.floor(t1 - t0).toString());
+		park.busy = false;
+		$("#park ul li").removeClass("selected");
+	},
 	next: function (i) {
 		var processInfo = $("#process").html();
 		park.busy = true;
@@ -65,18 +77,31 @@ var park = {
 		park.ga.next();
 		park.draw();
 
-		t1 = new Date();
-		$("#gen").html(park.ga.generation);
-		$("#mutation").html(park.ga.mutationCount.toString());
-		$("#time").html(Math.floor(t1 - t0));
-		park.busy = false;
-		$("#park ul li").removeClass("selected");
+		park.updateInfo(t0);
+	},
+	showHistory: function () {
+		$("#bestHistory").html("").css("height", Math.floor(park.ga.bestHistory.length / 5 + 0.99) * 140 + 10 + "px").slideDown();
+		for (var li, i = 0, l = park.ga.bestHistory.length, ul = $("#bestHistory")[0], canvas; i < l; i ++) {
+			li = document.createElement("li");
+			ul.appendChild(li);
+			canvas = new drjs.Canvas({
+					width: 128,
+					height: 128
+				}, li);
+			canvas.show();
+			park.drawOne(canvas, park.ga.bestHistory[i].gene);
+			canvas.draw("string", [i], 2, 2, "#f00");
+		}
+		$("#showHistory").html("隐藏进化历史");
+	},
+	hideHistory: function () {
+		$("#bestHistory").html("").slideUp("slow", function () {
+			$("#showHistory").html("显示进化历史");
+		});
 	}
 };
 
 $(document).ready(function () {
-	park.init();
-
 	$("#park ul li").mouseover(function () {
 		$(this).addClass("hover");
 	}).mouseout(function () {
@@ -92,8 +117,10 @@ $(document).ready(function () {
 	});
 
 	$("#start").click(function () {
-		setTimeout(park.draw, 1);
-		this.disabled = true;
+		setTimeout(park.init, 1);
 		park.busy = false;
+		$(this).val("重新开始");
 	});
+
+	$("#showHistory").toggle(park.showHistory, park.hideHistory);
 });
