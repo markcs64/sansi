@@ -5,7 +5,7 @@
 (function () {
 	GA = function (params) {
 		if (!params) params = {};
-		this.xRate = params.xRate || 0.9;
+		this.xRate = params.xRate || 0.7;
 		this.mutationRate = params.mutationRate || 0.005;
 		this.mutationCount = 0;
 		this.generation = 0;
