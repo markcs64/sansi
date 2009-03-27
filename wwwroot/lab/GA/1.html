@@ -21,6 +21,14 @@
 
 <body id="GA-test">
 	<div id="wrapper">
+		<div id="operation">
+			<p class="btn"><input type="button" value="开始" id="start" /></p>
+			<p class="btn">每次被选中的图形 +<input type="text" value="2" id="reward" size="2" /> 分</p>
+			<p class="info">当前第 <span id="gen">0</span> 代</p>
+			<p class="info">共产生了 <span id="mutation">0</span> 次变异</p>
+			<p class="info">从上一代到当前代耗时 <span id="time">0</span> 毫秒</p>
+		</div>
+
 		<div id="park">
 			<ul>
 				<li id="cell-0"></li>
