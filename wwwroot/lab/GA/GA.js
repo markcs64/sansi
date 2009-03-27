@@ -13,6 +13,7 @@
 		this.lives = [];
 		this.lifeCount = params.lifeCount || 50;
 		this.geneLength = params.geneLength || 100;
+		this.bestHistory = [];
 
 		this.init();
 	};
@@ -49,8 +50,11 @@
 		},
 		_getBounds: function () {
 			this.bounds = 0;
-			for (var i = 0; i < this.lifeCount; i ++)
+			this.best = {score: -1};
+			for (var i = 0; i < this.lifeCount; i ++) {
+				if (this.lives[i].score > this.best.score) this.best = this.lives[i];
 				this.bounds += this.lives[i].score;
+			}
 		},
 		_newChild: function () {
 			return this._bear(this._getOne(), this._getOne());
@@ -58,6 +62,7 @@
 		next: function () {
 			var newLives = [], i;
 			this._getBounds();
+			this.bestHistory.push(this.best);
 			while (newLives.length < this.lifeCount) {
 				newLives.push(this._newChild());
 			}
