@@ -20,6 +20,10 @@ p, h1, h2, h3, h4, h5, h6, ul, li {
 	background: #f5f5f5;
 	border: solid 1px #999;
 }
+#GA-test2 #park {
+	width: 710px;
+	height: 710px;
+}
 #park ul,
 ul#bestHistory {
 	margin: 0;
@@ -47,6 +51,9 @@ ul#bestHistory li {
 	position: absolute;
 	left: 460px;
 	margin: 20px 0;
+}
+#GA-test2 #operation {
+	left: 740px;
 }
 #operation p.btn {
 	margin-bottom: 10px;

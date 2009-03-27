@@ -3,7 +3,7 @@
  *
  */
 
-var g_lifeCount = 9;
+var g_lifeCount = 0;
 
 var park = {
 	ga: null,
@@ -67,7 +67,7 @@ var park = {
 		if (!t0) t0 = t1;
 		$("#gen").html(park.ga.generation.toString());
 		$("#mutation").html(park.ga.mutationCount.toString());
-		$("#time").html(Math.floor(t1 - t0).toString());
+		$("#time").html((Math.floor(t1 - t0) / 1000).toString());
 		park.busy = false;
 		$("#park ul li").removeClass("selected");
 	},
@@ -104,6 +104,10 @@ var park = {
 };
 
 $(document).ready(function () {
+	g_lifeCount = $("#park ul li").length;
+
+	$("#reward").val(Math.ceil(Math.sqrt(g_lifeCount) - 1));
+
 	$("#park ul li").mouseover(function () {
 		$(this).addClass("hover");
 	}).mouseout(function () {
