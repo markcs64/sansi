@@ -49,8 +49,8 @@ def evolve():
         if steps == 0:
             print("退出...")
             return
-        if steps < 0 or steps > 10000:
-            print("输入的数字应在1 ~ 10000之间！")
+        if steps < 0 or steps > 1000000:
+            print("输入的数字应在1 ~ 1000000之间！")
             evolve()
             return
     except:
