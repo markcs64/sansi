@@ -16,7 +16,7 @@ class GA:
     best = None
 
     def __init__(self, xRate, mutationRate, lifeCount, geneLength):
-        self.xRate = xRete
+        self.xRate = xRate
         self.mutationRate = mutationRate
         self.lifeCount = lifeCount
         self.geneLength = geneLength
@@ -29,7 +29,7 @@ class GA:
         r = random.random()
         if r < self.xRate:
             # 交叉
-            r = random.randomint(0, self.geneLength)
+            r = random.randint(0, self.geneLength)
             gene = p1.gene[0:r] + p2.gene[r:]
         else:
             gene = p1.gene
@@ -37,7 +37,7 @@ class GA:
         r = random.random()
         if r < self.mutationRage:
             # 突变
-            r = random.randomint(0, self.geneLength)
+            r = random.randint(0, self.geneLength)
             gene = gene[:r] + ("0", "1")[gene[r:r] == "1"] + gene[r + 1:]
             self.mutationCount += 1
 
