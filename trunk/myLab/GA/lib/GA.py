@@ -15,12 +15,12 @@ class GA:
     bounds = 0  # 得分总数
     best = None
 
-    def __init__(self, xRate = 0.7, mutationRate = 0.005, lifeCount = 50, geneLength = 100, judge = 0):
+    def __init__(self, xRate = 0.7, mutationRate = 0.005, lifeCount = 50, geneLength = 100, judge = lambda lf: 1):
         self.xRate = xRate
         self.mutationRate = mutationRate
         self.lifeCount = lifeCount
         self.geneLength = geneLength
-        self.__judge = (self.__judge, judge)[judge]
+        self.__judge = judge
 
         for i in range(lifeCount):
             self.lives.append(Life(self))
@@ -70,13 +70,13 @@ class GA:
         # 默认评价函数
         return 1
 
-    def judge(self, f = 0):
+    def judge(self, f = lambda lf: 1):
         # 根据传入的方法 f ，计算每个个体的得分
         self.bounds = 0
         self.best = Life(self)
         self.best.setScore(-1)
         for lf in self.lives:
-            lf.score = (self.__judge, f)[f](lf)
+            lf.score = f(lf)
             if lf.score > self.best.score:
                 self.best = lf
             self.bounds += lf.score
