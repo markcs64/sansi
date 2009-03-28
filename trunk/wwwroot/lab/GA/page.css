@@ -81,3 +81,10 @@ ul#bestHistory li {
 	line-height: 12px;
 	color: #f00;
 }
+#tagNotSupport {
+	color: #f00;
+	margin-top: 30px;
+}
+#howToPlay {
+	color: gray;
+}

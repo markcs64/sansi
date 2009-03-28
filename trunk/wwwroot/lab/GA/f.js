@@ -153,6 +153,9 @@ $(document).ready(function () {
 	g_lifeCount = $("#park ul li").length;
 	var canvasTag = document.createElement("canvas");
 	g_canvasTag = !!canvasTag.getContext;
+	if (!g_canvasTag) {
+		$("#tagNotSupport").html("您的浏览器不支持Canvas标签，请使用支持Canvas标签的浏览器（如Firefox 3、Chrome等）浏览本页以获得最佳体验！");
+	}
 
 	$("#reward").val(Math.ceil(Math.sqrt(g_lifeCount) - 1));
 
@@ -173,7 +176,8 @@ $(document).ready(function () {
 	$("#start").click(function () {
 		setTimeout(park.init, 1);
 		park.busy = false;
-		$(this).val("重新开始");
+		$(this).val("重新开始").blur();
+		$("#howToPlay").html("点击左边的方格以选择您觉得最理想的图形..");
 	});
 
 	$("#xRate").change(function () {
