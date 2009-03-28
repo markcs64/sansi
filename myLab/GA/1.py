@@ -2,7 +2,7 @@
 
 from PIL import Image, ImageDraw, ImageMath
 from lib.GA import GA
-import os, time
+import os, time, random
 
 g_xRate = 0.7           # 交叉率
 g_mutationRate = 0.005  # 变异率
@@ -61,7 +61,7 @@ def evolve():
     ga.next(steps)
     
     im1 = draw(ga.best.gene)
-    im1.show()
+    # im1.show()
 
     print("\n")
     evolve()

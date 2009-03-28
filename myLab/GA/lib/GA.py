@@ -89,7 +89,7 @@ class GA:
             newLives.append(self.__newChild())
         self.lives = newLives
         self.generation += 1
-        print("gen: %d, best: %d" % (self.generation, self.best.score))
+        print("gen: %d, mutation: %d, best: %d" % (self.generation, self.mutationCount, self.best.score))
         if self.generation % self.saveEvery == 0:
             self.save(self.best)
 
