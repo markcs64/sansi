@@ -4,6 +4,7 @@
  */
 
 var g_lifeCount = 0,
+	g_geneLength = 55,
 	g_canvasTag = false;
 
 var park = {
@@ -11,7 +12,7 @@ var park = {
 	init: function () {
 		park.ga = new GA({
 			lifeCount: g_lifeCount,
-			geneLength: 41 * 50,
+			geneLength: g_geneLength * 50,
 			xRate: parseFloat($("#xRate").val()) || 0.7,
 			mutationRate: parseFloat($("#mutationRate").val()) || 0.005
 		});
@@ -42,6 +43,7 @@ var park = {
 		if (g_canvasTag) {
 			for (i = 0; i < g_lifeCount; i ++) {
 				ctx = park.cells[i].getContext("2d");
+				ctx.globalAlpha = 1;
 				ctx.fillStyle = "#fff";
 				ctx.fillRect(0, 0, 128, 128);
 			}
@@ -59,8 +61,8 @@ var park = {
 	},
 	drawOne: function (canvas, gene) {
 		var i, l = gene.length;
-		for (i = 0; i < l; i += 41) {
-			park.drawOneClip(canvas, gene.substr(i, 41));
+		for (i = 0; i < l; i += g_geneLength) {
+			park.drawOneClip(canvas, gene.substr(i, g_geneLength));
 		}
 	},
 	drawOneClip: function (canvas, geneClip) {
@@ -69,20 +71,24 @@ var park = {
 			y0 = parseInt(geneClip.substr(7, 7), 2),
 			x1 = parseInt(geneClip.substr(14, 7), 2),
 			y1 = parseInt(geneClip.substr(21, 7), 2),
-			r = parseInt(geneClip.substr(28, 4), 2).toString(16),
-			g = parseInt(geneClip.substr(32, 4), 2).toString(16),
-			b = parseInt(geneClip.substr(36, 4), 2).toString(16),
-			s = parseInt(geneClip.substr(40, 1), 2) + 1;
+			x2 = parseInt(geneClip.substr(28, 7), 2),
+			y2 = parseInt(geneClip.substr(35, 7), 2),
+			r = parseInt(geneClip.substr(42, 4), 2).toString(16),
+			g = parseInt(geneClip.substr(46, 4), 2).toString(16),
+			b = parseInt(geneClip.substr(50, 4), 2).toString(16),
+			s = parseInt(geneClip.substr(54, 1), 2) + 1;
 		if (g_canvasTag) {
 			ctx = canvas.getContext("2d");
-			//ctx.strokeStyle = "#" + r + r + g + g + b + b;
-			ctx.strokeStyle = "#" + r + g + b;
-			ctx.lineWidth = s;
+			ctx.globalAlpha = 0.5;
+			//ctx.strokeStyle = "#" + r + g + b;
+			ctx.fillStyle = "#" + r + g + b;
+			//ctx.lineWidth = s;
 			ctx.beginPath();
 			ctx.moveTo(x0, y0);
 			ctx.lineTo(x1, y1);
+			ctx.lineTo(x2, y2);
 			ctx.closePath();
-			ctx.stroke();
+			ctx.fill();
 		} else {
 			canvas.draw("line", [[x0, y0], [x1, y1]], 0, 0, "#" + r + g + b, 0, s);
 		}
