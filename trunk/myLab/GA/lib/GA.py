@@ -66,10 +66,6 @@ class GA:
         # 产生新的后代
         return self.__bear(self.__getOne(), self.__getOne())
 
-    def __judge(self, lf):
-        # 默认评价函数
-        return 1
-
     def judge(self, f = lambda lf: 1):
         # 根据传入的方法 f ，计算每个个体的得分
         self.bounds = 0
@@ -81,13 +77,17 @@ class GA:
                 self.best = lf
             self.bounds += lf.score
 
-    def next(self):
+    def next(self, n = 1):
         # 演化至下一代
         newLives = []
         # self.__getBounds()
-        self.judge()
+        self.judge(self.__judge)
         self.bestHistory.append(self.best)
         while (len(newLives) < self.lifeCount):
             newLives.append(self.__newChild())
         self.lives = newLives
         self.generation += 1
+        print("gen: %d" % self.generation)
+
+        if n > 1:
+            self.next(n - 1)
