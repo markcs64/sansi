@@ -9,7 +9,6 @@
 		this.mutationRate = params.mutationRate || 0.005;
 		this.mutationCount = 0;
 		this.generation = 0;
-		this.oldLives = [];
 		this.lives = [];
 		this.lifeCount = params.lifeCount || 50;
 		this.geneLength = params.geneLength || 100;
