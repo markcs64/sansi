@@ -12,7 +12,7 @@ var park = {
 	init: function () {
 		park.ga = new GA({
 			lifeCount: g_lifeCount,
-			geneLength: g_geneLength * 50,
+			geneLength: g_geneLength * (g_canvasTag ? 25 : 10),
 			xRate: parseFloat($("#xRate").val()) || 0.7,
 			mutationRate: parseFloat($("#mutationRate").val()) || 0.005
 		});
@@ -43,7 +43,7 @@ var park = {
 		if (g_canvasTag) {
 			for (i = 0; i < g_lifeCount; i ++) {
 				ctx = park.cells[i].getContext("2d");
-				ctx.globalAlpha = 1;
+				//ctx.globalAlpha = 1;
 				ctx.fillStyle = "#fff";
 				ctx.fillRect(0, 0, 128, 128);
 			}
@@ -73,15 +73,15 @@ var park = {
 			y1 = parseInt(geneClip.substr(21, 7), 2),
 			x2 = parseInt(geneClip.substr(28, 7), 2),
 			y2 = parseInt(geneClip.substr(35, 7), 2),
-			r = parseInt(geneClip.substr(42, 4), 2).toString(16),
-			g = parseInt(geneClip.substr(46, 4), 2).toString(16),
-			b = parseInt(geneClip.substr(50, 4), 2).toString(16),
+			r = parseInt(geneClip.substr(42, 4), 2),
+			g = parseInt(geneClip.substr(46, 4), 2),
+			b = parseInt(geneClip.substr(50, 4), 2),
 			s = parseInt(geneClip.substr(54, 1), 2) + 1;
 		if (g_canvasTag) {
 			ctx = canvas.getContext("2d");
-			ctx.globalAlpha = 0.5;
+			//ctx.globalAlpha = 0.5;
 			//ctx.strokeStyle = "#" + r + g + b;
-			ctx.fillStyle = "#" + r + g + b;
+			ctx.fillStyle = "rgba(" + r * 17 + ", " + g * 17 + ", " + b * 17 + ", 0.5)";
 			//ctx.lineWidth = s;
 			ctx.beginPath();
 			ctx.moveTo(x0, y0);
@@ -90,7 +90,7 @@ var park = {
 			ctx.closePath();
 			ctx.fill();
 		} else {
-			canvas.draw("line", [[x0, y0], [x1, y1]], 0, 0, "#" + r + g + b, 0, s);
+			canvas.draw("line", [[x0, y0], [x1, y1]], 0, 0, "#" + r.toString(16) + g.toString(16) + b.toString(16), 0, s);
 		}
 	},
 	addScore: function (i) {
@@ -119,7 +119,7 @@ var park = {
 	},
 	showHistory: function () {
 		$("#bestHistory").html("").css("height", Math.floor(park.ga.bestHistory.length / 5 + 0.99) * 140 + 10 + "px").slideDown();
-		for (var li, i = 0, l = park.ga.bestHistory.length, ul = $("#bestHistory")[0], canvas; i < l; i ++) {
+		for (var li, i = 0, l = park.ga.bestHistory.length, ul = $("#bestHistory")[0], canvas, span; i < l; i ++) {
 			li = document.createElement("li");
 			ul.appendChild(li);
 			if (g_canvasTag) {
@@ -127,6 +127,9 @@ var park = {
 				canvas.setAttribute("width", 128);
 				canvas.setAttribute("height", 128);
 				li.appendChild(canvas);
+				span = document.createElement("span");
+				span.appendChild(document.createTextNode(i));
+				li.appendChild(span);
 			} else {
 				canvas = new drjs.Canvas({
 						width: 128,
