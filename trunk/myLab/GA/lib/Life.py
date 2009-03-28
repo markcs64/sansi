@@ -7,7 +7,7 @@ class Life:
     gene = ""
     score = 0
 
-    def __init__(self, env, gene):
+    def __init__(self, env, gene = ""):
         self.env = env
         self.gene = gene
 
