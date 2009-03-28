@@ -3,25 +3,33 @@
  *
  */
 
-var g_lifeCount = 0;
+var g_lifeCount = 0,
+	g_canvasTag = false;
 
 var park = {
 	ga: null,
 	init: function () {
 		park.ga = new GA({
 			lifeCount: g_lifeCount,
-			geneLength: 41 * 10,
+			geneLength: 41 * 50,
 			xRate: parseFloat($("#xRate").val()) || 0.7,
 			mutationRate: parseFloat($("#mutationRate").val()) || 0.005
 		});
 		var canvas;
 		for (var i = 0; i < g_lifeCount; i ++) {
-			canvas = new drjs.Canvas({
-					width: 128,
-					height: 128
-				}, "cell-" + i);
+			if (g_canvasTag) {
+				canvas = document.createElement("canvas");
+				canvas.setAttribute("width", 128);
+				canvas.setAttribute("height", 128);
+				document.getElementById("cell-" + i).appendChild(canvas);
+			} else {
+				canvas = new drjs.Canvas({
+						width: 128,
+						height: 128
+					}, "cell-" + i);
+				canvas.show();
+			}
 			park.cells.push(canvas);
-			canvas.show();
 		}
 		park.draw();
 		park.updateInfo(0);
@@ -30,8 +38,17 @@ var park = {
 	busy: true,
 	cells: [],
 	clear: function () {
-		for (var i = 0; i < g_lifeCount; i ++) {
-			park.cells[i].clear();
+		var i, ctx;
+		if (g_canvasTag) {
+			for (i = 0; i < g_lifeCount; i ++) {
+				ctx = park.cells[i].getContext("2d");
+				ctx.fillStyle = "#fff";
+				ctx.fillRect(0, 0, 128, 128);
+			}
+		} else {
+			for (i = 0; i < g_lifeCount; i ++) {
+				park.cells[i].clear();
+			}
 		}
 	},
 	draw: function () {
@@ -47,7 +64,8 @@ var park = {
 		}
 	},
 	drawOneClip: function (canvas, geneClip) {
-		var x0 = parseInt(geneClip.substr(0, 7), 2),
+		var ctx,
+			x0 = parseInt(geneClip.substr(0, 7), 2),
 			y0 = parseInt(geneClip.substr(7, 7), 2),
 			x1 = parseInt(geneClip.substr(14, 7), 2),
 			y1 = parseInt(geneClip.substr(21, 7), 2),
@@ -55,7 +73,19 @@ var park = {
 			g = parseInt(geneClip.substr(32, 4), 2).toString(16),
 			b = parseInt(geneClip.substr(36, 4), 2).toString(16),
 			s = parseInt(geneClip.substr(40, 1), 2) + 1;
-		canvas.draw("line", [[x0, y0], [x1, y1]], 0, 0, "#" + r + g + b, 0, s);
+		if (g_canvasTag) {
+			ctx = canvas.getContext("2d");
+			//ctx.strokeStyle = "#" + r + r + g + g + b + b;
+			ctx.strokeStyle = "#" + r + g + b;
+			ctx.lineWidth = s;
+			ctx.beginPath();
+			ctx.moveTo(x0, y0);
+			ctx.lineTo(x1, y1);
+			ctx.closePath();
+			ctx.stroke();
+		} else {
+			canvas.draw("line", [[x0, y0], [x1, y1]], 0, 0, "#" + r + g + b, 0, s);
+		}
 	},
 	addScore: function (i) {
 		var reward = parseInt($("#reward").val()) || 1;
@@ -86,13 +116,20 @@ var park = {
 		for (var li, i = 0, l = park.ga.bestHistory.length, ul = $("#bestHistory")[0], canvas; i < l; i ++) {
 			li = document.createElement("li");
 			ul.appendChild(li);
-			canvas = new drjs.Canvas({
-					width: 128,
-					height: 128
-				}, li);
-			canvas.show();
+			if (g_canvasTag) {
+				canvas = document.createElement("canvas");
+				canvas.setAttribute("width", 128);
+				canvas.setAttribute("height", 128);
+				li.appendChild(canvas);
+			} else {
+				canvas = new drjs.Canvas({
+						width: 128,
+						height: 128
+					}, li);
+				canvas.show();
+				canvas.draw("string", [i], 2, 2, "#f00");
+			}
 			park.drawOne(canvas, park.ga.bestHistory[i].gene);
-			canvas.draw("string", [i], 2, 2, "#f00");
 		}
 		$("#showHistory").html("隐藏进化历史");
 	},
@@ -105,6 +142,8 @@ var park = {
 
 $(document).ready(function () {
 	g_lifeCount = $("#park ul li").length;
+	var canvasTag = document.createElement("canvas");
+	g_canvasTag = !!canvasTag.getContext;
 
 	$("#reward").val(Math.ceil(Math.sqrt(g_lifeCount) - 1));
 
