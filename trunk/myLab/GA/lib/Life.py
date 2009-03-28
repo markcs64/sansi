@@ -14,13 +14,13 @@ class Life:
         if self.gene == "":
             self.__rndGene()
 
-    def __rndGene():
+    def __rndGene(self):
         self.gene = ""
         for i in range(self.env.geneLength):
-            self.gene += str(random.randomint(0, 1))
+            self.gene += str(random.randint(0, 1))
 
-    def setScore(v):
+    def setScore(self, v):
         self.score = v
 
-    def addScore(v):
+    def addScore(self, v):
         self.score += v
