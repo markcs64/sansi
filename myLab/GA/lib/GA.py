@@ -15,14 +15,15 @@ class GA:
     bounds = 0  # 得分总数
     best = None
 
-    def __init__(self, xRate, mutationRate, lifeCount, geneLength):
+    def __init__(self, xRate = 0.7, mutationRate = 0.005, lifeCount = 50, geneLength = 100, judge = 0):
         self.xRate = xRate
         self.mutationRate = mutationRate
         self.lifeCount = lifeCount
         self.geneLength = geneLength
+        self.__judge = (self.__judge, judge)[judge]
 
         for i in range(lifeCount):
-            self.lives.append(Life(self, ""))
+            self.lives.append(Life(self))
 
     def __bear(self, p1, p2):
         # 根据父母 p1, p2 生成一个后代
@@ -35,7 +36,7 @@ class GA:
             gene = p1.gene
 
         r = random.random()
-        if r < self.mutationRage:
+        if r < self.mutationRate:
             # 突变
             r = random.randint(0, self.geneLength)
             gene = gene[:r] + ("0", "1")[gene[r:r] == "1"] + gene[r + 1:]
@@ -51,7 +52,7 @@ class GA:
             if r <= 0:
                 return lf
 
-    def __getBounds(self):
+    """def __getBounds(self):
         # 取得总分及本代中得分最高的个体
         self.bounds = 0
         self.best = Life(self)
@@ -59,18 +60,34 @@ class GA:
         for lf in self.lives:
             if lf.score > self.best.score:
                 self.best = lf
-            self.bounds += lf.score
+            self.bounds += lf.score"""
 
     def __newChild(self):
         # 产生新的后代
         return self.__bear(self.__getOne(), self.__getOne())
 
+    def __judge(self, lf):
+        # 默认评价函数
+        return 1
+
+    def judge(self, f = 0):
+        # 根据传入的方法 f ，计算每个个体的得分
+        self.bounds = 0
+        self.best = Life(self)
+        self.best.setScore(-1)
+        for lf in self.lives:
+            lf.score = (self.__judge, f)[f](lf)
+            if lf.score > self.best.score:
+                self.best = lf
+            self.bounds += lf.score
+
     def next(self):
         # 演化至下一代
         newLives = []
-        self.__getBounds()
+        # self.__getBounds()
+        self.judge()
         self.bestHistory.append(self.best)
-        while (len(a) < self.lifeCount):
+        while (len(newLives) < self.lifeCount):
             newLives.append(self.__newChild())
         self.lives = newLives
         self.generation += 1
