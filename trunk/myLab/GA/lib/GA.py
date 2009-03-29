@@ -80,18 +80,18 @@ class GA:
             self.bounds += lf.score
 
     def next(self, n = 1):
-        # 演化至下一代
-        newLives = []
-        # self.__getBounds()
-        self.judge(self.__judge)
-        # self.bestHistory.append(self.best)
-        while (len(newLives) < self.lifeCount):
-            newLives.append(self.__newChild())
-        self.lives = newLives
-        self.generation += 1
-        print("gen: %d, mutation: %d, best: %d" % (self.generation, self.mutationCount, self.best.score))
-        if self.generation % self.saveEvery == 0:
-            self.save(self.best)
+        # 演化至下n代
+        while n > 0:
+            newLives = []
+            # self.__getBounds()
+            self.judge(self.__judge)
+            # self.bestHistory.append(self.best)
+            while (len(newLives) < self.lifeCount):
+                newLives.append(self.__newChild())
+            self.lives = newLives
+            self.generation += 1
+            print("gen: %d, mutation: %d, best: %d" % (self.generation, self.mutationCount, self.best.score))
+            if self.generation % self.saveEvery == 0:
+                self.save(self.best)
 
-        if n > 1:
-            self.next(n - 1)
+            n -= 1
