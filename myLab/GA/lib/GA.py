@@ -12,7 +12,7 @@ class GA:
     generation = 0
     # bestHistory = []
     lives = []
-    bounds = 0  # å¾—åˆ†æ€»æ•°
+    bounds = 0  # µÃ·Ö×ÜÊı
     best = None
     saveEvery = 1
 
@@ -28,10 +28,10 @@ class GA:
             self.lives.append(Life(self))
 
     def __bear(self, p1, p2):
-        # æ ¹æ®çˆ¶æ¯ p1, p2 ç”Ÿæˆä¸€ä¸ªåä»£
+        # ¸ù¾İ¸¸Ä¸ p1, p2 Éú³ÉÒ»¸öºó´ú
         r = random.random()
         if r < self.xRate:
-            # äº¤å‰
+            # ½»²æ
             r = random.randint(0, self.geneLength)
             gene = p1.gene[0:r] + p2.gene[r:]
         else:
@@ -39,37 +39,27 @@ class GA:
 
         r = random.random()
         if r < self.mutationRate:
-            # çªå˜
-            r = random.randint(0, self.geneLength)
+            # Í»±ä
+            r = random.randint(0, self.geneLength - 1)
             gene = gene[:r] + ("0", "1")[gene[r:r] == "1"] + gene[r + 1:]
             self.mutationCount += 1
 
         return Life(self, gene)
 
     def __getOne(self):
-        # æ ¹æ®å¾—åˆ†æƒ…å†µï¼Œéšæœºå–å¾—ä¸€ä¸ªä¸ªä½“ï¼Œæœºç‡æ­£æ¯”äºä¸ªä½“çš„scoreå±æ€§
+        # ¸ù¾İµÃ·ÖÇé¿ö£¬Ëæ»úÈ¡µÃÒ»¸ö¸öÌå£¬»úÂÊÕı±ÈÓÚ¸öÌåµÄscoreÊôĞÔ
         r = random.uniform(0, self.bounds)
         for lf in self.lives:
             r -= lf.score;
             if r <= 0:
                 return lf
 
-    """def __getBounds(self):
-        # å–å¾—æ€»åˆ†åŠæœ¬ä»£ä¸­å¾—åˆ†æœ€é«˜çš„ä¸ªä½“
-        self.bounds = 0
-        self.best = Life(self)
-        self.best.setScore(-1)
-        for lf in self.lives:
-            if lf.score > self.best.score:
-                self.best = lf
-            self.bounds += lf.score"""
-
     def __newChild(self):
-        # äº§ç”Ÿæ–°çš„åä»£
+        # ²úÉúĞÂµÄºó´ú
         return self.__bear(self.__getOne(), self.__getOne())
 
     def judge(self, f = lambda lf: 1):
-        # æ ¹æ®ä¼ å…¥çš„æ–¹æ³• f ï¼Œè®¡ç®—æ¯ä¸ªä¸ªä½“çš„å¾—åˆ†
+        # ¸ù¾İ´«ÈëµÄ·½·¨ f £¬¼ÆËãÃ¿¸ö¸öÌåµÄµÃ·Ö
         self.bounds = 0
         self.best = Life(self)
         self.best.setScore(-1)
@@ -80,7 +70,7 @@ class GA:
             self.bounds += lf.score
 
     def next(self, n = 1):
-        # æ¼”åŒ–è‡³ä¸‹nä»£
+        # Ñİ»¯ÖÁÏÂn´ú
         while n > 0:
             newLives = []
             # self.__getBounds()
