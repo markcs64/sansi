@@ -5,7 +5,7 @@ from lib.GA import GA
 import os, time, random
 
 g_xRate = 0.7           # 交叉率
-g_mutationRate = 1.905  # 变异率
+g_mutationRate = 0.105  # 变异率
 g_lifeCount = 50        # 个体数
 g_geneClipLength = 3    # 基因片段长度
 g_geneLength = g_geneClipLength * 1024       # 基因长度
@@ -29,14 +29,16 @@ def draw(gene):
 def judge(lf):
     # 判断一个个体的得分
     global g_pix
-    score = 0
+    score = -130
     j = 0
     for i in range(0, len(lf.gene), g_geneClipLength):
         if g_pix[j] == int(lf.gene[i:i + g_geneClipLength], 2) * 32:
             score += 1
         j += 1
 
-    return score
+    if score < 1:
+        score = 1
+    return score ** 2
 
 def evolve():
     # 演化
