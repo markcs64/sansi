@@ -40,6 +40,7 @@ def judge(lf, av):
     if score < 1:
         score = 1
     return score
+
 def evolve():
     # ัÝปฏ
     try:
