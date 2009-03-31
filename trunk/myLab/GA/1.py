@@ -2,7 +2,7 @@
 
 from PIL import Image, ImageDraw, ImageMath
 from lib.GA import GA
-import os, time, random
+import os, time, random, math
 
 g_xRate = 0.7           # 交叉率
 g_mutationRate = 0.105  # 变异率
@@ -26,10 +26,11 @@ def draw(gene):
     del d
     return im
 
-def judge(lf):
+def judge(lf, av):
     # 判断一个个体的得分
+    # av为上一轮迭代的平均得分
     global g_pix
-    score = -130
+    score = -0.9 * av
     j = 0
     for i in range(0, len(lf.gene), g_geneClipLength):
         if g_pix[j] == int(lf.gene[i:i + g_geneClipLength], 2) * 32:
@@ -38,8 +39,7 @@ def judge(lf):
 
     if score < 1:
         score = 1
-    return score ** 2
-
+    return score
 def evolve():
     # 演化
     try:
@@ -76,7 +76,7 @@ def save(lf):
     dir = "sav-" + g_id
     im = draw(lf.gene)
     im.save(dir + "\\" + str(lf.env.generation) + ".png")
-    print("文件已保存到 %s 目录" % dir)
+    # print("文件已保存到 %s 目录" % dir)
 
 def main():
     global ga, g_xRate, g_mutationRate, g_lifeCount, g_geneLength, g_im, g_pix
