@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import random
+import random, math
 from Life import Life
 
 class GA:
@@ -80,7 +80,7 @@ class GA:
                 newLives.append(self.__newChild())
             self.lives = newLives
             self.generation += 1
-            print("gen: %d, mutation: %d, best: %d" % (self.generation, self.mutationCount, self.best.score))
+            print("gen: %d, mutation: %d, best: %d, p: %d" % (self.generation, self.mutationCount, self.best.score, math.sqrt(self.best.score) + 130))
             if (100 < self.generation <= 1000):
                 self.saveEvery = 10
             elif (1000 < self.generation <= 10000):
