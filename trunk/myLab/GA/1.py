@@ -5,10 +5,10 @@ from lib.GA import GA
 import os, time, random
 
 g_xRate = 0.7           # 交叉率
-g_mutationRate = 0.005  # 变异率
-g_lifeCount = 50         # 个体数
-g_geneClipLength = 36   # 基因片段长度
-g_geneLength = g_geneClipLength * 1000       # 基因长度
+g_mutationRate = 1.905  # 变异率
+g_lifeCount = 50        # 个体数
+g_geneClipLength = 3    # 基因片段长度
+g_geneLength = g_geneClipLength * 1024       # 基因长度
 g_id = time.strftime("%y%m%d_%H%M%S", time.localtime(time.time()))
 
 
@@ -16,34 +16,26 @@ def draw(gene):
     # 根据基因生成对应的图形
     global g_geneLength
     # im = Image.new("RGB", (128, 128), (255, 255, 255))
-    im = Image.new("L", (128, 128), 255)
+    im = Image.new("L", (32, 32), 255)
     d = ImageDraw.Draw(im)
-    points = []
-    for i in range(0, len(gene), g_geneClipLength):
-        clip = gene[i:i + g_geneClipLength]
-        p1 = int(clip[0:7], 2), int(clip[7:14], 2)
-        p2 = int(clip[14:21], 2), int(clip[21:28], 2)
-        # rgb = int(clip[28:36], 2), int(clip[36:44], 2), int(clip[44:52], 2)
-        rgb = int(clip[28:36], 2)
-        # d.line(p1 + p2, rgb)
-        d.point(p1, rgb)
-        d.point(p2, rgb)
-        points.append(p1)
-        points.append(p2)
+    for y in range(32):
+        for x in range(32):
+            p = y * 32 + x
+            v = int(gene[p:p + g_geneClipLength], 2) * 32
+            d.point((x, y), v)
     del d
-    return im, points
+    return im
 
 def judge(lf):
     # 判断一个个体的得分
-    global g_im, g_pix
+    global g_pix
     score = 0
-    im, points = draw(lf.gene)
-    pix = im.load()
-    for point in points:
-        # if pix[x, y] == g_pix[x, y]:
-        if pix[point] == g_pix[point]:
+    j = 0
+    for i in range(0, len(lf.gene), g_geneClipLength):
+        if g_pix[j] == int(lf.gene[i:i + g_geneClipLength], 2) * 32:
             score += 1
-    # print score
+        j += 1
+
     return score
 
 def evolve():
@@ -64,9 +56,6 @@ def evolve():
     print("steps: %d" % steps)
     ga.next(steps)
     
-    # im1 = draw(ga.best.gene)
-    # im1.show()
-
     print("\n")
     evolve()
 
@@ -76,14 +65,14 @@ def filter(t, step = 32):
         for k in t:
             l2.append(int(k / step) * step)
     elif type(t) == type(1):
-        l2 = [t]
+        l2 = [int(t / step) * step]
     return tuple(l2)
 
 def save(lf):
     # 保存
     global g_id
     dir = "sav-" + g_id
-    im, points = draw(lf.gene)
+    im = draw(lf.gene)
     im.save(dir + "\\" + str(lf.env.generation) + ".png")
     print("文件已保存到 %s 目录" % dir)
 
@@ -91,24 +80,23 @@ def main():
     global ga, g_xRate, g_mutationRate, g_lifeCount, g_geneLength, g_im, g_pix
     # g_im = Image.open("ff.gif").convert("RGB")
     g_im = Image.open("ff.gif").convert("L")
-    imn = Image.new("L", (128, 128), 255)
+    imn = Image.new("L", (32, 32), 255)
     d = ImageDraw.Draw(imn)
     pix = g_im.load()
     g_pix = []
-    for x in range(0, 128, 4):
-        for y in range(0, 128, 4):
-            p = filter(pix[x, y])[0]
+    for y in range(0, 32):
+        for x in range(0, 32):
+            p = filter(pix[x * 4, y * 4])[0]
             g_pix.append(p)
-            d.rectangle([x, y, x + 3, y + 3], p)
+            d.point((x, y), p)
     dir = "sav-" + g_id
     if os.path.isdir(dir) == False:
         os.mkdir(dir)
     imn.save(dir + "\\_.png")
-    imn.show()
     print("正在初始化...")
     ga = GA(g_xRate, g_mutationRate, g_lifeCount, g_geneLength, judge, save)
 
-    #evolve()
+    evolve()
 
 if __name__ == "__main__":
     main()
