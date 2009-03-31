@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import random, math
+import random
 from Life import Life
 
 class GA:
@@ -16,7 +16,7 @@ class GA:
     best = None
     saveEvery = 1
 
-    def __init__(self, xRate = 0.7, mutationRate = 0.005, lifeCount = 50, geneLength = 100, judge = lambda lf: 1, save = lambda: 1):
+    def __init__(self, xRate = 0.7, mutationRate = 0.005, lifeCount = 50, geneLength = 100, judge = lambda lf, av: 1, save = lambda: 1):
         self.xRate = xRate
         self.mutationRate = mutationRate
         self.lifeCount = lifeCount
@@ -58,13 +58,14 @@ class GA:
         # 产生新的后代
         return self.__bear(self.__getOne(), self.__getOne())
 
-    def judge(self, f = lambda lf: 1):
+    def judge(self, f = lambda lf, av: 1):
         # 根据传入的方法 f ，计算每个个体的得分
+        lastAvg = self.bounds / self.lifeCount
         self.bounds = 0
         self.best = Life(self)
         self.best.setScore(-1)
         for lf in self.lives:
-            lf.score = f(lf)
+            lf.score = f(lf, lastAvg)
             if lf.score > self.best.score:
                 self.best = lf
             self.bounds += lf.score
@@ -80,7 +81,7 @@ class GA:
                 newLives.append(self.__newChild())
             self.lives = newLives
             self.generation += 1
-            print("gen: %d, mutation: %d, best: %d, p: %d" % (self.generation, self.mutationCount, self.best.score, math.sqrt(self.best.score) + 130))
+            print("gen: %d, mutation: %d, best: %d" % (self.generation, self.mutationCount, self.best.score))
             if (100 < self.generation <= 1000):
                 self.saveEvery = 10
             elif (1000 < self.generation <= 10000):
