@@ -70,6 +70,15 @@ def evolve():
     print("\n")
     evolve()
 
+def filter(t, step = 32):
+    l2 = []
+    if type(t) in (type(()), type([])):
+        for k in t:
+            l2.append(int(k / step) * step)
+    elif type(t) == type(1):
+        l2 = [t]
+    return tuple(l2)
+
 def save(lf):
     # 保存
     global g_id
@@ -82,25 +91,24 @@ def main():
     global ga, g_xRate, g_mutationRate, g_lifeCount, g_geneLength, g_im, g_pix
     # g_im = Image.open("ff.gif").convert("RGB")
     g_im = Image.open("ff.gif").convert("L")
+    imn = Image.new("L", (128, 128), 255)
+    d = ImageDraw.Draw(imn)
+    pix = g_im.load()
+    g_pix = []
+    for x in range(0, 128, 4):
+        for y in range(0, 128, 4):
+            p = filter(pix[x, y])[0]
+            g_pix.append(p)
+            d.rectangle([x, y, x + 3, y + 3], p)
     dir = "sav-" + g_id
     if os.path.isdir(dir) == False:
         os.mkdir(dir)
-    g_im.save(dir + "\\_.png")
-    g_pix = g_im.load()
+    imn.save(dir + "\\_.png")
+    imn.show()
     print("正在初始化...")
     ga = GA(g_xRate, g_mutationRate, g_lifeCount, g_geneLength, judge, save)
 
-    evolve()
+    #evolve()
 
 if __name__ == "__main__":
     main()
-    # im1 = Image.new("RGB", (128, 128), (255, 255, 255))
-    # im2 = Image.open("ff.gif").convert("RGB")
-    # print im1.getpixel((50, 50)), im2.getpixel((50, 50))
-    # pix1 = im1.load()
-    # pix2 = im2.load()
-    # print pix1[50, 50], pix2[50, 50]
-    # for x in range(128):
-        # for y in range(128):
-            # pix1[x, y] = pix2[x, y]
-    # im1.show()
