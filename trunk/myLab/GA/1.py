@@ -5,7 +5,7 @@ from lib.GA import GA
 import os, time, random, math
 
 g_xRate = 0.7           # 交叉率
-g_mutationRate = 0.005  # 变异率
+g_mutationRate = 0.105  # 变异率
 g_lifeCount = 500        # 个体数
 g_geneClipLength = 3    # 基因片段长度
 g_geneLength = g_geneClipLength * 1024       # 基因长度
