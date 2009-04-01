@@ -5,8 +5,8 @@ from lib.GA import GA
 import os, time, random, math
 
 g_xRate = 0.7           # 交叉率
-g_mutationRate = 0.105  # 变异率
-g_lifeCount = 50        # 个体数
+g_mutationRate = 0.005  # 变异率
+g_lifeCount = 500        # 个体数
 g_geneClipLength = 3    # 基因片段长度
 g_geneLength = g_geneClipLength * 1024       # 基因长度
 g_id = time.strftime("%y%m%d_%H%M%S", time.localtime(time.time()))
@@ -30,13 +30,16 @@ def judge(lf, av):
     # 判断一个个体的得分
     # av为上一轮迭代的平均得分
     global g_pix
-    score = -0.9 * av
     j = 0
+    match = 0
     for i in range(0, len(lf.gene), g_geneClipLength):
         if g_pix[j] == int(lf.gene[i:i + g_geneClipLength], 2) * 32:
-            score += 1
+            match += 1
         j += 1
 
+    score = match - 0.9 * av
+    if score > av:
+        print("\tmatch: %d / %d" % (match, j))
     if score < 1:
         score = 1
     return score
