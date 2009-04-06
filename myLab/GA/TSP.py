@@ -67,9 +67,9 @@ class OpenGLWindow():
         self.line(curOrder)
         self.info(["distance: %f" % g_distance])
         glutSwapBuffers()
-        self.rx += 0.05
-        self.ry += 0.05
-        self.rz += 0.05
+        self.rx += 0.1
+        self.ry += 0.1
+        self.rz += 0.1
 
     def InitGL(self, width, height):
         glClearColor(0.25, 0.25, 0.25, 0.0)
@@ -145,7 +145,7 @@ def mFunc(gene):
     gene[p1], gene[p2] = gene[p2], gene[p1]
     return gene
 
-def save(lf):
+def save(lf, gen):
     # ±£¥Ê÷µ
     global points, curOrder, g_distance
     curOrder = lf.gene
@@ -158,7 +158,7 @@ def order0():
     g_distance = getDistance(curOrder)
 
 def evolve():
-    for i in range(1000):
+    for i in range(10000):
         ga.next()
         # time.sleep(0.1)
 

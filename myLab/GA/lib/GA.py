@@ -14,9 +14,8 @@ class GA:
     lives = []
     bounds = 0.0  # 得分总数
     best = None
-    saveEvery = 1
 
-    def __init__(self, xRate = 0.7, mutationRate = 0.005, lifeCount = 50, geneLength = 100, judge = lambda lf, av: 1, save = lambda: 1, mkLife = lambda: "", xFunc = None, mFunc = None):
+    def __init__(self, xRate = 0.7, mutationRate = 0.005, lifeCount = 50, geneLength = 100, judge = lambda lf, av: 1, save = lambda: 1, mkLife = lambda: None, xFunc = None, mFunc = None):
         self.xRate = xRate
         self.mutationRate = mutationRate
         self.lifeCount = lifeCount
@@ -95,16 +94,6 @@ class GA:
             self.lives = newLives
             self.generation += 1
             print("gen: %d, mutation: %d, best: %f" % (self.generation, self.mutationCount, self.best.score))
-            if (100 < self.generation <= 1000):
-                self.saveEvery = 10
-            elif (1000 < self.generation <= 10000):
-                self.saveEvery = 100
-            elif (10000 < self.generation <= 100000):
-                self.saveEvery = 1000
-            elif (100000 < self.generation):
-                self.saveEvery = 10000
-
-            if self.generation % self.saveEvery == 0:
-                self.save(self.best)
+            self.save(self.best, self.generation)
 
             n -= 1
