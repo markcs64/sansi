@@ -7,11 +7,11 @@ class Life:
     gene = ""
     score = 0
 
-    def __init__(self, env, gene = ""):
+    def __init__(self, env, gene = None):
         self.env = env
         self.gene = gene
 
-        if self.gene == "":
+        if self.gene == None:
             self.__rndGene()
 
     def __rndGene(self):

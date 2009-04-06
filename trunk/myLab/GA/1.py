@@ -2,6 +2,7 @@
 
 from PIL import Image, ImageDraw, ImageMath
 from lib.GA import GA
+from panel.panel import MyApp
 import os, time, random, math
 
 g_xRate = 0.7           # ½»²æÂÊ
@@ -105,4 +106,6 @@ def main():
     evolve()
 
 if __name__ == "__main__":
-    main()
+    app = MyApp()
+    app.mainLoop(main)
+    # main()
