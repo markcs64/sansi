@@ -87,7 +87,8 @@ class GA:
         while n > 0:
             # self.__getBounds()
             self.judge(self.__judge)
-            newLives = [self.best]  # 将最好的父代加入竞争
+            newLives = []
+            newLives.append(Life(self, self.best.gene))  # 将最好的父代加入竞争
             # self.bestHistory.append(self.best)
             while (len(newLives) < self.lifeCount):
                 newLives.append(self.__newChild())
