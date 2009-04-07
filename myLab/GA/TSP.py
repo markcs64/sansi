@@ -147,9 +147,17 @@ def mFunc(gene):
 
 def save(lf, gen):
     # 保存值
-    global points, curOrder, g_distance
-    curOrder = lf.gene
-    g_distance = getDistance(curOrder)
+    global points, curOrder, g_distance, g_bestScore
+    if g_bestScore != lf.score:
+        g_bestScore = lf.score
+        curOrder = lf.gene
+        g_distance = getDistance(curOrder)
+        f = open("tsp.txt", "a")
+        f.write("%d\t%f\t%f\tgene:" % (gen, getDistance(lf.gene), lf.score))
+        for k in lf.gene:
+            f.write("%d, " % k)
+        f.write("\n")
+        f.close()
 
 def order0():
     # 初始线条
@@ -176,9 +184,13 @@ def tspq():
     evolve()
 
 if __name__ == "__main__":
-    global pointCount, points, curOrder
+    global pointCount, points, curOrder, g_bestScore
     pointCount = 32
+    g_bestScore = 0
     points = mkPoints(pointCount)
     order0()
+    f = open("tsp.txt", "w+")
+    f.write("TSP\n\n")
+    f.close()
     window = OpenGLWindow(points)
     window.MainLoop(tspq)
