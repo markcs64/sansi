@@ -167,15 +167,15 @@ def order0():
     g_distance = getDistance(curOrder)
 
 def evolve():
-    for i in range(100000):
+    for i in range(1000000):
         ga.next()
         # time.sleep(0.1)
 
 def tspq():
     # TSPŒ Ã‚
     global points, ga, curOrder
-    ga = GA(lifeCount = 500,
-            geneLength = 160,
+    ga = GA(lifeCount = 16,
+            mutationRate = 0.05,
             judge = judge,
             save = save,
             mkLife = mkLife,
