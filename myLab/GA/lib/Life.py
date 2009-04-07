@@ -9,10 +9,15 @@ class Life:
 
     def __init__(self, env, gene = None):
         self.env = env
-        self.gene = gene
 
-        if self.gene == None:
+        if gene == None:
             self.__rndGene()
+        elif type(gene) == type([]):
+            self.gene = []
+            for k in gene:
+                self.gene.append(k)
+        else:
+            self.gene = gene
 
     def __rndGene(self):
         self.gene = ""

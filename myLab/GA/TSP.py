@@ -67,9 +67,9 @@ class OpenGLWindow():
         self.line(curOrder)
         self.info(["distance: %f" % g_distance])
         glutSwapBuffers()
-        self.rx += 0.1
-        self.ry += 0.1
-        self.rz += 0.1
+        self.rx += 0.02
+        self.ry += 0.02
+        self.rz += 0.02
 
     def InitGL(self, width, height):
         glClearColor(0.25, 0.25, 0.25, 0.0)
@@ -166,7 +166,7 @@ def order0():
     g_distance = getDistance(curOrder)
 
 def evolve():
-    for i in range(10000):
+    for i in range(100000):
         ga.next()
         # time.sleep(0.1)
 
@@ -190,7 +190,7 @@ if __name__ == "__main__":
     points = mkPoints(pointCount)
     order0()
     f = open("tsp.txt", "w+")
-    f.write("TSP\n\nGEN\tDIST\tSCORE\tGENE\n----\t----\t----\t----\n")
+    f.write("TSP\n\nGEN\tDIST\tSCORE\tGENE\n")
     f.close()
     window = OpenGLWindow(points)
     window.MainLoop(tspq)
