@@ -153,7 +153,7 @@ def save(lf, gen):
         curOrder = lf.gene
         g_distance = getDistance(curOrder)
         f = open("tsp.txt", "a")
-        f.write("%d\t%f\t%f\tgene:" % (gen, getDistance(lf.gene), lf.score))
+        f.write("%d\t%f\t%f\t" % (gen, getDistance(lf.gene), lf.score))
         for k in lf.gene:
             f.write("%d, " % k)
         f.write("\n")
@@ -190,7 +190,7 @@ if __name__ == "__main__":
     points = mkPoints(pointCount)
     order0()
     f = open("tsp.txt", "w+")
-    f.write("TSP\n\n")
+    f.write("TSP\n\nGEN\tDIST\tSCORE\tGENE\n----\t----\t----\t----\n")
     f.close()
     window = OpenGLWindow(points)
     window.MainLoop(tspq)
