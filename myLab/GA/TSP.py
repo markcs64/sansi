@@ -148,8 +148,9 @@ def mFunc(gene):
 def save(lf, gen):
     # ±£¥Ê÷µ
     global points, curOrder, g_distance, g_bestScore
-    if g_bestScore != lf.score:
-        g_bestScore = lf.score
+    sc = int(lf.score * 100000)
+    if g_bestScore != sc:
+        g_bestScore = sc
         curOrder = lf.gene
         g_distance = getDistance(curOrder)
         f = open("tsp.txt", "a")
