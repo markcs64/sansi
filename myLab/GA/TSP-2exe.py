@@ -2,6 +2,7 @@
 
 from distutils.core import setup
 import py2exe
+
 includes = ["encodings", "encodings.*"]
 options = {"py2exe": {
         "compressed": 1,
