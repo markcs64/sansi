@@ -64,7 +64,7 @@ if __name__ == "__main__":
 	t0 = time.time()
 	print("Status: 200 OK")
 	print("Content-type: text/xml")
-	print()
+	print
 	
 	print("<?xml version=\"1.0\" encoding=\"utf-8\"?>")
 	print("<piQuery>")

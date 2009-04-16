@@ -46,5 +46,5 @@ def count():
 if __name__ == "__main__":
     print("Status: 200 OK")
     print("Content-type: text/plain")
-    print()
+    print
     print("%d" % count())
