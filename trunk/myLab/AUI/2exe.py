@@ -14,9 +14,9 @@ options = {"py2exe": {
 
 setup(
         version = "0.1.0",
-        description = "TSP",
-        name = "TSP",
+        description = "AUI",
+        name = "AUI",
         options = options,
         zipfile = None,
-        windows=[{"script": "TSP.py", "icon_resources": [(1, "doraemon.ico")] }],
+        windows=[{"script": "AUI.py", "icon_resources": [(1, "doraemon.ico")] }],
     )
