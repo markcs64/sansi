@@ -34,6 +34,7 @@ class TSP_GTK:
 		self.gc.rectangle(event.area.x, event.area.y, event.area.width, event.area.height)
 		self.gc.clip()
 		self.draw()
+		self.__mkPoints(32)
 
 	def draw(self):
 		print 2
@@ -62,16 +63,17 @@ class TSP_GTK:
 		#make some points randomly
 		self.ps = []
 		for i in range(n):
-			p = (int(random.random() * 320), int(random.random() * 320))
+			p = (int(random.random() * 320) + 5, int(random.random() * 320) + 5)
 			self.ps.append(p)
+		self.__drawPoints()
 
 	def __drawPoints(self):
 		self.gc.set_source_rgb(1, 0, 0)
 		for p in self.ps:
 			self.gc.move_to(p[0], p[1])
-			self.gc.line_to(p[1], p[0])
+			#self.gc.line_to(p[0] + 1, p[1])
+			self.gc.arc(p[0] - 1, p[1] - 1, 2, 0, 2 * math.pi)
 		self.gc.stroke()
-		print 1
 
 	def main(self):
 		self.window.show_all()
