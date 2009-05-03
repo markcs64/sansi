@@ -28,6 +28,7 @@ class TSP_GTK:
 		self.txtMsg = self.wTree.get_widget("txtMsg")
 		self.txtMsg.set_text = "123"
 		self.__mkTree()
+		glib.timeout_add(1000, self.update)
 
 	def on_expose(self, widget, event):
 		self.gc = widget.window.cairo_create()
@@ -35,9 +36,14 @@ class TSP_GTK:
 		self.gc.clip()
 		self.draw()
 		self.__mkPoints(32)
+		self.__drawPoints()
+		return True
+
+	def update(self):
+		print 1
+		return True
 
 	def draw(self):
-		print 2
 		rect = self.area.get_allocation()
 		#print rect.x, rect.y, rect.width, rect.height
 		self.gc.rectangle(0, 0, rect.width, rect.height)
@@ -50,6 +56,7 @@ class TSP_GTK:
 
 	def act(self, widget):
 		self.__mkPoints(32)
+		self.window.process_updates(True)
 
 	def __mkTree(self):
 		self.treePoints = self.wTree.get_widget("treePoints")
@@ -65,15 +72,17 @@ class TSP_GTK:
 		for i in range(n):
 			p = (int(random.random() * 320) + 5, int(random.random() * 320) + 5)
 			self.ps.append(p)
-		self.__drawPoints()
 
 	def __drawPoints(self):
+		#self.gc.save()
 		self.gc.set_source_rgb(1, 0, 0)
 		for p in self.ps:
 			self.gc.move_to(p[0], p[1])
 			#self.gc.line_to(p[0] + 1, p[1])
 			self.gc.arc(p[0] - 1, p[1] - 1, 2, 0, 2 * math.pi)
 		self.gc.stroke()
+		#self.gc.restore()
+		return True
 
 	def main(self):
 		self.window.show_all()
