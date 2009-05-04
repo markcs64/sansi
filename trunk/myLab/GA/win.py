@@ -3,7 +3,8 @@
 import pygtk
 pygtk.require("2.0")
 import gtk, gtk.glade
-import glib, math, time, random
+#import glib, math, time, random
+import math, time, random
 from lib.GA import GA
 
 class CairoDraw(gtk.DrawingArea):
@@ -28,7 +29,7 @@ class TSP_GTK:
 		self.txtMsg = self.wTree.get_widget("txtMsg")
 		self.txtMsg.set_text = "123"
 		self.__mkTree()
-		glib.timeout_add(1000, self.update)
+		#glib.timeout_add(1000, self.update)
 
 	def on_expose(self, widget, event):
 		self.gc = widget.window.cairo_create()
