@@ -94,7 +94,7 @@ class GA:
                 newLives.append(self.__newChild())
             self.lives = newLives
             self.generation += 1
-            print("gen: %d, mutation: %d, best: %f" % (self.generation, self.mutationCount, self.best.score))
+            #print("gen: %d, mutation: %d, best: %f" % (self.generation, self.mutationCount, self.best.score))
             self.save(self.best, self.generation)
 
             n -= 1
