@@ -158,6 +158,8 @@ class Tree(object):
 					tag = "leaf",
 				)
 
+		self.canvas.update()
+
 	def line2(self, x0, y0, x1, y1, width = 1, fill = "#000", minDist = 10, tags = ""):
 		dots = midDots(x0, y0, x1, y1, minDist)
 		dots2 = []
