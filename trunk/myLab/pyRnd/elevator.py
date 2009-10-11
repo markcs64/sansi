@@ -12,10 +12,11 @@ g = {
 	"floors": 30,			# 建筑总楼层
 	"elevatorCount": 05,	# 总电梯数
 	"maxPassagers": 13,		# 每台电梯最多可同时载多少乘客
+	"maxWaiterPerFloor": 50,	# 每层楼最多多少个人同时等待
 	"t1": 5.0,				# 电梯启动/停止所需的额外时间（包括开关门）
 	"t2": 1.0,				# 电梯正常运行时每经过一层楼所需时间
 	"t3": 1.0,				# 每位乘客进入/离开电梯所需的平均时间
-	"t4": 09.0,				# 每层楼平均每隔多少时间会新到一位乘客
+	"t4": 06.0,				# 每层楼平均每隔多少时间会新到一位乘客
 	"mode": 1,				# 乘客策略，1：见电梯就上；
 							# 	2：只坐同方向的电梯；
 							# 	0: 随机。
@@ -38,7 +39,8 @@ class Passager(object):
 		else:
 			self.end = random.randint(2, g["floors"])	# 用户目的楼层
 		self.mode = g["mode"] or random.randint(1, 2)
-		self.waiters.append(self)
+		if len([p for p in self.waiters if p.start == self.start]) < g["maxWaiterPerFloor"]:
+			self.waiters.append(self)
 
 	def isIn(self, direction):
 		# 是否进入电梯
@@ -142,7 +144,7 @@ class Elevator(object):
 def showState():
 	for ele in Elevator.all:
 		waiters = len([p for p in Passager.waiters if p.start == ele.floor])
-		print "#%d, floor: %2d, waiters: %3d/%4d, passagers: %2d" % \
+		print "#%d\tfloor: %2d, waiters: %3d/%4d, passagers: %2d" % \
 			(ele.id, ele.floor, waiters, len(Passager.waiters), len(ele.passagers))
 	stat()
 	print
@@ -160,10 +162,10 @@ def stat():
 
 if __name__ == "__main__":
 	for i in range(g["elevatorCount"]):
-		Elevator()
+		Elevator(start = i + 1, step = 1)
 	while g["totalPassagers"] < 10000:
 		if random.random() < g["interval"] / g["t4"]:
-			p = Passager()
+			Passager()
 		for ele in Elevator.all:
 			ele.check()
 		if g["time"] % 3600 == 0:
