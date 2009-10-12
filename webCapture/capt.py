@@ -2,7 +2,7 @@
 
 import os, random, datetime
 import threading, time
-import urllib
+import urllib, socket
 
 def getList():
 	# 得到url列表
@@ -32,7 +32,7 @@ def saveHTML(url, fn):
 	u = urllib.urlopen(url)
 	c = u.read()
 	u.close()
-	f = open("storage_html//" + fn + ".html", "w+")
+	f = open(os.path.join("storage_html", fn + ".html"), "w+")
 	f.write(c)
 	f.close()
 
@@ -60,8 +60,8 @@ def captOne():
 
 def captUrls():
 	threads = []
-	# 10个线程
-	for i in range(10):
+	n = 10 # 10个线程
+	for i in range(n):
 		t = threading.Thread(target=captOne)
 		threads.append(t)
 		t.start()
@@ -69,6 +69,7 @@ def captUrls():
 
 if __name__ == "__main__":
 	print("web capture!")
+	socket.setdefaulttimeout(30)	# 默认超时时间为30秒
 	g_idx = 0
 	g_urls = getList()
 	captUrls()
