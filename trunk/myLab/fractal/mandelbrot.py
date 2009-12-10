@@ -5,11 +5,11 @@
 import time, random
 import Image, ImageDraw
 
-g_size = (4000, 3000)
+g_size = (400, 300)
 g_zoom = 2.5 / g_size[0]
 g_offset = (-g_size[0] / 4, 0)
 g_maxRepeat = 100
-g_bailout = 1000
+g_bailout = max(g_size) * 4
 
 def draw(antialias = True):
 	zi = 1
@@ -25,6 +25,7 @@ def draw(antialias = True):
 	print "painting Mandelbrot .."
 	for p in getPoints(size, offset, zoom):
 		dr.point(p[0], fill = p[1])
+	print "%s100%%" % ("\b" * 10)
 
 	del dr
 	if antialias:
@@ -32,7 +33,7 @@ def draw(antialias = True):
 #	img.show()
 	img.save("mandelbrot.png")
 
-def getPoints(size, offset, zoom):
+def getPoints(size, offset, zoom, ti = 0, tstep = 1):
 	"生成需要绘制的点的坐标及颜色"
 
 	def getRepeats(c):
@@ -52,13 +53,12 @@ def getPoints(size, offset, zoom):
 	xs, ys = size
 	for iy in xrange(ys):
 		print ("%s%d%%..." % ("\b" * 10, iy * 100 / ys)),
-		for ix in xrange(xs):
+		for ix in xrange(ti, xs, tstep):
 			y = (iy - ys / 2 + offset[1]) * zoom
 			x = (ix - xs / 2 + offset[0]) * zoom
 			c = complex(x, y)
 			r = getRepeats(c)
 			yield (ix, iy), getColor(r)
-	print "%s100%%" % ("\b" * 10)
 
 def main():
 	t0 = time.time()
