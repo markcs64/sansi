@@ -7,28 +7,32 @@ import Image, ImageDraw
 
 g_size = (800, 600)
 g_zoom = 0.003
-g_offsetX = -200
-g_offsetY = 0
+g_offset = (-200, 0)
 g_maxRepeat = 100
 g_bailout = 1000
 
 def draw():
-	img = Image.new("RGB", g_size, 0xffffff)
+	size = [i * 2 for i in g_size]
+	zoom = g_zoom * 0.5
+	offset = [i * 2  for i in g_offset]
+	bailout = g_bailout * 2
+	img = Image.new("RGB", size, 0xffffff)
 	dr = ImageDraw.Draw(img)
 
 	print "painting Mandelbrot .."
-	for iy in xrange(g_size[1]):
-		print ("%s%d%%..." % ("\b" * 10, iy * 100 / g_size[1])),
-		for ix in xrange(g_size[0]):
-			y = (iy - g_size[1] / 2 + g_offsetY) * g_zoom
-			x = (ix - g_size[0] / 2 + g_offsetX) * g_zoom
+	for iy in xrange(size[1]):
+		print ("%s%d%%..." % ("\b" * 10, iy * 100 / size[1])),
+		for ix in xrange(size[0]):
+			y = (iy - size[1] / 2 + offset[1]) * zoom
+			x = (ix - size[0] / 2 + offset[0]) * zoom
 			c = complex(x, y)
 			r = getRepeats(c)
 			dr.point((ix, iy), fill = getColor(r))
 	print "%s100%%" % ("\b" * 10)
 
 	del dr
-	img.show()
+	img = img.resize(g_size, Image.ANTIALIAS)
+#	img.show()
 	img.save("mandelbrot.png")
 
 def getRepeats(c):
