@@ -5,10 +5,10 @@
 import time, random
 import Image, ImageDraw
 
-g_size = (400, 300)
+g_size = (1024, 768)
 g_zoom = 2.5 / g_size[0]
 g_offset = (-g_size[0] / 4, 0)
-g_maxRepeat = 100
+g_maxRepeat = 4096
 g_bailout = max(g_size) * 4
 
 def draw(antialias = True):
@@ -48,7 +48,7 @@ def getPoints(size, offset, zoom, ti = 0, tstep = 1):
 		color = 0x000000
 		if r < g_maxRepeat:
 			color = 0xffffff * r / g_maxRepeat
-		return color
+		return int(color)
 
 	xs, ys = size
 	for iy in xrange(ys):
