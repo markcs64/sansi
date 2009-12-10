@@ -11,11 +11,14 @@ g_offset = (-200, 0)
 g_maxRepeat = 100
 g_bailout = 1000
 
-def draw():
-	size = [i * 2 for i in g_size]
-	zoom = g_zoom * 0.5
-	offset = [i * 2  for i in g_offset]
-	bailout = g_bailout * 2
+def draw(antialias = True):
+	zi = 1
+	if antialias:
+		zi = 2
+	size = [i * zi for i in g_size]
+	zoom = g_zoom / zi
+	offset = [i * zi  for i in g_offset]
+	bailout = g_bailout * zi
 	img = Image.new("RGB", size, 0xffffff)
 	dr = ImageDraw.Draw(img)
 
@@ -31,7 +34,8 @@ def draw():
 	print "%s100%%" % ("\b" * 10)
 
 	del dr
-	img = img.resize(g_size, Image.ANTIALIAS)
+	if antialias:
+		img = img.resize(g_size, Image.ANTIALIAS)
 #	img.show()
 	img.save("mandelbrot.png")
 
