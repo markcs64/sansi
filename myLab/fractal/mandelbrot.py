@@ -6,7 +6,7 @@ import time, random
 import Image, ImageDraw
 
 g_size = (600, 480)
-g_maxIteration = 4096
+g_maxIteration = 256
 g_bailout = 4
 g_zoom = 2.5 / g_size[0]
 g_offset = (-g_size[0] * 0.25, 0)
@@ -45,17 +45,21 @@ def getPoints(size, offset, zoom, ti = 0, tstep = 1):
 		return repeats
 
 	def getColor(r):
-		color = 0
+		color = "hsl(0, 0%, 0%)"
 		if r < g_maxIteration:
-			color = int(0xffffff * r / g_maxIteration)
+			v = 1.0 * r / g_maxIteration
+			h = 210 * (1 - v)
+			s = 80
+			l = 50 * (1 + v)
+			color = "hsl(%d, %d%%, %d%%)" % (h, s, l)
 		return color
 
 	xs, ys = size
 	for iy in xrange(ys):
 		print ("%s%d%%..." % ("\b" * 10, iy * 100 / ys)),
 		for ix in xrange(ti, xs, tstep):
-			y = (iy - ys / 2 + offset[1]) * zoom
 			x = (ix - xs / 2 + offset[0]) * zoom
+			y = (iy - ys / 2 + offset[1]) * zoom
 			c = complex(x, y)
 			r = getRepeats(c)
 			yield (ix, iy), getColor(r)
