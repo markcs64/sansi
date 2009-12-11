@@ -18,7 +18,6 @@ def mkPoints():
 		y1 = y0 + h * ( x0 * (b - z0) - y0)
 		z1 = z0 + h * (x0 * y0 - c * z0)
 		x0, y0, z0 = x1, y1, z1
-#		yield x0, y0, z0
 		xs.append(x0)
 		ys.append(y0)
 		zs.append(z0)
