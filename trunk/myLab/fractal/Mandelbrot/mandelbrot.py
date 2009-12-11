@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
-
+# http://blog.csdn.net/oldjwu/
 # z<n+1> = z<n> ^ 2 + c
 
-import time, random
+import time
 import Image, ImageDraw
 
-g_size = (600, 480)
-g_maxIteration = 256
-g_bailout = 4
-g_zoom = 2.5 / g_size[0]
-g_offset = (-g_size[0] * 0.25, 0)
+g_size = (600, 450) # 图形最终尺寸
+g_maxIteration = 256 # 最大迭代次数
+g_bailout = 4 # 最大域
+g_zoom = 2.5 / g_size[0] # 缩放参数
+g_offset = (-g_size[0] * 0.25, 0) # 偏移量
 
 def draw(antialias = True):
 	zi = 1
