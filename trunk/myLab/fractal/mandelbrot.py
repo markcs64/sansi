@@ -5,15 +5,15 @@
 import time, random
 import Image, ImageDraw
 
-g_size = (1024, 768)
+g_size = (600, 480)
+g_maxIteration = 4096
+g_bailout = 4
 g_zoom = 2.5 / g_size[0]
-g_offset = (-g_size[0] / 4, 0)
-g_maxRepeat = 4096
-g_bailout = max(g_size) * 4
+g_offset = (-g_size[0] * 0.25, 0)
 
 def draw(antialias = True):
 	zi = 1
-	if antialias:
+	if antialias: # 抗锯齿
 		zi = 2
 	size = [i * zi for i in g_size]
 	zoom = g_zoom / zi
@@ -39,16 +39,16 @@ def getPoints(size, offset, zoom, ti = 0, tstep = 1):
 	def getRepeats(c):
 		z = c
 		repeats = 0
-		while abs(z) < g_bailout and repeats < g_maxRepeat:
+		while abs(z) < g_bailout and repeats < g_maxIteration:
 			z = z ** 2 + c
 			repeats += 1
 		return repeats
 
 	def getColor(r):
-		color = 0x000000
-		if r < g_maxRepeat:
-			color = 0xffffff * r / g_maxRepeat
-		return int(color)
+		color = 0
+		if r < g_maxIteration:
+			color = int(0xffffff * r / g_maxIteration)
+		return color
 
 	xs, ys = size
 	for iy in xrange(ys):
