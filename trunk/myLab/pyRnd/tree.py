@@ -206,6 +206,7 @@ if __name__ == "__main__":
 	canvas = Tkinter.Canvas(root,
 			width = gw,
 			height = gh,
+			bg = "#ffffff",
 		)
 	canvas.pack()
 	tree = Tree(root, canvas, Point(gw / 2, gh - 20), Point(gw / 2, gh * 0.2), \
