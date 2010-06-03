@@ -7,8 +7,8 @@
 <style type="text/css">
 @import url(css/mg.css);
 </style>
-<script type="text/javascript" src="../lib/jQuery.js"></script>
-<script type="text/javascript" src="../lib/jQuery.hotkey.js"></script>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.hotkey.js"></script>
 <script type="text/javascript" src="js/mg.js"></script>
 <script type="text/javascript" src="js/msg.js"></script>
 </head>
@@ -54,7 +54,7 @@ function new_mg() {
 }
 
 function count() {
-	$.get("stat/count.py", {
+	$.get("/count/maze/", {
 			r: Math.random()
 		}, function (r) {
 			r = r.replace(/[\r\n\s]/g, "");
