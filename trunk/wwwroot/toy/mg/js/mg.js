@@ -6,7 +6,7 @@ Copyright (c) 2008 oldJ, Sansi.Org
 Author: oldj.wu@gmail.com, http://oldj.net/
 License: LGPL
 
-LastUpdate: 2010-06-03
+LastUpdate: 2010-07-02
 
 You can get the last version by SVN:
 svn checkout http://sansi.googlecode.com/svn/trunk/ sansi-read-only
@@ -241,22 +241,33 @@ MG.prototype = {
 		this.ob.appendChild(this.canvas);
 
 		// 在canvas上画图
-		var x, y, ix, iy, ctx = this.canvas.getContext("2d");
-		ctx.fillStyle = "#f5f5f5";
-		ctx.fillRect(0, 0, w, h);
+		var x, y, ix, iy;
+		this.ctx = this.canvas.getContext("2d");
+		this.ctx.fillStyle = "#f5f5f5";
+		this.ctx.fillRect(0, 0, w, h);
 		for (y = 0; y < this.h; y ++) {
 			for (x = 0; x < this.w; x ++) {
 				ix = this.grid_size * x;
 				iy = this.grid_size * y;
 				v = this.grids[y * this.w + x];
-				MG.border2(ctx, ix, iy, ix + this.grid_size, iy + this.grid_size, v);
+				MG.border2(this.ctx, ix, iy, ix + this.grid_size, iy + this.grid_size, v);
 			}
 		}
 		var finish_img = new Image();
 		finish_img.src = "img/finish.gif";
 		finish_img.className = "finish-img";
-		//ctx.drawImage(finish_img, w - this.grid_size + 2, h - this.grid_size + 2);
+		//this.ctx.drawImage(finish_img, w - this.grid_size + 2, h - this.grid_size + 2);
 		this.ob.appendChild(finish_img);
+	},
+	fillBox: function (grid_i, c) {
+		// 将格子 grid_i 涂成颜色 c
+		this.ctx.fillStyle = c;
+		var x = (grid_i % this.w) * this.grid_size,
+			y = Math.floor(grid_i / this.w) * this.grid_size;;;;
+		this.ctx.fillRect(x, y, this.grid_size, this.grid_size);
+
+		var v = this.grids[grid_i];
+		MG.border2(this.ctx, x, y, x + this.grid_size, y + this.grid_size, v);
 	}
 };
 
@@ -398,8 +409,13 @@ MG_Me.prototype = {
 		this.inform();
 		this.setEmotion("normal");
 		this.history.unshift(p);
-		if (this.mg.mark_history)
-			this.mg.grid_ob[this.history[0]].style.backgroundColor = "#fcc";
+		if (this.mg.mark_history) {
+			if (this.mg.is_canvas_valid) {
+				this.mg.fillBox(this.history[0], "#ffcccc");
+			} else {
+				this.mg.grid_ob[this.history[0]].style.backgroundColor = "#fcc";
+			}
+		}
 		/*if (this.history2[0] == p) {
 			this.history2.shift();
 		} else {
@@ -453,19 +469,19 @@ MG_Me.prototype = {
 		if (h == 1) {
 			this.mg.mark_history = v;
 			for (var i = 0; i < this.history.length; i ++) {
-				if (this.is_canvas_valid) {
-					this.mg.grid_ob[this.history[i]].style.backgroundColor = v ? "#fcc" : "#f5f5f5";
+				if (this.mg.is_canvas_valid) {
+					this.mg.fillBox(this.history[i], v ? "#ffcccc" : "#f5f5f5");
 				} else {
-					// todo...
+					this.mg.grid_ob[this.history[i]].style.backgroundColor = v ? "#fcc" : "#f5f5f5";
 				}
 			}
 		} else if (h == 2) {
 			this.mg.mark_history2 = v;
 			for (var i = 0; i < this.history2.length; i ++) {
-				if (this.is_canvas_valid) {
-					this.mg.grid_ob[this.history2[i]].style.backgroundColor = v ? "#f99" : "#f5f5f5";
+				if (this.mg.is_canvas_valid) {
+					this.mg.fillBox(this.history2[i], v ? "#ff9999" : "#f5f5f5");
 				} else {
-					// todo...
+					this.mg.grid_ob[this.history2[i]].style.backgroundColor = v ? "#f99" : "#f5f5f5";
 				}
 			}
 		}
