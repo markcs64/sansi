@@ -24,9 +24,23 @@ function MG(ob, w, h) {
 	this.is_moved = false;		// 用户是否按下过方向键
 	this.mark_history = false;	// 是否将走过的格子用红色标出
 	this.mark_history2 = false;	// 是否标出最短路径，暂时没有用
+	this.chkCanvasTagSupport();	// 检查是否支持Canvas标签
 }
 
 MG.prototype = {
+	init: function () {
+		// 初始化迷宫地图
+		this.grids = [];
+		this.grid_ob = [];
+		this.grid_str = "";
+		for (var y = 0; y < this.h; y ++)
+			for (var x = 0; x < this.w; x ++) {
+				//this.grids.push(Math.floor(Math.random() * 16).toString(16));
+				this.grids.push(0);
+			}
+		//this.grid_str = this.grids.join("");
+		return this;
+	},
 	set: function (sets) {
 		// 设置迷宫的宽度与高度
 		if (sets.width) this.w = sets.width;
@@ -168,21 +182,14 @@ MG.prototype = {
 		}
 		return -1;
 	},
-	init: function () {
-		// 初始化迷宫地图
-		this.grids = [];
-		this.grid_ob = [];
-		this.grid_str = "";
-		for (var y = 0; y < this.h; y ++)
-			for (var x = 0; x < this.w; x ++) {
-				//this.grids.push(Math.floor(Math.random() * 16).toString(16));
-				this.grids.push(0);
-			}
-		//this.grid_str = this.grids.join("");
-		return this;
+	chkCanvasTagSupport: function () {
+		// 检查是否支持Canvas标签
+		this.canvas = document.createElement("canvas");
+		this.is_canvas_valid = !! this.canvas.getContext;
 	},
 	clear: function () {
 		// 清除迷宫上的DOM元素
+		this.canvas = null;
 		while (this.ob.childNodes[0])
 			this.ob.removeChild(this.ob.childNodes[0]);
 		return this;
@@ -190,6 +197,15 @@ MG.prototype = {
 	show: function () {
 		// 将迷宫从数据转化为DOM元素并显示在页面上
 		this.clear();
+		if (this.is_canvas_valid) {
+			this._showByCanvas();
+		} else {
+			this._showByDOM();
+		}
+		this.me = new MG_Me(this);
+		return this;
+	},
+	_showByDOM: function () {
 		var tmp_ob, v;
 		this.ob.style.width = this.grid_size * this.w + 2 + "px";
 		this.ob.style.height= this.grid_size * this.h + 2 + "px";
@@ -211,9 +227,36 @@ MG.prototype = {
 			}
 		}
 		tmp_ob.setAttribute("class", "grid mg_finish");
-		tmp_ob.setAttribute("className", "grid mg_finish");
-		this.me = new MG_Me(this);
-		return this;
+		//tmp_ob.setAttribute("className", "grid mg_finish");
+	},
+	_showByCanvas: function () {
+		// 使用canvas显示
+		var w = this.grid_size * this.w,
+			h = this.grid_size * this.h;
+		this.ob.style.width = w + "px";
+		this.ob.style.height= h + "px";
+		this.canvas = document.createElement("canvas");
+		this.canvas.setAttribute("width", w);
+		this.canvas.setAttribute("height", h);
+		this.ob.appendChild(this.canvas);
+
+		// 在canvas上画图
+		var x, y, ix, iy, ctx = this.canvas.getContext("2d");
+		ctx.fillStyle = "#f5f5f5";
+		ctx.fillRect(0, 0, w, h);
+		for (y = 0; y < this.h; y ++) {
+			for (x = 0; x < this.w; x ++) {
+				ix = this.grid_size * x;
+				iy = this.grid_size * y;
+				v = this.grids[y * this.w + x];
+				MG.border2(ctx, ix, iy, ix + this.grid_size, iy + this.grid_size, v);
+			}
+		}
+		var finish_img = new Image();
+		finish_img.src = "img/finish.gif";
+		finish_img.className = "finish-img";
+		//ctx.drawImage(finish_img, w - this.grid_size + 2, h - this.grid_size + 2);
+		this.ob.appendChild(finish_img);
 	}
 };
 
@@ -233,6 +276,34 @@ MG.border = function (ob, v) {
 	if (v & 8)
 		ob.style.borderLeft = "solid 1px #f5f5f5";
 };
+MG.border2 = function (ctx, ix, iy, ix2, iy2, v) {
+	// MG对象的方法，Canvas方式
+	// 根据格子的值显示格子四条边是否可通过
+	if (v == 0) {
+		ctx.fillRect(ix, iy, ix2, iy2);
+		return;
+	}
+
+	ctx.strokeStyle = "#333333";
+	ctx.lineWidth = 0.5;
+	var _d = function (x1, y1, x2, y2) {
+		ctx.beginPath();
+		ctx.moveTo(x1, y1);
+		ctx.lineTo(x2, y2);
+		ctx.stroke();
+		ctx.closePath();
+	};
+
+	if (!(v & 1))
+		_d(ix, iy, ix2, iy);
+	if (!(v & 2))
+		_d(ix2, iy, ix2, iy2);
+	if (!(v & 4))
+		_d(ix, iy2, ix2, iy2);
+	if (!(v & 8))
+		_d(ix, iy, ix, iy2);
+};
+
 
 // 走迷宫的小人的类
 function MG_Me(mg) {
@@ -382,12 +453,20 @@ MG_Me.prototype = {
 		if (h == 1) {
 			this.mg.mark_history = v;
 			for (var i = 0; i < this.history.length; i ++) {
-				this.mg.grid_ob[this.history[i]].style.backgroundColor = v ? "#fcc" : "#f5f5f5";
+				if (this.is_canvas_valid) {
+					this.mg.grid_ob[this.history[i]].style.backgroundColor = v ? "#fcc" : "#f5f5f5";
+				} else {
+					// todo...
+				}
 			}
 		} else if (h == 2) {
 			this.mg.mark_history2 = v;
 			for (var i = 0; i < this.history2.length; i ++) {
-				this.mg.grid_ob[this.history2[i]].style.backgroundColor = v ? "#f99" : "#f5f5f5";
+				if (this.is_canvas_valid) {
+					this.mg.grid_ob[this.history2[i]].style.backgroundColor = v ? "#f99" : "#f5f5f5";
+				} else {
+					// todo...
+				}
 			}
 		}
 	}
