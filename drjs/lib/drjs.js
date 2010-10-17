@@ -2,14 +2,13 @@
 drjs.js
 - A JavaScript graphics library based on DOM and CSS.
 
-Version: 0.2.2
+Version: 0.2.1
 Copyright (c) 2008 oldJ, Sansi.Org
 License: LGPL
 
 LastUpdate: 2008-8-16
-
-You can get the last version by SVN:
-svn checkout http://sansi.googlecode.com/svn/trunk/ drjs-read-only
+Author: oldj
+Blog: http://oldj.net/
 */
 
 (function () {
@@ -26,7 +25,7 @@ svn checkout http://sansi.googlecode.com/svn/trunk/ drjs-read-only
 			div.style.overflow = "hidden";
 			div.style.backgroundColor = dot[4] || "#000";
 			div.style.borderWidth = 0;
-			
+
 			return div;
 		},
 		dotStroke: function (dot, stroke) {
@@ -42,22 +41,21 @@ svn checkout http://sansi.googlecode.com/svn/trunk/ drjs-read-only
 		merge: function (dots) {
 			//将多组点合并为一组点
 			var dot = [], i, j, l, d0, d1;
-			
+
 			//将数组拆分、合并
 			while (dots[0])
 				dot.push.apply(dot, dots.splice(0, 1)[0]);
-			
+
 			/*l = dot.length;
 			//合并可合并的点
 			for (i = 0; i < l; i ++) {
 				d0 = dot[i];
 				for (j = i + 1; j < l; j ++) {
 					d1 = dot[j];
-					!! 说明：此处如果遍历数组，可以将点进一步合并，但至多只能再合并2%-5%的点，
-					却可能因此而多循环n!次，所以舍弃。
+
 				}
 			}*/
-			
+
 			return dot;
 		},
 		newColor: function (colorIdx) {
@@ -75,18 +73,19 @@ svn checkout http://sansi.googlecode.com/svn/trunk/ drjs-read-only
 			return clr;
 		}
 	};
-	
+
 	//私有变量
 	var pv = {
 		colors: [	//常用的颜色，绘图时如未指定颜色将依次从本颜色表中读取
-			"#FF0000", "#FF9900", "#FFFF00", "#00FF00", "#0000FF", 
-			"#840084", "#FF00FF", "#008200", "#FF0066", "#CEDF39", 
-			"#D5FF00", "#848200", "#00FF84", "#0082FF", "#84FFFF", 
-			"#004184", "#8482FF", "#8400FF", "#FF0084", "#844100", 
+			"#FF0000", "#FF9900", "#FFFF00", "#00FF00", "#0000FF",
+			"#840084", "#FF00FF", "#008200", "#FF0066", "#CEDF39",
+			"#D5FF00", "#848200", "#00FF84", "#0082FF", "#84FFFF",
+			"#004184", "#8482FF", "#8400FF", "#FF0084", "#844100",
 			"#FF8242", "#848242", "#FF8500", "#BEB05A", "#BEB0E1"
 		]
+
 	};
-	
+
 	//预设函数
 	var drFunc = {
 		arc: function (canvas, p) {
@@ -97,17 +96,17 @@ svn checkout http://sansi.googlecode.com/svn/trunk/ drjs-read-only
 				angle1 = Math.min(p[2], p[3]) % 360, angle2 = Math.max(p[2], p[3]) % 360,
 				noBorder = p[4],
 				f = [], ray1, ray2;
-			
+
 			if (angle2 - angle1 >= 360)
 				return drFunc.oval(canvas, {a: a, b: b});	//如果两个角度相差大于360度，返回椭圆
-			
+
 			//计算椭圆与射线的交点
 			var getIntersection = function (a, b, c, angle) {
 				var x = a * b * Math.sqrt(1 / (b * b + a * a * c * c)),
 					sign = Math.cos(Math.PI * angle / 180) > 0 ? 1 : - 1;	//根据射线所在区间，计算x、y的正负号
 				return x * sign + a;
 			};
-			
+
 			//根据角度计算射线方程
 			var c1 = Math.tan(Math.PI * angle1 / 180),
 				c2 = Math.tan(Math.PI * angle2 / 180);
@@ -117,7 +116,7 @@ svn checkout http://sansi.googlecode.com/svn/trunk/ drjs-read-only
 			ray2 = function (x) {
 				return c2 * x;
 			};
-			
+
 			var oval = function (sign, x0, x1) {
 				return {
 					f: function (x) {
@@ -125,8 +124,8 @@ svn checkout http://sansi.googlecode.com/svn/trunk/ drjs-read-only
 					},
 					interval: [x0, x1]
 				}
-			};
-			
+			}
+
 			//交点
 			var x1 = getIntersection(a, b, c1, angle1),
 				x2 = getIntersection(a, b, c2, angle2),
@@ -137,12 +136,12 @@ svn checkout http://sansi.googlecode.com/svn/trunk/ drjs-read-only
 			//	y1 = (1 + Math.sin(Math.PI * angle1 / 180)) * b;
 			//if (x2 == a)
 			//	y2 = (1 + Math.sin(Math.PI * angle2 / 180)) * b;
-			
+
 			//将射线方程及区间添加到函数组中
 			if (!noBorder) {
 				f.push.apply(f, drFunc.polyline(canvas, [[x1, y1], [a, b], [x2, y2]]));
 			}
-			
+
 			//判断射线区间是否包含X轴
 			if (angle1 <= -180) {
 				if (angle2 <= -180) {
@@ -176,7 +175,7 @@ svn checkout http://sansi.googlecode.com/svn/trunk/ drjs-read-only
 			} else {
 				f.push(oval(-1, x1, x2));
 			}
-			
+
 			return f;
 		},
 		box: function (canvas, p) {
@@ -229,7 +228,7 @@ svn checkout http://sansi.googlecode.com/svn/trunk/ drjs-read-only
 		polyline: function (canvas, p) {
 			//画折线
 			//参数的形式为：[[x0, y0], [x1, y1], [x2, y2] ...]
-			
+
 			var i, l = p.length, functions = [];
 			for (i = 1; i < l; i ++) {
 				functions.push(drFunc.line(canvas, [p[i - 1], p[i]])[0]);
@@ -256,7 +255,7 @@ svn checkout http://sansi.googlecode.com/svn/trunk/ drjs-read-only
 					return b * (1 - Math.sqrt(1 - (x - a) * (x - a) / (a * a)));
 				},
 				interval: [0, a * 2]
-			}];
+			}]
 		},
 		rectangle: function (canvas, p) {
 			//画矩形
@@ -273,7 +272,7 @@ svn checkout http://sansi.googlecode.com/svn/trunk/ drjs-read-only
 			return (new drjs.Shape(canvas)).setText(p[0], css).paint();
 		}
 	}
-	
+
 	//主对象
 	drjs = {	//drjs是全局变量，在外部可访问
 		addFunc: function (name, func) {
@@ -284,7 +283,7 @@ svn checkout http://sansi.googlecode.com/svn/trunk/ drjs-read-only
 			//画布类，用这个类生成一块新的画布
 			//参数p为对象类型
 			p = typeof(p) == "object" ? p : {width:480,height:360};
-			
+
 			this.container = document.createElement("div");
 			this.shapes = [];
 			this.items = {};
@@ -294,9 +293,9 @@ svn checkout http://sansi.googlecode.com/svn/trunk/ drjs-read-only
 					document.getElementById(parent) :
 					parent
 				) : document.getElementsByTagName("body")[0];
-			
+
 			this._colorIdx = 0;
-			
+
 			//设置默认样式
 			this.style({
 				position: "relative",
@@ -316,16 +315,16 @@ svn checkout http://sansi.googlecode.com/svn/trunk/ drjs-read-only
 		Shape: function (canvas, dots, name) {
 			//形状类
 			if (!canvas) return null;
-			
+
 			this.canvas = canvas;	//画布对象，通过这个接口可以访问画布内的属性
 			this.dots = dots || [];
 			this.canvas.shapes.push(this);
 			this.name = name ? name : "shape_" + this.canvas.shapes.length;
-			
+
 			this.container = document.createElement("div");
 			this.container.style.position = "absolute";
 			this.container.setAttribute("id", "drjs_shape_" + this.name);
-			
+
 			this.init();
 		},
 		Item: function (canvas, name) {
@@ -336,49 +335,49 @@ svn checkout http://sansi.googlecode.com/svn/trunk/ drjs-read-only
 			this.container = document.createElement("div");
 			this.container.style.position = "absolute";
 			this.container.setAttribute("id", "drjs_item_" + this.name);
-			
+
 			this.canvas.items[this.name] = this;
 			this.canvas.container.appendChild(this.container);
-			
+
 			return this;
 		}
 	};
-	
+
 	drjs.Canvas.prototype.colorIdx = function () {
 		return this._colorIdx ++;
 	};
-	
+
 	drjs.Canvas.prototype.count = function () {
 		//计算当前画布使用了多少dom元素
 		return this.container.getElementsByTagName("div").length;
 	};
-	
+
 	drjs.Canvas.prototype.style = function (obCSS) {
 		//用一个css对象来设置当前画布的样式
+
 		for (var k in obCSS) {
 			this.container.style[k] = obCSS[k];
 		}
 	};
-	
+
 	drjs.Canvas.prototype.newColor = function () {
-		//生成一个新的颜色
 		return pm.newColor(this.colorIdx());
 	};
-	
+
 	drjs.Canvas.prototype.show = function () {
 		//将画布显示到页面中
+
 		this.parent.appendChild(this.container);
 	};
-	
+
 	drjs.Canvas.prototype.clear = function () {
-		//清除画布
 		this.container.innerHTML = "";
 	};
-	
+
 	drjs.Canvas.prototype.draw = function (drawType, parameters, left, top, color, fill, stroke) {
 		//在指定画布上绘图
 		//返回值为一个Shap对象
-		
+
 		//根据drawType返回对应的函数组
 		var functions, shape;
 		if (typeof(drawType) == "string" && (drawType in drFunc)) {
@@ -390,7 +389,7 @@ svn checkout http://sansi.googlecode.com/svn/trunk/ drjs-read-only
 		} else {
 			throw new Error("drawType Error!");
 		}
-		
+
 		if (functions instanceof drjs.Shape)
 			shape = functions;
 		else
@@ -400,10 +399,10 @@ svn checkout http://sansi.googlecode.com/svn/trunk/ drjs-read-only
 		shape.setTop(top || 0);
 		shape.setLeft(left || 0);
 		shape.paint();
-		
+
 		return shape;
 	};
-	
+
 	drjs.Canvas.prototype.mkDots = function (functions, color, fill, stroke) {
 		//根据指定函数及区间生成相应的点
 		/*
@@ -434,9 +433,9 @@ svn checkout http://sansi.googlecode.com/svn/trunk/ drjs-read-only
 			}
 			return functions;
 		}*/
-		
+
 		var i, f, x, y, x0 = 0, x1 = 0, dots = [], dot, tmp;
-		
+
 		if (!fill) {
 			//不填充画法
 			for (i = 0; i < functions.length; i ++) {
@@ -501,14 +500,14 @@ svn checkout http://sansi.googlecode.com/svn/trunk/ drjs-read-only
 					}
 				}
 			}
-			
+
 			//将dots合并为一个数组
 			dots = pm.merge(dots);
 		} else {
 			//填充画法
 			var ys = [],	//y的值
 				funcLen = functions.length;
-			
+
 			//得到最小x0和最大x1
 			for (i = 0; i < funcLen; i ++) {
 				if (functions[i].interval && functions[i].interval[0] < x0)
@@ -516,7 +515,7 @@ svn checkout http://sansi.googlecode.com/svn/trunk/ drjs-read-only
 				if (functions[i].interval && functions[i].interval[1] > x1)
 					x1 = functions[i].interval[1];
 			}
-			
+
 			for (x = x0; x < x1; x ++) {
 				ys.length = 0;
 				for (i = 0; i < funcLen; i ++) {
@@ -527,12 +526,12 @@ svn checkout http://sansi.googlecode.com/svn/trunk/ drjs-read-only
 					}
 				}
 				if (ys.length < 2) continue;
-				
+
 				ys.sort(function (a, b) {return a - b});
 				//如果数组前两个值相同，去掉第一个（例如折线顶点）
 				if (ys.length > 1 && ys[0] == ys[1])
 					ys.shift();
-				
+
 				for (i = 0; i < ys.length - 1; i += 2) {
 					if (dots[0]) {
 						//判断当前点与前一个点是否能合并
@@ -553,20 +552,20 @@ svn checkout http://sansi.googlecode.com/svn/trunk/ drjs-read-only
 				}
 			}
 		}
-		
+
 		//如果不填充且stroke>1
 		if (!fill && stroke > 1) {
 			for (i = 0; i < dots.length; i ++)
 				dots[i] = pm.dotStroke(dots[i], stroke);
 		}
-		
+
 		return dots;
 	};
-	
+
 	drjs.Canvas.prototype.newItem = function (name) {
 		return new drjs.Item(this, name);
 	};
-	
+
 	drjs.Canvas.prototype.chart = function (chartName, chartType, width, height, values, labels, colors, stroke) {
 		//绘制图表
 		var item = this.newItem(chartName),
@@ -577,7 +576,7 @@ svn checkout http://sansi.googlecode.com/svn/trunk/ drjs-read-only
 			i, c;
 		for (i = 0; i < len; i ++)
 			sum += values[i];
-		
+
 		if (chartType == "bar") {
 			var sp = 2,
 				w = (width + sp) / len,	//每个直方图的宽度，包括空隙
@@ -592,7 +591,7 @@ svn checkout http://sansi.googlecode.com/svn/trunk/ drjs-read-only
 			var a = Math.round(width / 2),
 				b = Math.round(height / 2);
 			/*if (width > height) {
-				//画阴影 !! 画阴影能让饼图看起来更好看一些，但是会生成更多的DOM，耗费更多资源
+				//画阴影
 				item.addShape(this.draw("oval", [a, b], 0, Math.round(30 * (1 - height / width)), "gray", true));
 			}*/
 			var angles = [-90], sum2 = 0;
@@ -611,11 +610,11 @@ svn checkout http://sansi.googlecode.com/svn/trunk/ drjs-read-only
 			}
 			item.addShape(this.draw("polyline", dots, 0, 0, null, false, stroke || 1));
 		}
-		
+
 		return item;
 	};
-	
-	//Shape类的静态方法
+
+	//Shape类的方法
 	drjs.Shape.prototype = {
 		addDots: function (dots) {
 			//向Shape添加点
@@ -693,7 +692,7 @@ svn checkout http://sansi.googlecode.com/svn/trunk/ drjs-read-only
 			return this;
 		}
 	}
-	
+
 	//Item类方法
 	drjs.Item.prototype = {
 		addShape: function (shapes) {
