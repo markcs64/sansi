@@ -6,7 +6,7 @@ Copyright (c) 2008 oldJ, Sansi.Org
 Author: oldj.wu@gmail.com, http://oldj.net/
 License: LGPL
 
-LastUpdate: 2010-07-02
+* Last Update: 2010-11-29 16:42:23
 
 You can get the last version by SVN:
 svn checkout http://sansi.googlecode.com/svn/trunk/ sansi-read-only
@@ -30,14 +30,16 @@ function MG(ob, w, h) {
 MG.prototype = {
 	init: function () {
 		// 初始化迷宫地图
+		var x, y;
 		this.grids = [];
 		this.grid_ob = [];
 		this.grid_str = "";
-		for (var y = 0; y < this.h; y ++)
-			for (var x = 0; x < this.w; x ++) {
+		this.grids[this.w * this.h - 1] = 0;
+		/*for (y = 0; y < this.h; y ++)
+			for (x = 0; x < this.w; x ++) {
 				//this.grids.push(Math.floor(Math.random() * 16).toString(16));
 				this.grids.push(0);
-			}
+			}*/
 		//this.grid_str = this.grids.join("");
 		return this;
 	},
@@ -49,8 +51,14 @@ MG.prototype = {
 	},
 	create: function () {
 		// 秘生成迷宫
+		var t1, t0 = (new Date()).getTime();
 		this.init();
-		return this._walk(Math.floor(Math.random() * this.grids.length));
+		this._walk(Math.floor(Math.random() * this.grids.length));
+		t1 = (new Date()).getTime();
+		if (typeof console != "undefined") {
+			console.log("耗时: " + (t1 - t0) + "ms");
+		}
+		return this;
 	},
 	_walk: function (startPos) {
 		// 从startPos开始，遍历地图
@@ -73,28 +81,28 @@ MG.prototype = {
 
 		// 判断当前格子上方的格子是否可在下一次遍历到达
 		p = current_pos - this.w;
-		if (p > 0 && this.grids[p] == 0 && !this._isRepeating(p))
+		if (p > 0 && !this.grids[p] && !this._isRepeating(p))
 			a.push(p);
 		else
 			a.push(-1);
 
 		// 判断当前格子右方的格子是否可在下一次遍历到达
 		p = current_pos + 1;
-		if (p % this.w != 0 && this.grids[p] == 0 && !this._isRepeating(p))
+		if (p % this.w != 0 && !this.grids[p] && !this._isRepeating(p))
 			a.push(p);
 		else
 			a.push(-1);
 
 		// 判断当前格子下方的格子是否可在下一次遍历到达
 		p = current_pos + this.w;
-		if (p < this.grids.length && this.grids[p] == 0 && !this._isRepeating(p))
+		if (p < this.grids.length && !this.grids[p] && !this._isRepeating(p))
 			a.push(p);
 		else
 			a.push(-1);
 
 		// 判断当前格子左方的格子是否可在下一次遍历到达
 		p = current_pos - 1;
-		if (current_pos % this.w != 0 && this.grids[p] == 0 && !this._isRepeating(p))
+		if (current_pos % this.w != 0 && !this.grids[p] && !this._isRepeating(p))
 			a.push(p);
 		else
 			a.push(-1);
@@ -121,7 +129,8 @@ MG.prototype = {
 		}
 
 		var r = Math.floor(Math.random() * 4),
-			next_pos;
+			next_pos,
+			grids = this.grids;
 
 		while (this._target_steps[r] == -1) {
 			r = Math.floor(Math.random() * 4);
@@ -131,33 +140,37 @@ MG.prototype = {
 
 		var is_cross = false;
 		// 判断当前格子是否与已走过的路线交叉
-		if (this.grids[next_pos] != 0)
+		if (grids[next_pos])
 			is_cross = true;
 
-		if (r == 0) {
-			// 如果是向上走
-			// 当前格子的顶边标记为可通过（标记为1）
-			// 下一格子的底边标记为可通过（标记为1）
-			this.grids[current_pos] ^= 1;
-			this.grids[next_pos] ^= 4;
-		} else if (r == 1) {
-			// 如果是向右走
-			// 当前格子的右边标记为可通过（标记为1）
-			// 下一格子的左边标记为可通过（标记为1）
-			this.grids[current_pos] ^= 2;
-			this.grids[next_pos] ^= 8;
-		} else if (r == 2) {
-			// 如果是向下走
-			// 当前格子的底边标记为可通过（标记为1）
-			// 下一格子的顶边标记为可通过（标记为1）
-			this.grids[current_pos] ^= 4;
-			this.grids[next_pos] ^= 1;
-		} else if (r == 3) {
-			// 如果是向左走
-			// 当前格子的左边标记为可通过（标记为1）
-			// 下一格子的右边标记为可通过（标记为1）
-			this.grids[current_pos] ^= 8;
-			this.grids[next_pos] ^= 2;
+		switch (r) {
+			case 0:
+				// 如果是向上走
+				// 当前格子的顶边标记为可通过（标记为1）
+				// 下一格子的底边标记为可通过（标记为1）
+				grids[current_pos] ^= 1;
+				grids[next_pos] ^= 4;
+				break;
+			case 1:
+				// 如果是向右走
+				// 当前格子的右边标记为可通过（标记为1）
+				// 下一格子的左边标记为可通过（标记为1）
+				grids[current_pos] ^= 2;
+				grids[next_pos] ^= 8;
+				break;
+			case 2:
+				// 如果是向下走
+				// 当前格子的底边标记为可通过（标记为1）
+				// 下一格子的顶边标记为可通过（标记为1）
+				grids[current_pos] ^= 4;
+				grids[next_pos] ^= 1;
+				break;
+			case 3:
+				// 如果是向左走
+				// 当前格子的左边标记为可通过（标记为1）
+				// 下一格子的右边标记为可通过（标记为1）
+				grids[current_pos] ^= 8;
+				grids[next_pos] ^= 2;
 		}
 		// 将当前位置记入历史记录
 		this._walk_history.push(current_pos);
@@ -166,18 +179,23 @@ MG.prototype = {
 	},
 	_isRepeating: function (p) {
 		// 判断当前格子是否已走过
-		for (var i = 0; i < this._walk_history.length; i ++) {
-			if (this._walk_history[i] == p) return true;
+		var i,
+			a = this._walk_history,
+			a2 = this._walk_history2,
+			l = a.length,
+			l2 = a2.length;
+		for (i = 0; i < l; i ++) {
+			if (a[i] == p) return true;
 		}
-		for (i = 0; i < this._walk_history2.length; i ++) {
-			if (this._walk_history2[i] == p) return true;
+		for (i = 0; i < l2; i ++) {
+			if (a2[i] == p) return true;
 		}
 		return false;
 	},
 	_getNext0: function () {
 		// 得到地图上下一个未到达的格子
 		for (var i = 0, l = this.grids.length; i <= l; i ++) {
-			if (this.grids[i] == 0)
+			if (!this.grids[i])
 				return i;
 		}
 		return -1;
@@ -206,20 +224,24 @@ MG.prototype = {
 		return this;
 	},
 	_showByDOM: function () {
-		var tmp_ob, v;
-		this.ob.style.width = this.grid_size * this.w + 2 + "px";
-		this.ob.style.height= this.grid_size * this.h + 2 + "px";
-		for (var y = 0; y < this.h; y ++) {
-			for (var x = 0; x < this.w; x ++) {
+		var tmp_ob, v, x, y,
+			w = this.w,
+			h = this.h,
+			grid_size = this.grid_size,
+			grids = this.grids;
+		this.ob.style.width = grid_size * this.w + 2 + "px";
+		this.ob.style.height= grid_size * this.h + 2 + "px";
+		for (y = 0; y < h; y ++) {
+			for (x = 0; x < w; x ++) {
 				tmp_ob = document.createElement("div");
 				tmp_ob.setAttribute("class", "grid");
 				tmp_ob.setAttribute("className", "grid");
-				tmp_ob.style.width = this.grid_size + "px";
-				tmp_ob.style.height = this.grid_size + "px";
-				tmp_ob.style.left = this.grid_size * x + "px";
-				tmp_ob.style.top = this.grid_size * y + "px";
+				tmp_ob.style.width = grid_size + "px";
+				tmp_ob.style.height = grid_size + "px";
+				tmp_ob.style.left = grid_size * x + "px";
+				tmp_ob.style.top = grid_size * y + "px";
 				//v = parseInt(this.grid_str.substr(y * this.w + x, 1) || "0", 16);
-				v = this.grids[y * this.w + x];
+				v = grids[y * w + x];
 				MG.border(tmp_ob, v);
 				//tmp_ob.appendChild(document.createTextNode(v));
 				this.grid_ob.push(tmp_ob);
@@ -231,8 +253,10 @@ MG.prototype = {
 	},
 	_showByCanvas: function () {
 		// 使用canvas显示
-		var w = this.grid_size * this.w,
-			h = this.grid_size * this.h;
+		var grid_size = this.grid_size,
+			grids = this.grids,
+			w = grid_size * this.w,
+			h = grid_size * this.h;
 		this.ob.style.width = w + "px";
 		this.ob.style.height= h + "px";
 		this.canvas = document.createElement("canvas");
@@ -241,16 +265,17 @@ MG.prototype = {
 		this.ob.appendChild(this.canvas);
 
 		// 在canvas上画图
-		var x, y, ix, iy;
-		this.ctx = this.canvas.getContext("2d");
-		this.ctx.fillStyle = "#f5f5f5";
-		this.ctx.fillRect(0, 0, w, h);
+		var x, y, ix, iy,
+			ctx = this.canvas.getContext("2d");
+		this.ctx = ctx;
+		ctx.fillStyle = "#f5f5f5";
+		ctx.fillRect(0, 0, w, h);
 		for (y = 0; y < this.h; y ++) {
 			for (x = 0; x < this.w; x ++) {
-				ix = this.grid_size * x;
-				iy = this.grid_size * y;
-				v = this.grids[y * this.w + x];
-				MG.border2(this.ctx, ix, iy, ix + this.grid_size, iy + this.grid_size, v);
+				ix = grid_size * x;
+				iy = grid_size * y;
+				v = grids[y * this.w + x];
+				MG.border2(ctx, ix, iy, ix + grid_size, iy + grid_size, v);
 			}
 		}
 		var finish_img = new Image();
@@ -274,7 +299,7 @@ MG.prototype = {
 MG.border = function (ob, v) {
 	// MG对象的方法，
 	// 根据格子的值显示格子四条边是否可通过
-	if (v == 0) {
+	if (!v) {
 		ob.style.backgroundColor = "#666";
 		return;
 	}
@@ -290,19 +315,19 @@ MG.border = function (ob, v) {
 MG.border2 = function (ctx, ix, iy, ix2, iy2, v) {
 	// MG对象的方法，Canvas方式
 	// 根据格子的值显示格子四条边是否可通过
-	if (v == 0) {
+	if (!v) {
 		ctx.fillRect(ix, iy, ix2, iy2);
 		return;
 	}
 
-	ctx.strokeStyle = "#333333";
-	ctx.lineWidth = 0.5;
+	ctx.strokeStyle = "#aaa";
+	ctx.lineWidth = 1;
 	var _d = function (x1, y1, x2, y2) {
 		ctx.beginPath();
-		ctx.moveTo(x1, y1);
-		ctx.lineTo(x2, y2);
-		ctx.stroke();
+		ctx.moveTo(x1 + 0.5, y1 + 0.5);
+		ctx.lineTo(x2 + 0.5, y2 + 0.5);
 		ctx.closePath();
+		ctx.stroke();
 	};
 
 	if (!(v & 1))
