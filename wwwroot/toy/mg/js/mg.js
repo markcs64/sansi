@@ -6,7 +6,7 @@ Copyright (c) 2008 oldJ, Sansi.Org
 Author: oldj.wu@gmail.com, http://oldj.net/
 License: LGPL
 
-* Last Update: 2010-11-29 16:42:23
+* Last Update: 2010-11-30 15:04:40
 
 You can get the last version by SVN:
 svn checkout http://sansi.googlecode.com/svn/trunk/ sansi-read-only
@@ -224,32 +224,33 @@ MG.prototype = {
 		return this;
 	},
 	_showByDOM: function () {
-		var tmp_ob, v, x, y,
+		var tmp_ob, i, grid_ob = this.grid_ob,
 			w = this.w,
 			h = this.h,
+			len = w * h,
 			grid_size = this.grid_size,
-			grids = this.grids;
-		this.ob.style.width = grid_size * this.w + 2 + "px";
-		this.ob.style.height= grid_size * this.h + 2 + "px";
-		for (y = 0; y < h; y ++) {
-			for (x = 0; x < w; x ++) {
-				tmp_ob = document.createElement("div");
-				tmp_ob.setAttribute("class", "grid");
-				tmp_ob.setAttribute("className", "grid");
-				tmp_ob.style.width = grid_size + "px";
-				tmp_ob.style.height = grid_size + "px";
-				tmp_ob.style.left = grid_size * x + "px";
-				tmp_ob.style.top = grid_size * y + "px";
-				//v = parseInt(this.grid_str.substr(y * this.w + x, 1) || "0", 16);
-				v = grids[y * w + x];
-				MG.border(tmp_ob, v);
-				//tmp_ob.appendChild(document.createTextNode(v));
-				this.grid_ob.push(tmp_ob);
-				this.ob.appendChild(tmp_ob);
-			}
+			grids = this.grids,
+			fragement = document.createDocumentFragment();
+		this.ob.style.width = grid_size * w + 2 + "px";
+		this.ob.style.height= grid_size * h + 2 + "px";
+
+		for (i = 0; i < len; i ++) {
+			tmp_ob = document.createElement("div");
+			tmp_ob.setAttribute("class", "grid");
+			tmp_ob.setAttribute("className", "grid");
+			tmp_ob.style.width = grid_size + "px";
+			tmp_ob.style.height = grid_size + "px";
+			tmp_ob.style.left = grid_size * (i % w) + "px";
+			tmp_ob.style.top = grid_size * Math.floor(i / w) + "px";
+
+			MG.border(tmp_ob, grids[i]);
+			grid_ob.push(tmp_ob);
+			fragement.appendChild(tmp_ob);
 		}
+
 		tmp_ob.setAttribute("class", "grid mg_finish");
 		//tmp_ob.setAttribute("className", "grid mg_finish");
+		this.ob.appendChild(fragement);
 	},
 	_showByCanvas: function () {
 		// 使用canvas显示
@@ -266,17 +267,17 @@ MG.prototype = {
 
 		// 在canvas上画图
 		var x, y, ix, iy,
+			w = this.w,
+			h = this.h,
+			i, len = w * h,
 			ctx = this.canvas.getContext("2d");
 		this.ctx = ctx;
 		ctx.fillStyle = "#f5f5f5";
 		ctx.fillRect(0, 0, w, h);
-		for (y = 0; y < this.h; y ++) {
-			for (x = 0; x < this.w; x ++) {
-				ix = grid_size * x;
-				iy = grid_size * y;
-				v = grids[y * this.w + x];
-				MG.border2(ctx, ix, iy, ix + grid_size, iy + grid_size, v);
-			}
+		for (i = 0; i < len; i ++) {
+			ix = grid_size * (i % w);
+			iy = grid_size * Math.floor(i / w);
+			MG.border2(ctx, ix, iy, ix + grid_size, iy + grid_size, grids[i]);
 		}
 		var finish_img = new Image();
 		finish_img.src = "img/finish.gif";
